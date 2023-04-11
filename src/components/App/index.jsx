@@ -16,7 +16,6 @@ function App() {
     <BrowserRouter>
       <div>
         <Navigation />
-
         <hr />
         <Routes>
           <Route exact path={ROUTES.LANDING} element={<LandingPage />} />

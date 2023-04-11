@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import { auth } from '../Firebase/firebase';
 
 function Home() {
@@ -23,9 +24,9 @@ function Home() {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        const { uid } = user;
+        const { email } = user;
         // ...
-        console.log('uid', uid);
+        console.log('email', email);
       } else {
         // User is signed out
         // ...
@@ -33,13 +34,21 @@ function Home() {
       }
     });
   }, []);
+  // const userEmail = auth().currentUser.email;
+  // const isUserLoggedIn = auth?.currentUser;
+  const email = auth?.currentUser?.email;
+  // const { email } = user ?? undefined;
+  console.log('email', email);
 
   return (
     <nav>
-      <p>Welcome Home</p>
+      <h2>Welcome to LeanIn {email}</h2>
 
       <div>
-        <button onClick={handleLogout}>Logout</button>
+        <Button onClick={handleLogout} variant="contained">
+          Logout
+        </Button>
+        {/* <button onClick={handleLogout}></button> */}
       </div>
     </nav>
   );
