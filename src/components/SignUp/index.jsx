@@ -9,6 +9,7 @@ function Signup() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessageAlert, setErrorMessageAlert] = useState(null);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +23,10 @@ function Signup() {
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        // const errorCode = error.code;
+        const [, errorMessage] = error.message.split(': ');
+
+        setErrorMessageAlert(errorMessage);
         // ..
       });
   };
@@ -68,6 +70,7 @@ function Signup() {
               <button type="submit" onClick={onSubmit}>
                 Sign up
               </button>
+              <div>{errorMessageAlert}</div>
             </form>
 
             <p>
