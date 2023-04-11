@@ -16,12 +16,6 @@ const config = {
   appId: import.meta.env.VITE_APP_ID,
 };
 
-// class Firebase {
-//   constructor() {
-//     app.initializeApp(config);
-//   }
-// }
-
 const app = initializeApp(config);
 const auth = getAuth(app);
 const db = getDatabase(app);

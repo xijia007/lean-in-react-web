@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import { auth } from '../Firebase/firebase';
 
 function Home() {
@@ -45,10 +44,7 @@ function Home() {
       <h2>Welcome to LeanIn {email}</h2>
 
       <div>
-        <Button onClick={handleLogout} variant="contained">
-          Logout
-        </Button>
-        {/* <button onClick={handleLogout}></button> */}
+        <button onClick={handleLogout}>Logout</button>
       </div>
     </nav>
   );
