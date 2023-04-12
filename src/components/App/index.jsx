@@ -22,24 +22,14 @@ function App() {
         <hr />
         <Routes>
           <Route exact path={ROUTES.SEARCH} element={<SearchPage />} />
-          <Route
-            exact
-            path={ROUTES.SEARCHDETAILS}
-            element={<SearchDetailsPage />}
-          />
+          <Route exact path={ROUTES.SEARCHDETAILS} element={<SearchDetailsPage />} />
           <Route exact path={ROUTES.SIGN_UP} element={<SignUpPage />} />
           <Route exact path={ROUTES.SIGN_IN} element={<SignInPage />} />
-          <Route
-            exact
-            path={ROUTES.PASSWORD_FORGET}
-            element={<PasswordForgetPage />}
-          />
+          <Route exact path={ROUTES.PASSWORD_FORGET} element={<PasswordForgetPage />} />
           <Route exact path={ROUTES.HOME} element={<HomePage />} />
           
           <Route exact path={ROUTES.ADMIN} element={<AdminPage />} />
-          {/*<Route exact path={`${ROUTES.PROFILE}${ROUTES.EDITPROFILE}`} element={<EditProfileScreen />} />*/}
-
-          <Route exact path={ROUTES.PROFILE} element={<ProfilePage />} />
+          <Route exact path={`${ROUTES.PROFILE}/*`} element={<ProfilePage />} />
         </Routes>
       </div>
     </BrowserRouter>
