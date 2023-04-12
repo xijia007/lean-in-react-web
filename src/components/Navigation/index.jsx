@@ -20,7 +20,7 @@ function Navigation() {
           <Link to={ROUTES.PROFILE}>Profile</Link>
         </li>
         <li>
-          <Link to={ROUTES.EDITPROFILE}>Edit Profile</Link>
+          <Link to={`${ROUTES.PROFILE}${ROUTES.EDITPROFILE}`}>Edit Profile</Link>
         </li>
 
         <li>

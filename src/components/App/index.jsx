@@ -35,13 +35,10 @@ function App() {
             element={<PasswordForgetPage />}
           />
           <Route exact path={ROUTES.HOME} element={<HomePage />} />
-
+          
           <Route exact path={ROUTES.ADMIN} element={<AdminPage />} />
-          <Route
-            exact
-            path={ROUTES.EDITPROFILE}
-            element={<EditProfilePage />}
-          />
+          {/*<Route exact path={`${ROUTES.PROFILE}${ROUTES.EDITPROFILE}`} element={<EditProfileScreen />} />*/}
+
           <Route exact path={ROUTES.PROFILE} element={<ProfilePage />} />
         </Routes>
       </div>
