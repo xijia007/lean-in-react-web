@@ -2,12 +2,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navigation from '../Navigation';
 import SearchPage from '../Search';
+import SearchDetailsPage from '../SearchDetails';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
-import ProfilePage from '../Profile';
+
 import AdminPage from '../Admin';
+import EditProfilePage from '../EditProfile';
+import ProfilePage from '../Profile';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -19,6 +22,11 @@ function App() {
         <hr />
         <Routes>
           <Route exact path={ROUTES.SEARCH} element={<SearchPage />} />
+          <Route
+            exact
+            path={ROUTES.SEARCHDETAILS}
+            element={<SearchDetailsPage />}
+          />
           <Route exact path={ROUTES.SIGN_UP} element={<SignUpPage />} />
           <Route exact path={ROUTES.SIGN_IN} element={<SignInPage />} />
           <Route
@@ -27,9 +35,11 @@ function App() {
             element={<PasswordForgetPage />}
           />
           <Route exact path={ROUTES.HOME} element={<HomePage />} />
-          <Route exact path={`${ROUTES.PROFILE}/*`} element={<ProfilePage />} />
-          {/*<Route exact path={`${ROUTES.PROFILE}${ROUTES.EDITPROFILE}`} element={<EditProfileScreen />} />*/}
+          
           <Route exact path={ROUTES.ADMIN} element={<AdminPage />} />
+          {/*<Route exact path={`${ROUTES.PROFILE}${ROUTES.EDITPROFILE}`} element={<EditProfileScreen />} />*/}
+
+          <Route exact path={ROUTES.PROFILE} element={<ProfilePage />} />
         </Routes>
       </div>
     </BrowserRouter>
