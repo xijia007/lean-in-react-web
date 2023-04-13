@@ -1,19 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
-import * as ROUTES from '../../constants/routes';
+import {
+  checkEmailAddress,
+  checkFirstName,
+  checkLastName,
+  checkPassword,
+  checkRetypePassword,
+  updateOrgnization,
+} from '../Features/SignUp/SignUpSlice';
 
 function Signup() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessageAlert, setErrorMessageAlert] = useState(null);
+  const handleFirstNameChange = (event) => {
+    dispatch(checkFirstName(event.target.value));
+  };
+  const handleLastNameChange = (event) => {
+    dispatch(checkLastName(event.target.value));
+  };
+
+  const handleEmailChange = (event) => {
+    dispatch(checkEmailAddress(event.target.value));
+  };
+  const handleOrgChange = (event) => {
+    dispatch(updateOrgnization(event.target.value));
+  };
+  const handlePasswordChange = (event) => {
+    dispatch(checkPassword(event.target.value));
+  };
+  const handleRetypePwdChange = (event) => {
+    dispatch(checkRetypePassword(event.target.value));
+  };
+  const submitStatus = useSelector((state) => state.signup.submitStatus);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const email = useSelector((state) => state.signup.email);
+    const password = useSelector((state) => state.signp.password);
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -29,58 +57,78 @@ function Signup() {
         setErrorMessageAlert(errorMessage);
         // ..
       });
+    navigate('/');
   };
 
   return (
-    <main>
-      <section>
-        <div>
-          <div>
-            <h1> LeanIn </h1>
-            <h2> Sign Up New Account </h2>
-            <form>
-              <div>
-                <label htmlFor="email-address">
-                  Email address
-                  <input
-                    type="email"
-                    label="Email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder="Email address"
-                  />
-                </label>
-              </div>
-
-              <div>
-                <label htmlFor="password">
-                  Password
-                  <input
-                    type="password"
-                    label="Create password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="Password"
-                  />
-                </label>
-              </div>
-
-              <button type="submit" onClick={onSubmit}>
-                Sign up
-              </button>
-              <div>{errorMessageAlert}</div>
-            </form>
-
-            <p>
-              Already have an account?
-              <NavLink to={ROUTES.SIGN_IN}>Sign in</NavLink>
-            </p>
+    <div className="Auth-form-container">
+      <form className="Auth-form">
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Sign Up</h3>
+          <div className="form-group mt-3">
+            <label>First Name</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              onChange={handleFirstNameChange}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Last Name</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              onChange={handleLastNameChange}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Organization</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              onChange={handleOrgChange}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control mt-1"
+              placeholder="Enter email"
+              onChange={handleEmailChange}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control mt-1"
+              placeholder="Enter password"
+              onChange={handlePasswordChange}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Retype Password</label>
+            <input
+              type="password"
+              className="form-control mt-1"
+              placeholder="Retype password"
+              onChange={handleRetypePwdChange}
+            />
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={!submitStatus}
+              onClick={onSubmit}
+            >
+              Submit
+            </button>
           </div>
         </div>
-      </section>
-    </main>
+      </form>
+    </div>
   );
 }
 

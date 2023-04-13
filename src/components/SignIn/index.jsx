@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../Firebase/firebase';
-import * as ROUTES from '../../constants/routes';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setUpUserId,
+  setUpUserPassword,
+} from '../Features/Login/LoginSlice';
 
 function SignIn() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  const onLogin = (e) => {
+  const OnLogin = (e) => {
+    const email = useSelector((state) => state.login.user_id);
+    const password = useSelector((state) => state.login.user_password);
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const { user } = userCredential;
-        navigate('/home');
+        navigate('/');
         console.log(user);
       })
       .catch((error) => {
@@ -25,52 +31,52 @@ function SignIn() {
       });
   };
 
+  const emailOnChange = (event) => {
+    dispatch(setUpUserId(event.target.value));
+  };
+
+  const passwordOnChange = (event) => {
+    dispatch(setUpUserPassword(event.target.value));
+  };
+
+  const submitStatus = useSelector((state)=>state.login.submitStatus)
+
   return (
-    <main>
-      <section>
-        <div>
-          <p> LeanIn </p>
-
-          <form>
-            <div>
-              <label htmlFor="email-address">
-                Email address
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email address"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="password">
-                Password
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </label>
-            </div>
-
-            <div>
-              <button onClick={onLogin}>Login</button>
-            </div>
-          </form>
-
-          <p className="text-sm text-white text-center">
-            No account yet? <NavLink to={ROUTES.SIGN_UP}>Sign up</NavLink>
+    <>
+    <div className="Auth-form-container">
+      <form className="Auth-form">
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Sign In</h3>
+          <div className="form-group mt-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control mt-1"
+              placeholder="Enter email"
+              onChange={emailOnChange}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control mt-1"
+              placeholder="Enter password"
+              onChange={passwordOnChange}
+            />
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button type="submit" className="btn btn-primary" onClick={OnLogin} disabled={!submitStatus}>
+              Submit
+            </button>
+          </div>
+          <p className="forgot-password text-right mt-2">
+            <a href="/signup">Sign up?</a>
           </p>
         </div>
-      </section>
-    </main>
+      </form>
+    </div>
+    </>
   );
 }
 
