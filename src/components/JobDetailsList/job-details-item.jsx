@@ -5,11 +5,11 @@ function JobSummaryItem (job) {
     return ( 
         <div className="list-group-item">
             <div className="row">
-                <div className="col-2">
+                <div className="col-3">
                     {/* <img src={"https://via.placeholder.com/200"} alt="Company Logo" className="img-fluid w-200 h-200"/> */}
-                    <img src={job.logo} alt="Company Logo" className="img-fluid w-200 h-200"/>
+                    <img src={`/images/${job.image}`} alt="Company Logo" className="img-fluid w-200 h-200"/>
                 </div>
-                <div className="col-10">
+                <div className="col-9">
                     <JobKeyFacts {...job} />
                     <div className="row">
                         <div className="col-12 mt-3"> 

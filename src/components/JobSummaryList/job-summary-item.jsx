@@ -1,7 +1,9 @@
 import React from 'react';
 import JobKeyFacts from './job-key-facts';
+import { useNavigate } from 'react-router-dom';
 
 function JobSummaryItem (job) {
+    const navigate = useNavigate();
     return ( 
         <div className="list-group-item">
             <div className="row">
@@ -11,21 +13,13 @@ function JobSummaryItem (job) {
                 </div>
                 <div className="col-8">
                     <JobKeyFacts {...job} />
-                    {/* <div className="row"> 
-                        <b>Job Title: {job.title}</b> 
-                    </div>
-                    <div className="row"> 
-                        <b>Company Name: {job.company}</b> 
-                    </div>
-                    <div className="row">
-                        <div className="col-12"> Job Location: {job.location} </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-12"> Posted Time: {job.postedTime} </div>
-                    </div> */}
                 </div>
                 <div className="col-2 d-flex align-items-center">
-                    <button type="button" className="btn btn-outline-secondary">View details</button>
+                    <button type="button" className="btn btn-outline-secondary"
+                            onClick={() => {navigate('/search-details');}}>
+                        View details
+                    </button>
+
                 </div>
             </div>
         </div>
