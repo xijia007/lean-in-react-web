@@ -6,7 +6,7 @@ function JobSummaryItem (job) {
         <div className="list-group-item">
             <div className="row">
                 <div className="col-2">
-                    <img src={job.logo} alt="Company Logo" className="img-fluid w-100 h-100"/>
+                    <img src={`/images/${job.image}`} alt="Company Logo" className="img-fluid w-100 h-100"/>
                     {/* <img src="https://via.placeholder.com/100" alt="Company Logo" className="img-fluid"/> */}
                 </div>
                 <div className="col-8">
