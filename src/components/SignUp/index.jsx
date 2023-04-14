@@ -12,6 +12,8 @@ import {
   updateOrgnization,
 } from '../Features/SignUp/SignUpSlice';
 
+import { createUser } from '../../services/user-service';
+
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,28 +38,47 @@ function Signup() {
     dispatch(checkRetypePassword(event.target.value));
   };
   const submitStatus = useSelector((state) => state.signup.submitStatus);
+  const { email, password, firstName, lastName, orgnization } = useSelector(
+    (state) => state.signup
+  );
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const email = useSelector((state) => state.signup.email);
-    const password = useSelector((state) => state.signp.password);
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const { user } = userCredential;
-        console.log(user);
-        navigate('/login');
-        // ...
-      })
-      .catch((error) => {
-        // const errorCode = error.code;
-        const [, errorMessage] = error.message.split(': ');
 
-        setErrorMessageAlert(errorMessage);
-        // ..
+    const user = {
+      email,
+      password,
+      firstName,
+      lastName,
+      orgnization,
+    };
+
+    console.log(user);
+    await createUser(user)
+      .then((res) => {
+        console.log(res);
+        navigate('/signin');
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    navigate('/');
+
+    // await createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed in
+    //     const { user } = userCredential;
+    //     console.log(user);
+    //     navigate('/login');
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     // const errorCode = error.code;
+    //     const [, errorMessage] = error.message.split(': ');
+
+    //     setErrorMessageAlert(errorMessage);
+    //     // ..
+    //   });
+    // navigate('/');
   };
 
   return (
