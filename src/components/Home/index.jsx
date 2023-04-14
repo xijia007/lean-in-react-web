@@ -3,6 +3,8 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../Firebase/firebase';
 
+import { findUsers, findUser } from '../../services/user-service';
+
 function Home() {
   const navigate = useNavigate();
 
@@ -33,6 +35,23 @@ function Home() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const users = await findUsers();
+      console.log(users);
+    }
+
+    async function fetchUser(uid) {
+      const user = await findUser(uid);
+      console.log(user);
+    }
+
+    fetchUsers();
+
+    fetchUser('1EesaL499STDpjv6OzjV');
+  }, []);
+
   // const userEmail = auth().currentUser.email;
   // const isUserLoggedIn = auth?.currentUser;
   const email = auth?.currentUser?.email;
