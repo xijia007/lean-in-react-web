@@ -1,22 +1,29 @@
 import React from 'react';
 import JobKeyFacts from '../JobSummaryList/job-key-facts';
+import CompanyImage from '../JobSummaryList/company-image';
 
-function JobSummaryItem (job) {
+function JobDetailItem (job) {
     return ( 
         <div className="list-group-item">
             <div className="row">
-                <div className="col-3">
+                <div className="col-2 text-center">
+                    <CompanyImage {...job} />
+                    {/* <img  src={`https://logo.clearbit.com/${job.company}.com`}
+                          onError={(e) => { e.target.src = '/images/default_logo.jpg'; }}// set default image URL
+                          alt="Company Logo" className="img-fluid"/> */}
+                    {/* <img  src={`https://logo.clearbit.com/${job.company}.com`}
+                          onError={(e) => { e.target.src = '/images/default_logo.jpg'; }}// set default image URL
+                          alt="Company Logo" className="img-fluid"/> */}
                     {/* <img src={"https://via.placeholder.com/200"} alt="Company Logo" className="img-fluid w-200 h-200"/> */}
-                    <img src={`/images/${job.image}`} alt="Company Logo" className="img-fluid w-200 h-200"/>
+                    {/* <img src={`/images/${job.image}`} alt="Company Logo" className="img-fluid w-200 h-200"/> */}
                 </div>
-                <div className="col-9">
+                <div className="col-10">
                     <JobKeyFacts {...job} />
                     <div className="row">
                         <div className="col-12 mt-3"> 
                             <b>Job Description: </b> 
                             <p className="m-3">
                                 {job.description}
-                                {/* If you’re looking to hit the ground running, the Enterprise Management Internship will help you build valuable business and leadership skills. For a university/college student, the real-world professional experience you’ll receive during the internship will help you stand apart from the crowd, and will be more than just a line on your resume. From day one as a paid intern with Enterprise, you'll learn what it takes to run a successful business and acquire highly marketable skills in management. Our university/college interns take on the same challenges as our first and second year full-time professionals. It's a team-based environment; and throughout your internship, your peers will be right by your side helping you learn, grow and have fun. This role is located in Fremont, CA. The hourly pay is $20 / hour. */}
                             </p>
                         </div>
                     </div>
@@ -29,4 +36,4 @@ function JobSummaryItem (job) {
         </div>
     )
 }
-export default JobSummaryItem;
+export default JobDetailItem;
