@@ -11,7 +11,7 @@ export const findUsers = async () => {
 };
 
 export const findUser = async (uid) => {
-  const response = await axios.get(`${USER_API}/${uid}`);
+  const response = await axios.get(`${USER_API}/find/${uid}`);
   return response.data;
 };
 
