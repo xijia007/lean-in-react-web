@@ -1,8 +1,22 @@
 import React from 'react';
 import JobKeyFacts from '../JobSummaryList/job-key-facts';
 import CompanyImage from '../JobSummaryList/company-image';
+import {useSelector, useDispatch} from 'react-redux';
+import {saveJob} from '../../JobsSideBar/reducer/saved-jobs-reducer';
+import {applyJob} from '../../JobsSideBar/reducer/applied-jobs-reducer';
 
 function JobDetailItem (job) {
+    const {savedJobs} = useSelector((state) => state.savedJobs)
+    const {appliedjobs} = useSelector((state) => state.appliedJobs)
+    const dispatch = useDispatch();
+    const onJobSave = (job) => {
+        dispatch(saveJob(job));
+        console.log("savedJob: ", job);
+    }
+    const onJobApply = (job) => {
+        dispatch(applyJob(job));
+        console.log("appliedJob: ", job);
+    }
     return ( 
         <div className="list-group-item">
             <div className="row">
@@ -28,8 +42,12 @@ function JobDetailItem (job) {
                         </div>
                     </div>
                     <div className="row">
-                        <button type="button" className="btn btn-primary col m-3">Apply</button>
-                        <button type="button" className="btn btn-outline-secondary col m-3">Save</button>
+                        <button type="button" 
+                            onClick= {() => onJobApply(job)}
+                            className="btn btn-primary col m-3">Apply</button>
+                        <button type="button" 
+                            onClick= {() => onJobSave(job)}
+                            className="btn btn-outline-secondary col m-3">Save</button>
                     </div>
                 </div>
             </div>
