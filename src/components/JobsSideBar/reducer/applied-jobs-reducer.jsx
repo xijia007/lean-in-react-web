@@ -1,20 +1,20 @@
 // TODO: this reducer needs to be connected with job detail page!!
 
 import {createSlice} from "@reduxjs/toolkit";
-import jobs from "./jobs";
+import appliedJobs from "./savedJobs";
 
-const initialState = {jobs};
+const initialState = {appliedJobs};
 
 const appliedJobsSlice = createSlice({
   name: "appliedJobs",
   initialState,
   reducers: {
     applyJob(state, action) {
-      state.jobs.push({...action.payload, _id: (new Date()).getTime()});
+      state.appliedJobs.push({...action.payload, _id: (new Date()).getTime()});
     },
     // no need to un-apply a job
     // unapplyJob(state, action) {
-    //   state.jobs = state.jobs.filter(e => e._id !== action.payload);
+    //   state.appliedJobs = state.appliedJobs.filter(e => e._id !== action.payload);
     // },
   },
 });
