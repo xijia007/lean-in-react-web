@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import {deleteEducation} from "../../reducer/education-reducer";
 import "../../index.css"
+import { XLg } from "react-bootstrap-icons";
 
 const EducationComponent = () => {
     const {educations} = useSelector((state) => state.education)
@@ -38,7 +39,7 @@ const EducationComponent = () => {
                         <div>{e.description}</div>
                     </div>
                     <div>
-                        <h5><i className="bi bi-x-lg clickable" onClick={() => deleteEducationHandler(e._id)}></i></h5>
+                        <h5 className="clickable" onClick={() => deleteEducationHandler(e._id)}><XLg/></h5>
                     </div>
 
                 </div>)}

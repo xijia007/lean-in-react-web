@@ -2,6 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import {deleteExperience} from "../../reducer/experience-reducer";
+import {XLg} from "react-bootstrap-icons";
 
 const ExperienceComponent = () => {
     const {experiences} = useSelector((state) => state.experience)
@@ -37,7 +38,7 @@ const ExperienceComponent = () => {
                         <div>{e.description}</div>
                     </div>
                     <div>
-                        <h5><i className="bi bi-x-lg clickable" onClick={() => deleteExperienceHandler(e._id)}></i></h5>
+                        <h5 className="clickable" onClick={() => deleteExperienceHandler(e._id)}><XLg/></h5>
                     </div>
                 </div>)}
         </div>

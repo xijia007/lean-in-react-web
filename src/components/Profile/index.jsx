@@ -1,11 +1,14 @@
 import React from 'react';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useParams } from "react-router";
 import EditProfileScreen from './EditProfileScreen/index.jsx';
 import ProfileScreen from './ProfileScreen';
 import AddEducationScreen from './ProfileScreen/education/add-education';
 import AddExperienceScreen from './ProfileScreen/experience/add-experience';
+import JobsSideBar from "../JobsSideBar/index.jsx";
 
 function Profile() {
+  // const { userId } = useParams();
+
   return (
       <div className="container">
         <h2>profile screen</h2>
@@ -19,7 +22,7 @@ function Profile() {
             </Routes>
           </div>
           <div className="col-3">
-            <h2>saved jobs list</h2>
+            <JobsSideBar/>
           </div>
         </div>
       </div>
