@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from '../Navigation/HomeNav';
-import SearchPage from '../SearchScreen';
-import SearchDetailsPage from '../SearchDetailsScreen';
+import SearchPage from '../Search/SearchScreen';
+import SearchDetailsPage from '../Search/SearchDetailsScreen';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
