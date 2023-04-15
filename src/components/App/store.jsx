@@ -4,6 +4,8 @@ import signupReducer from '../Features/SignUp/SignUpSlice';
 import userInfoReducer from "../Profile/reducer/userInfo-reducer.jsx";
 import educationReducer from "../Profile/reducer/education-reducer.jsx";
 import experienceReducer from "../Profile/reducer/experience-reducer.jsx";
+import AppliedJobsReducer from "../JobsSideBar/reducer/applied-jobs-reducer.jsx";
+import SavedJobsReducer from "../JobsSideBar/reducer/saved-jobs-reducer.jsx";
 
 export default configureStore({
   reducer: {
@@ -12,5 +14,8 @@ export default configureStore({
     userInfo: userInfoReducer,
     education: educationReducer,
     experience: experienceReducer,
+    appliedJobs: AppliedJobsReducer,
+    savedJobs: SavedJobsReducer,
+
   },
 });
