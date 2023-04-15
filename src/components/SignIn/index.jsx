@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { findUser } from '../../services/user-service';
 
 import { setUpUserId, setUpUserPassword } from '../Features/Login/LoginSlice';
+import { updateUserInfo } from '../Profile/reducer/userInfo-reducer';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -16,18 +18,37 @@ function SignIn() {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const { user } = userCredential;
-        navigate('/');
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const { uid } = userCredential.user;
+      const userData = await findUser(uid);
+
+      dispatch(updateUserInfo({ ...userData, isLogined: true }));
+      navigate('/');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    }
+    // await signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed in
+    //     const { uid } = userCredential.user;
+    //     const userData = await findUser(uid);
+    //     // navigate('/');
+    //     // console.log(user);
+
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     console.log(errorCode, errorMessage);
+    //   });
   };
 
   const emailOnChange = (event) => {
