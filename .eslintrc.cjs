@@ -21,6 +21,7 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'import/no-extraneous-dependencies': 0,
     'react/button-has-type': 0,
-    "no-param-reassign": ["error", { "props": false }]
+    'no-param-reassign': ['error', { props: false }],
+    'jsx-a11y/label-has-associated-control': 0,
   },
 };
