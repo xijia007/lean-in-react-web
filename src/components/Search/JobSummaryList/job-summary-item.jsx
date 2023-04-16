@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function JobSummaryItem (job) {
     const navigate = useNavigate();
+    const NavigateJobDetails = (id) => navigate(`/search-details/${id}`)
     return ( 
         <div className="list-group-item">
             <div className="row">
@@ -19,9 +20,13 @@ function JobSummaryItem (job) {
                 </div>
                 <div className="col-2 d-flex align-items-center">
                     <button type="button" className="btn btn-outline-secondary"
-                            onClick={() => {navigate('/search-details');}}>
+                            onClick={() => {NavigateJobDetails(job._id);}}>
                         View details
                     </button>
+                    {/* <button type="button" className="btn btn-outline-secondary"
+                            onClick={() => {navigate('/search-details');}}>
+                        View details
+                    </button> */}
 
                 </div>
             </div>

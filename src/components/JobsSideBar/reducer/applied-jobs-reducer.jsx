@@ -1,7 +1,7 @@
 // TODO: this reducer needs to be connected with job detail page!!
 
 import {createSlice} from "@reduxjs/toolkit";
-import appliedJobs from "./savedJobs";
+import appliedJobs from "./appliedJobs";
 
 const initialState = {appliedJobs};
 
@@ -11,6 +11,7 @@ const appliedJobsSlice = createSlice({
   reducers: {
     applyJob(state, action) {
       state.appliedJobs.push({...action.payload, _id: (new Date()).getTime()});
+      console.log("state.appliedJobs in appliedJobsSlice: ", state.appliedJobs)
     },
     // no need to un-apply a job
     // unapplyJob(state, action) {
@@ -22,3 +23,4 @@ const appliedJobsSlice = createSlice({
 export default appliedJobsSlice.reducer;
 
 export const {applyJob} = appliedJobsSlice.actions;
+

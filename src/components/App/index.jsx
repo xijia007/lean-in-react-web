@@ -21,11 +21,13 @@ function App() {
 
         <Routes>
           <Route exact path={ROUTES.SEARCH} element={<SearchPage />} />
-          <Route
+          {/* <Route
             exact
             path={ROUTES.SEARCHDETAILS}
             element={<SearchDetailsPage />}
-          />
+          /> */}
+          {/* <Route exact path={`${ROUTES.SEARCHDETAILS}/*`} element={<SearchDetailsPage />} /> */}
+          <Route exact path={`${ROUTES.SEARCHDETAILS}/:jobId`} element={<SearchDetailsPage />} />
           <Route exact path={ROUTES.SIGN_UP} element={<SignUpPage />} />
           <Route exact path={ROUTES.SIGN_IN} element={<SignInPage />} />
           <Route
