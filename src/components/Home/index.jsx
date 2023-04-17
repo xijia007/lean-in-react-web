@@ -5,9 +5,13 @@ import { auth } from '../Firebase/firebase';
 import JobsSideBar from "../JobsSideBar/index.jsx";
 
 import { findUsers, findUser, removeCurrentUser } from "../../services/user-service";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Admin from "../Admin/index.jsx";
 
 function Home() {
+  const {user} = useSelector((state) => state.userInfo);
+  const {role} = user;
+  const isAdmin = role === 'admin';
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -66,17 +70,23 @@ function Home() {
     <nav>
       <h2>Welcome to LeanIn {email}</h2>
       <div className="row mt-2">
-        <div className="col-2 col-md-2 col-lg-1 col-xl-2">
-
-          <p> 1234</p>
-        </div>
-        <div className="col-9 col-md-10 col-lg-7 col-xl-6"
-             style={{"position": "relative"}}>
-          <p> 1234</p>
-        </div>
-        <div className="col-3 col-lg-2 col-xl-4">
-          <JobsSideBar/>
-        </div>
+        {isAdmin
+          ? <Admin/>
+          : <>
+            <div className="col-2 col-md-2 col-lg-1 col-xl-2">
+              <p> 1234</p>
+            </div>
+            <div className="col-9 col-md-10 col-lg-7 col-xl-6"
+                 style={{ "position": "relative" }}>
+              <p> 1234</p>
+            </div>
+            </>
+        }
+        {!isAdmin &&
+          <div className="col-3 col-lg-2 col-xl-4">
+          <JobsSideBar />
+          </div>
+        }
       </div>
       <div>
         <button onClick={handleLogout}>Logout</button>
