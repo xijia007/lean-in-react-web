@@ -11,7 +11,6 @@ function Profile() {
 
   return (
       <div className="container">
-        <h2>profile screen</h2>
         <div className="row">
           <div className="col-9">
             <Routes>

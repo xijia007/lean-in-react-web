@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {deleteEducation} from "../../reducer/education-reducer";
-import "../../index.css"
+import {deleteEducation} from "../../../Features/Profile/education-reducer.jsx";
+// import "../../index.css"
 import { XLg } from "react-bootstrap-icons";
 
 const EducationComponent = () => {
@@ -18,7 +18,7 @@ const EducationComponent = () => {
     return(
         <div className="list-group">
             <div className="list-group-item d-flex justify-content-between">
-                <div className="p-3"><h4>Education</h4></div>
+                <div className="pt-2 pb-2"><h4>Education</h4></div>
                 <div>
                     <button
                         className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"

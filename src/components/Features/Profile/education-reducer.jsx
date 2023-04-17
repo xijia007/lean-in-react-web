@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import educations from "./educations";
+import educations from "./educations.jsx";
 
 const initialState = {educations};
 

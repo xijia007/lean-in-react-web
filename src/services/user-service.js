@@ -19,3 +19,8 @@ export const createUser = async (user) => {
   const response = await axios.post(`${USER_API}/signup`, user);
   return response.data;
 };
+
+export const updateUser = async (uid, newUser) => {
+  const response = await axios.put(`${USER_API}/${uid}`, newUser);
+  return response.data;
+};

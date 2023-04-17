@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {updateUserInfo} from "../reducer/userInfo-reducer";
-import "../index.css";
+import {updateUser} from "../../Features/Profile/users-reducer.jsx";
+import { ArrowLeft, XLg } from "react-bootstrap-icons";
+import { updateUserThunk } from "../../../services/user-thunk.js";
 
 const EditProfileScreen = () => {
     const {user} = useSelector((state) => state.userInfo);
@@ -10,8 +11,10 @@ const EditProfileScreen = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    console.log("current user editing profile", user)
+
     const handleSaveButton = () => {
-        dispatch(updateUserInfo(userInfo));
+        dispatch(updateUserThunk(user.uid, userInfo));
         navigate(-1);
     };
     return (
@@ -20,7 +23,7 @@ const EditProfileScreen = () => {
                 <div className="list-group-item">
                     <button className="btn btn-primary rounded-pill float-end border-secondary border-1 mt-3" onClick={handleSaveButton}>Save</button>
                     <div className="d-flex justify-content-start">
-                        <div><h3 className="mt-3"><i className="clickable bi bi-x-lg" onClick={() => navigate(-1)}></i></h3></div>
+                        <div><h3 className="mt-3 clickable" onClick={() => navigate(-1)}><ArrowLeft/></h3></div>
                         <div className="ms-4">
                             <h4><b>Edit Profile</b></h4>
                             <h5>{`${user.firstName} ${user.lastName}`}</h5>
@@ -29,39 +32,47 @@ const EditProfileScreen = () => {
                 </div>
 
                 <div className="list-group-item pt-4">
-                    <form className="form-floating">
-                        <input type="text" className="form-control"
-                               placeholder="John" value={userInfo.firstName}
-                               onChange={(e) => setUserInfo({...userInfo, firstName: e.target.value})}
-                        />
-                        <label>First Name</label>
+                    <form className="row">
+                        <label className="col-sm-2 col-form-label">First Name</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control"
+                                   placeholder="Ex: John" value={userInfo.firstName}
+                                   onChange={(e) => setUserInfo({...userInfo, firstName: e.target.value})}
+                            />
+                        </div>
                     </form>
                     <br/>
 
-                    <form className="form-floating">
-                        <input type="text" className="form-control"
-                               placeholder="Doe" value={userInfo.lastName}
-                               onChange={(e) => setUserInfo({...userInfo, lastName: e.target.value})}
-                        />
-                        <label>Last Name</label>
+                    <form className="row">
+                        <label className="col-sm-2 col-form-label">Last Name</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control"
+                                   placeholder="Ex: Doe" value={userInfo.lastName}
+                                   onChange={(e) => setUserInfo({...userInfo, lastName: e.target.value})}
+                            />
+                        </div>
                     </form>
                     <br/>
 
-                    <form className="form-floating">
-                        <textarea className="form-control"
-                                  placeholder="Add your skills..." value={userInfo.skills} rows={8} cols={40}
-                                  onChange={(e) => setUserInfo({...userInfo, skills: e.target.value})}
-                        />
-                        <label>Skills</label>
+                    <form className="row">
+                        <label className="col-sm-2 col-form-label">Skills</label>
+                        <div className="col-sm-10">
+                            <textarea className="form-control"
+                                      placeholder="Ex: I am good at ..." value={userInfo.skills} rows={3} cols={40}
+                                      onChange={(e) => setUserInfo({...userInfo, skills: e.target.value})}
+                            />
+                        </div>
                     </form>
                     <br/>
 
-                    <form className="form-floating">
-                        <textarea className="form-control"
-                                  placeholder="Say something..." value={userInfo.bio} rows={8} cols={40}
-                                  onChange={(e) => setUserInfo({...userInfo, bio: e.target.value})}
-                        />
-                        <label>Bio</label>
+                    <form className="row">
+                        <label className="col-sm-2 col-form-label">Bio</label>
+                        <div className="col-sm-10">
+                            <textarea className="form-control"
+                                      placeholder="Ex: I love..." value={userInfo.bio} rows={4} cols={40}
+                                      onChange={(e) => setUserInfo({...userInfo, bio: e.target.value})}
+                            />
+                        </div>
                     </form>
                     <br/>
 
