@@ -3,15 +3,18 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../Firebase/firebase';
 
-import { findUsers, findUser } from '../../services/user-service';
+import { findUsers, findUser, removeCurrentUser } from "../../services/user-service";
+import { useDispatch } from "react-redux";
 
 function Home() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        dispatch(removeCurrentUser());
         navigate('/');
         console.log('Signed out successfully');
       })

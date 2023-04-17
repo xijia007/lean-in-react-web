@@ -7,10 +7,10 @@ import LoginComponent from './LoginComponent';
 import * as ROUTES from '../../constants/routes';
 
 function HomeNav() {
-  const { user } = useSelector((state) => state.userInfo);
-  const { firstName, role, isLogined } = user;
+  const { user, isLogined } = useSelector((state) => state.userInfo);
+  const { firstName, role } = user;
   const isAdmin = role === 'admin';
-
+  console.log("from HomeNav", user)
   return (
     <Navbar>
       <Container fluid>

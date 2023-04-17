@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { findUser } from '../../services/user-service';
-
 import { setUpUserId, setUpUserPassword } from '../Features/Login/LoginSlice';
 import { updateUser } from '../Features/Profile/users-reducer.jsx';
+import { recordCurrentUserThunk } from "../../services/user-thunk.js";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -27,7 +27,8 @@ function SignIn() {
       );
       const { uid } = userCredential.user;
       const userData = await findUser(uid);
-      dispatch(updateUser({ ...userData, isLogined: true }));
+      dispatch(recordCurrentUserThunk(userData))
+      // dispatch(updateUser({ ...userData, isLogined: true }));
       navigate('/');
     } catch (error) {
       const errorCode = error.code;

@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import user from './user.jsx';
-import { updateUserThunk } from "../../../services/user-thunk.js";
+// import user from './user.jsx';
+import {
+  currentUserProfileThunk, findUserThunk,
+  recordCurrentUserThunk,
+  removeCurrentUserThunk,
+  updateUserThunk
+} from "../../../services/user-thunk.js";
 
 // const initialState = { user };
 const initialState = {
-  user: {
-    firstName: '',
-    role: 'user',
-    isLogined: false,
-  },
+  user: {firstName: '', role: 'user',},
+  isLogined: false,
 };
-
-console.log(user);
 
 // const initialState2 = {
 //   userName: 'testUser',
@@ -32,8 +32,23 @@ const usersSlice = createSlice({
   name: 'userInfo',
   initialState,
   extraReducers: {
+    [findUserThunk.fulfilled]: (state, action) => {
+      state.user = action.payload;
+    },
     [updateUserThunk.fulfilled]: (state, action) => {
-      state.users = {...action.payload, isLogined: true}
+      state.user = action.payload;
+    },
+    [recordCurrentUserThunk.fulfilled]: (state, action) => {
+      state.user = action.payload;
+      state.isLogined = true;
+      console.log("fulfilled recordCurrentUserThunk", state.user);
+    },
+    [removeCurrentUserThunk.fulfilled]: (state, action) => {
+      state.user = {firstName: '', role: 'user',};
+      state.isLogined = false;
+    },
+    [currentUserProfileThunk.fulfilled]: (state, action) => {
+      state.user = action.payload;
     },
   },
   reducers: {

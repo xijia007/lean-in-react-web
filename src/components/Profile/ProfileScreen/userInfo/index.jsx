@@ -1,12 +1,15 @@
-import {useSelector} from "react-redux";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import {useNavigate} from "react-router";
+import { currentUserProfileThunk, findUserThunk } from "../../../../services/user-thunk.js";
 
 
 const UserInfoComponent = () => {
     const {user} = useSelector((state) => state.userInfo);
     const navigate = useNavigate();
-    console.log(user)
+
+    console.log("current user", user)
+
     return(
         <div className="list-group">
             <div className="list-group-item p-3">
