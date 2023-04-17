@@ -8,8 +8,6 @@ import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AdminPage from '../Admin';
-// eslint-disable-next-line no-unused-vars
-import EditProfilePage from '../EditProfile';
 import ProfilePage from '../Profile';
 import * as ROUTES from '../../constants/routes';
 

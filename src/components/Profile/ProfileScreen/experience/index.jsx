@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {deleteExperience} from "../../reducer/experience-reducer";
+import {deleteExperience} from "../../../Features/Profile/experience-reducer.jsx";
 import {XLg} from "react-bootstrap-icons";
 
 const ExperienceComponent = () => {
@@ -17,7 +17,7 @@ const ExperienceComponent = () => {
     return(
         <div className="list-group">
             <div className="list-group-item d-flex justify-content-between">
-                <div className="p-3"><h4>Experience</h4></div>
+                <div className="pt-2 pb-2"><h4>Experience</h4></div>
                 <div>
                     <button
                         className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
