@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const RecentJobList = () => {
     const dbjobsArray = useSelector((state) => state.DBjobs.data);
-    const recruiterJobsArray = useSelector((state) => state.RecruiterJobs.data);
+    const recruiterJobsArray = useSelector((state) => state.Recruiterjobs.data);
 
     console.log(recruiterJobsArray);
     return (
@@ -17,6 +17,12 @@ const RecentJobList = () => {
                  return( <RecentJobItem job={job}/>)
                 }
             )}
+
+            {recruiterJobsArray.RecruiterJobs.map( (job) =>{
+                
+                return( <RecentJobItem job={job}/>)
+               }
+           )}
 
         </div>
     );
