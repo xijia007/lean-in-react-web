@@ -6,7 +6,7 @@ import { auth } from '../Firebase/firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { findUser } from '../../services/user-service';
 import { setUpUserId, setUpUserPassword } from '../Features/Login/LoginSlice';
-import { updateUser } from '../Features/Profile/users-reducer.jsx';
+import { updateUser } from '../Features/Profile/user-reducer.jsx';
 import { recordCurrentUserThunk } from "../../services/user-thunk.js";
 
 function SignIn() {

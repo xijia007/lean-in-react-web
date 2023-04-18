@@ -20,8 +20,12 @@ export const createUser = async (user) => {
   return response.data;
 };
 
-export const updateUser = async (newUser) => {
-  const response = await axios.put(`${USER_API}/${newUser.id}`, newUser);
+export const deleteUser = (id) => {
+  return axios.delete(`${USER_API}/${id}`);
+};
+
+export const updateUser = async (id, newUser) => {
+  const response = await axios.put(`${USER_API}/${id}`, newUser);
   return response.data;
 };
 

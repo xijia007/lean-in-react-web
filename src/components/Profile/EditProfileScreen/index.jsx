@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {updateUser} from "../../Features/Profile/users-reducer.jsx";
+import {updateUser} from "../../Features/Profile/user-reducer.jsx";
 import { ArrowLeft, XLg } from "react-bootstrap-icons";
 import { updateUserThunk } from "../../../services/user-thunk.js";
 

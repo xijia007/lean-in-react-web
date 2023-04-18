@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {addExperience} from "../../../Features/Profile/experience-reducer.jsx";
+import {addExperience} from "../../Features/Profile/experience-reducer.jsx";
 import { ArrowLeft } from "react-bootstrap-icons";
 
 

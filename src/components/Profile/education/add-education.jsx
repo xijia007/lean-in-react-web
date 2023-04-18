@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addEducation} from "../../../Features/Profile/education-reducer.jsx";
+import {addEducation} from "../../Features/Profile/education-reducer.jsx";
 import {useNavigate} from "react-router";
 import { ArrowLeft } from "react-bootstrap-icons";
 
