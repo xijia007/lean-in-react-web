@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import JobKeyFacts from '../JobSummaryList/job-key-facts';
 import CompanyImage from '../JobSummaryList/company-image';
-import {saveJob} from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
+// import {saveJob} from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
+import {saveUnsaveJob} from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
 import {applyJob} from '../../Features/AppliedSavedJobs/applied-jobs-reducer.jsx';
 
 const JobDetails = () => {
@@ -18,12 +19,14 @@ const JobDetails = () => {
 
     const {savedJobs} = useSelector((state) => state.savedJobs)
     const {appliedjobs} = useSelector((state) => state.appliedJobs)
+    const saved = savedJobs.find(e => e._id === job._id);
+
     const dispatch = useDispatch();
-    const onJobSave = (job) => {
-        dispatch(saveJob(job));
+    const onJobSaveUnsave = (job) => { // combine save/unsave button function
+        dispatch(saveUnsaveJob(job));
         console.log("savedJob: ", job);
-        
     }
+
     const onJobApply = (job) => {
         dispatch(applyJob(job));
         console.log("appliedJob: ", job);
@@ -31,7 +34,8 @@ const JobDetails = () => {
 
 
     return ( 
-        <div className="list-group-item">
+        <div className="list-group">
+            <div className="list-group-item">
             <div className="row">
                 <h4>Job Details for selected id: {jobId}</h4>
                 <div className="col-2 text-center">
@@ -57,14 +61,22 @@ const JobDetails = () => {
                     </div>
                     <div className="row">
                         <button type="button" 
-                            onClick= {() => onJobApply(job)}
-                            className="btn btn-primary col m-3">Apply</button>
+                            onClick={() => onJobApply(job)}
+                            className="btn btn-primary col m-3">
+                                Apply for this job
+                        </button>
                         <button type="button" 
-                            onClick= {() => onJobSave(job)}
-                            className="btn btn-outline-secondary col m-3">Save</button>
+                            // onClick= {() => onJobSave(job)}
+                            onClick={() => onJobSaveUnsave(job)}
+                            className="btn btn-outline-secondary col m-3">
+                            {saved ? "Unsave this job" : "Save this job"}    
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
+            
+                
         </div>
     )
 }
