@@ -9,15 +9,25 @@ const savedJobsSlice = createSlice({
   name: "savedJobs",
   initialState,
   reducers: {
-    saveJob(state, action) {
-      state.savedJobs.push({...action.payload, _id: (new Date()).getTime()});
+    saveUnsaveJob(state, action) {
+      const saved = state.savedJobs.find(e => e._id === action.payload._id)
+      if (saved) {
+        state.savedJobs = state.savedJobs.filter(e => e._id !== action.payload._id);
+      } else {
+        state.savedJobs.unshift({
+          ...action.payload, _id: (new Date()).getTime()
+        });
+      }
     },
-    unSaveJob(state, action) {
-      state.savedJobs = state.savedJobs.filter(e => e._id !== action.payload);
-    },
+    // saveJob(state, action) {
+    //   state.savedJobs.push({...action.payload, _id: (new Date()).getTime()});
+    // },
+    // unSaveJob(state, action) {
+    //   state.savedJobs = state.savedJobs.filter(e => e._id !== action.payload);
+    // },
   },
 });
 
 export default savedJobsSlice.reducer;
 
-export const {saveJob, unSaveJob} = savedJobsSlice.actions;
+export const {saveJob, unSaveJob, saveUnsaveJob} = savedJobsSlice.actions;
