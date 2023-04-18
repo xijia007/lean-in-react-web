@@ -24,9 +24,11 @@ export const deleteUser = (id) => {
   return axios.delete(`${USER_API}/${id}`);
 };
 
-export const updateUser = async (id, newUser) => {
-  const response = await axios.put(`${USER_API}/${id}`, newUser);
-  return response.data;
+export const updateUser = (newUser) => {
+  return axios.post(`${USER_API}/update/${newUser.uid}`, newUser);
+
+  // const response = await axios.post(`${USER_API}/update/${newUser.uid}`, newUser);
+  // return response.data;
 };
 
 export const recordCurrentUser = (user) => {

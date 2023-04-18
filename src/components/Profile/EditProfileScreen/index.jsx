@@ -11,8 +11,9 @@ const EditProfileScreen = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleSaveButton = () => {
-        dispatch(updateUserThunk(userInfo));
+    const handleSaveButton = async () => {
+        await dispatch(updateUserThunk(userInfo));
+        console.log("save userinfo", userInfo);
         navigate(-1);
     };
     return (
