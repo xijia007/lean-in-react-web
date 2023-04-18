@@ -8,3 +8,6 @@ export const SEARCHDETAILS = '/search-details';
 export const PASSWORD_FORGET = '/pw-forget';
 export const EDITPROFILE = '/edit-profile';
 export const PROFILE = '/profile';
+export const ADDEXPERIENCE = '/add-experience';
+export const ADDEDUCATION = '/add-education';
+

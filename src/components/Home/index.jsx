@@ -6,15 +6,22 @@ import JobsSideBar from "../JobsSideBar/index.jsx";
 import ProfileCard from "./ProfileCard.jsx";
 import RecentJobLists from "./recentJobLists/index.jsx";
 
-import { findUsers, findUser } from '../../services/user-service';
+import { findUsers, findUser, removeCurrentUser } from "../../services/user-service";
+import { useDispatch, useSelector } from "react-redux";
+import Admin from "../Admin/index.jsx";
 
 function Home() {
+  const {user} = useSelector((state) => state.userInfo);
+  const {role} = user;
+  const isAdmin = role === 'admin';
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        dispatch(removeCurrentUser());
         navigate('/');
         console.log('Signed out successfully');
       })
@@ -77,6 +84,7 @@ function Home() {
         <div className="col-3 col-lg-2 col-xl-4">
           <JobsSideBar/>
         </div>
+
       </div>
       <div>
         <button onClick={handleLogout}>Logout</button>

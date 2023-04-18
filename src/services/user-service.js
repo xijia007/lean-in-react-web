@@ -19,3 +19,24 @@ export const createUser = async (user) => {
   const response = await axios.post(`${USER_API}/signup`, user);
   return response.data;
 };
+
+export const deleteUser = (id) => {
+  return axios.delete(`${USER_API}/${id}`);
+};
+
+export const updateUser = async (id, newUser) => {
+  const response = await axios.put(`${USER_API}/${id}`, newUser);
+  return response.data;
+};
+
+export const recordCurrentUser = (user) => {
+  return axios.post(`${USER_API}/recordCurrentUser`, user);
+}
+
+export const removeCurrentUser = () => {
+  return axios.post(`${USER_API}/removeCurrentUser`);
+}
+
+export const currentUserProfile = () => {
+  return axios.get(`${USER_API}/currentUserProfile`);
+}

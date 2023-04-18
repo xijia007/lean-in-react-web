@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import experiences from "./experiences";
+import experiences from "./experiences.jsx";
 
 const initialState = {experiences};
 

@@ -2,8 +2,8 @@ import React from 'react';
 import JobKeyFacts from '../JobSummaryList/job-key-facts';
 import CompanyImage from '../JobSummaryList/company-image';
 import {useSelector, useDispatch} from 'react-redux';
-import {saveJob} from '../../JobsSideBar/reducer/saved-jobs-reducer';
-import {applyJob} from '../../JobsSideBar/reducer/applied-jobs-reducer';
+import {saveJob} from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
+import {applyJob} from '../../Features/AppliedSavedJobs/applied-jobs-reducer.jsx';
 
 function JobDetailItem (job) {
     const {savedJobs} = useSelector((state) => state.savedJobs)
