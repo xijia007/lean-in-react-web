@@ -13,7 +13,7 @@ const JobDetails = () => {
     const jobsArray = useSelector(state => state.jobs);
     // console.log("all jobs for JobDetails: ", jobsArray)
 
-    const job = jobsArray.find(job => job._id === jobId);
+    const job = jobsArray.find(job => job._id == jobId);
     // console.log("selected job for JobDetails: ", job)
 
     const {savedJobs} = useSelector((state) => state.savedJobs)
