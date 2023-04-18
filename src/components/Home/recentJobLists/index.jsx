@@ -1,22 +1,22 @@
 import React from 'react';
-import recentJobItem from "./recentJobItem.jsx";
-
+import RecentJobItem from "./RecentJobItem.jsx";
+import RecruiterJobs from '../reducer/RecruiterJobs.jsx';
 import { useSelector } from 'react-redux';
 
 
-const recentJobList = () => {
-    const dbjobsArray = useSelector(state => state.DBjobs);
-    const recruiterJobsArray = useSelector(state => state.RecruiterJobs);
-
+const RecentJobList = () => {
+    const dbjobsArray = useSelector((state) => state.DBjobs.data);
+    const recruiterJobsArray = useSelector(state => state.Recruiterjobs.data);
+    console.log(recruiterJobsArray);
     return (
         <div className="list-group">
-            {dbjobsArray.map(job =>
-                    <recentJobItem key={job._id} {...job} />
+            {dbjobsArray.DBjobs.map( (job) =>{
+                
+                 return( <RecentJobItem job={job}/>)
+            }
             )}
-            {recruiterJobsArray.map(job =>
-                <RecruiterJobs key={job._id} {...job} />
-            )}
+            
         </div>
     );
 }
-export default recentJobList();
+export default RecentJobList;

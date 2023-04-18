@@ -7,7 +7,8 @@ import experienceReducer from '../Profile/reducer/experience-reducer.jsx';
 import AppliedJobsReducer from '../JobsSideBar/reducer/applied-jobs-reducer.jsx';
 import SavedJobsReducer from '../JobsSideBar/reducer/saved-jobs-reducer.jsx';
 import jobsReducer from '../Search/reducer/jobs-reducer.jsx';
-
+import DBjobsReducer from '../Home/reducer/DBjobs-reducer';
+import RecruiterJobsReducer from '../Home/reducer/RecruiterJobs-reducer';
 export default configureStore({
   reducer: {
     login: loginReducer,
@@ -18,5 +19,7 @@ export default configureStore({
     appliedJobs: AppliedJobsReducer,
     savedJobs: SavedJobsReducer,
     jobs: jobsReducer,
+    DBjobs: DBjobsReducer,
+    Recruiterjobs: RecruiterJobsReducer,
   },
 });
