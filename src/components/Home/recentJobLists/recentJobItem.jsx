@@ -1,7 +1,7 @@
 import React from 'react';
 
 function RecentJobItem(job) {
-    console.log(2);
+
     return (
         <div className="list-group-item">
             <div className="row">
