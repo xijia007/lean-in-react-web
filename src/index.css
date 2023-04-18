@@ -110,3 +110,6 @@ label {
 .clickable{
   cursor: pointer;
 }
+.clickable:hover {
+  color: #747bff;
+}

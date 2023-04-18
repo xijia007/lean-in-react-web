@@ -1,15 +1,18 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
-import {deleteExperience} from "../../../Features/Profile/experience-reducer.jsx";
+import { useNavigate, useParams } from "react-router";
+import {deleteExperience} from "../../Features/Profile/experience-reducer.jsx";
 import {XLg} from "react-bootstrap-icons";
 
 const ExperienceComponent = () => {
+    const { userId } = useParams();
+    const isMyProfile = userId === undefined;
+
     const {experiences} = useSelector((state) => state.experience)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const addExperienceHandler = () => {navigate("/profile/add-experience");};
+    const addExperienceHandler = () => {navigate("/add-experience");};
     const deleteExperienceHandler = (id) => {
         dispatch(deleteExperience(id))
     };
@@ -18,14 +21,16 @@ const ExperienceComponent = () => {
         <div className="list-group">
             <div className="list-group-item d-flex justify-content-between">
                 <div className="pt-2 pb-2"><h4>Experience</h4></div>
-                <div>
-                    <button
+                {isMyProfile &&
+                  <div>
+                      <button
                         className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
                         onClick={() => {
                             addExperienceHandler();
                         }}
-                    >Add Experience</button>
-                </div>
+                      >Add Experience</button>
+                  </div>
+                }
             </div>
             {experiences && experiences.map((e) =>
                 <div key={e._id} className="list-group-item d-flex justify-content-between">
@@ -37,9 +42,12 @@ const ExperienceComponent = () => {
                         </div>
                         <div>{e.description}</div>
                     </div>
-                    <div>
-                        <h5 className="clickable" onClick={() => deleteExperienceHandler(e._id)}><XLg/></h5>
-                    </div>
+                    {isMyProfile &&
+                      <div>
+                          <h5 className="clickable" onClick={() => deleteExperienceHandler(e._id)}><XLg/></h5>
+                      </div>
+                    }
+
                 </div>)}
         </div>
     );

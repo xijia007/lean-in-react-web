@@ -14,6 +14,12 @@ export const findUserThunk = createAsyncThunk(
     return user;}
 );
 
+export const deleteUserThunk = createAsyncThunk(
+  'users/delete', async (id) => {
+    await userService.deleteUser(id);
+    return id;}
+);
+
 export const updateUserThunk = createAsyncThunk(
   'users/update', async (newUser) => {
     await userService.updateUser(newUser);
