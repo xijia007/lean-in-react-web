@@ -6,6 +6,7 @@ import { auth } from '../Firebase/firebase';
 import JobsSideBar from '../JobsSideBar/index.jsx';
 import ProfileCard from './ProfileCard.jsx';
 import RecentJobLists from './recentJobLists/index.jsx';
+import CompanyHome from '../CompanyHome/index.jsx';
 
 import {
   findUsers,
@@ -20,6 +21,8 @@ function Home() {
   const isAdmin = role === 'admin';
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isUser = role === 'user';
+  const isCompany = role === 'company';
 
   const handleLogout = () => {
     signOut(auth)
@@ -56,26 +59,45 @@ function Home() {
   console.log('email', email);
 
   return (
-    <nav>
-      <h2>Welcome to LeanIn {email}</h2>
-      <div className="row mt-2">
-        <div className="col-2 col-md-2 col-lg-1 col-xl-2">
-          <ProfileCard />
-        </div>
-        <div
-          className="col-9 col-md-10 col-lg-7 col-xl-6"
-          style={{ position: 'relative' }}
-        >
-          <RecentJobLists />
-        </div>
-        <div className="col-3 col-lg-2 col-xl-4">
-          <JobsSideBar />
-        </div>
-      </div>
-      <div>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-    </nav>
+    <>
+      {isUser && (
+        <nav>
+          <h2>Welcome to LeanIn {email}</h2>
+          <div className="row mt-2">
+            <div className="col-2 col-md-2 col-lg-1 col-xl-2">
+              <ProfileCard />
+            </div>
+            <div
+              className="col-9 col-md-10 col-lg-7 col-xl-6"
+              style={{ position: 'relative' }}
+            >
+              <RecentJobLists />
+            </div>
+            <div className="col-3 col-lg-2 col-xl-4">
+              <JobsSideBar />
+            </div>
+          </div>
+          <div>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        </nav>
+      )}
+      {isCompany && (
+        <nav>
+          <h2>Welcome to LeanIn {email}</h2>
+          <h3>Company home page</h3>
+          <CompanyHome />
+        </nav>
+      )}
+      {isAdmin && (
+        <nav>
+          <h2>Welcome to LeanIn {email}</h2>
+          <h3>Admin home page</h3>
+          <h3>Lists of Users</h3>
+          <Admin />
+        </nav>
+      )}
+    </>
   );
 }
 

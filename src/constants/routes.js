@@ -11,3 +11,7 @@ export const EDITPROFILE = '/edit-profile';
 export const PROFILE = '/profile';
 export const ADDEXPERIENCE = '/add-experience';
 export const ADDEDUCATION = '/add-education';
+export const JOBS = '/jobs';
+export const COMPANY_PROFILE = '/company-profile';
+export const ADMINHOME = '/admin-home';
+export const COMPANYHOME = '/company-home';
