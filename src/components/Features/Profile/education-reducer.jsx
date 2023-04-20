@@ -32,7 +32,29 @@ const educationSlice = createSlice({
         end: convertDate(end),
       };
 
-      state.educations.push(newState);
+      const existingEducation = state.educations.find(
+        (education) => education.id === id
+      );
+
+      if (existingEducation) {
+        // If the education object already exists, replace it with the new data
+        return {
+          ...state,
+          educations: state.educations.map((education) => {
+            if (education.id === id) {
+              return newState;
+            }
+            return education;
+          }),
+        };
+      }
+      // If the education object does not exist, add it to the array
+      return {
+        ...state,
+        educations: [...state.educations, newState],
+      };
+
+      // state.educations.push(newState);
     },
     deleteEducation(state, action) {
       state.educations = state.educations.filter(
