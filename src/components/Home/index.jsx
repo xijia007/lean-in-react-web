@@ -13,7 +13,7 @@ import {
   findUser,
   removeCurrentUser,
 } from '../../services/user-service';
-import Admin from '../Admin/index.jsx';
+import AdminHome from '../AdminHome/index.jsx';
 
 function Home() {
   const { user } = useSelector((state) => state.userInfo);
@@ -62,7 +62,9 @@ function Home() {
     <>
       {isUser && (
         <nav>
-          <h2>Welcome to LeanIn {email}</h2>
+          <h2>
+            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+          </h2>
           <div className="row mt-2">
             <div className="col-2 col-md-2 col-lg-1 col-xl-2">
               <ProfileCard />
@@ -84,17 +86,19 @@ function Home() {
       )}
       {isCompany && (
         <nav>
-          <h2>Welcome to LeanIn {email}</h2>
+          <h2>
+            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+          </h2>
           <h3>Company home page</h3>
           <CompanyHome />
         </nav>
       )}
       {isAdmin && (
         <nav>
-          <h2>Welcome to LeanIn {email}</h2>
-          <h3>Admin home page</h3>
-          <h3>Lists of Users</h3>
-          <Admin />
+          <h2>
+            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+          </h2>
+          <AdminHome />
         </nav>
       )}
     </>

@@ -14,12 +14,35 @@ function AdminHome() {
 
   return (
     <div className="container">
-      <h1>Admin Home</h1>
       <div className="row">
         <h2>Hi, LeanIn Admin</h2>
-
-        {users &&
-          users.map((user) => <UserItemByRole key={user.id} user={user} />)}
+        <div className="col-4">
+          {' '}
+          <h3>Job Seeker Role List</h3>
+          {users
+            .filter((user) => user.role === 'user')
+            .map((user) => (
+              <UserItemByRole key={user.id} user={user} />
+            ))}
+        </div>
+        <div className="col-4">
+          {' '}
+          <h3>Company Role List</h3>
+          {users
+            .filter((user) => user.role === 'company')
+            .map((user) => (
+              <UserItemByRole key={user.id} user={user} />
+            ))}
+        </div>
+        <div className="col-4">
+          {' '}
+          <h3>Admin Role List</h3>
+          {users
+            .filter((user) => user.role === 'admin')
+            .map((user) => (
+              <UserItemByRole key={user.id} user={user} />
+            ))}
+        </div>
       </div>
     </div>
   );
