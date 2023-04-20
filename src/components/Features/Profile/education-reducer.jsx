@@ -1,25 +1,48 @@
-import {createSlice} from "@reduxjs/toolkit";
-import educations from "./educations.jsx";
+import { createSlice } from '@reduxjs/toolkit';
+import educations from './educations';
+import { convertDate } from '../../../utils/convertData';
 
-const initialState = {educations};
+const initialState2 = { educations };
+
+const initialState = {};
 
 const educationSlice = createSlice({
-    name: "educations",
-    initialState,
-    reducers: {
-        // updateEducation: (state, action) => {
-        //     const index = state.findIndex(e => e._id === action.payload._id);
-        //     state.educations[index] = action.payload;
-        // },
-        addEducation(state, action) {
-            state.educations.push({...action.payload, _id: (new Date()).getTime()});
-        },
-        deleteEducation(state, action) {
-            state.educations = state.educations.filter(e => e._id !== action.payload);
-        },
+  name: 'educations',
+  initialState,
+  reducers: {
+    // updateEducation: (state, action) => {
+    //     const index = state.findIndex(e => e._id === action.payload._id);
+    //     state.educations[index] = action.payload;
+    // },
+    addEducation(state, action) {
+      const {
+        education_id: id,
+        degree: role,
+        description,
+        school_name: entityName,
+        start_time: start,
+        end_time: end,
+      } = action.payload;
+      const newState = {
+        id,
+        role,
+        description,
+        entityName,
+        start: convertDate(start),
+        end: convertDate(end),
+      };
+
+      state.educations.push(newState);
     },
+    deleteEducation(state, action) {
+      state.educations = state.educations.filter(
+        (e) => e.id !== action.payload
+      );
+    },
+  },
 });
 
 export default educationSlice.reducer;
 
-export const {addEducation, deleteEducation, updateEducation} = educationSlice.actions;
+export const { addEducation, deleteEducation, updateEducation } =
+  educationSlice.actions;
