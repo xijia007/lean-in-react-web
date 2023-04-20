@@ -28,8 +28,11 @@ function SignIn() {
       console.log('userCredential', userCredential);
       const { uid } = userCredential.user;
       const userData = await findUser(uid);
-      dispatch(recordCurrentUserThunk(userData));
-      // dispatch(updateUser({ ...userData, isLogined: true }));
+      // dispatch(recordCurrentUserThunk(userData));
+      userData.isLogined = true;
+      dispatch(updateUser(userData));
+      localStorage.setItem('userData', JSON.stringify(userData));
+
       navigate('/');
     } catch (error) {
       const errorCode = error.code;

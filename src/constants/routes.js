@@ -1,5 +1,6 @@
 export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';
+export const SIGN_OUT = '/signout';
 export const HOME = '/';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
@@ -10,4 +11,3 @@ export const EDITPROFILE = '/edit-profile';
 export const PROFILE = '/profile';
 export const ADDEXPERIENCE = '/add-experience';
 export const ADDEDUCATION = '/add-education';
-

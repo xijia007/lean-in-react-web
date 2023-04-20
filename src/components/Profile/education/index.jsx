@@ -16,7 +16,6 @@ function EducationComponent() {
   const { educations } = useSelector((state) => state.education);
   const { user } = useSelector((state) => state.userInfo);
   const { uid } = user;
-  //   console.log('user from education', user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const addEducationHandler = () => {
@@ -38,7 +37,7 @@ function EducationComponent() {
     if (uid) {
       fetchUserEducations(uid);
     }
-  }, []);
+  }, [dispatch, uid]);
 
   return (
     <div className="list-group">
