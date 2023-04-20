@@ -62,23 +62,6 @@ function Signup() {
       .catch((err) => {
         console.log(err);
       });
-
-    // await createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     const { user } = userCredential;
-    //     console.log(user);
-    //     navigate('/login');
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     // const errorCode = error.code;
-    //     const [, errorMessage] = error.message.split(': ');
-
-    //     setErrorMessageAlert(errorMessage);
-    //     // ..
-    //   });
-    // navigate('/');
   };
 
   return (
