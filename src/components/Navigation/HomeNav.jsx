@@ -18,7 +18,7 @@ function HomeNav() {
         <Navbar.Brand href="#">LeanIn</Navbar.Brand>
         <Nav className="ml-auto">
           {isLogined ? (
-            <LinkContainer to={ROUTES.PROFILE}>
+            <LinkContainer to={ROUTES.HOME}>
               <Nav.Link>Hello, {firstName}</Nav.Link>
             </LinkContainer>
           ) : (
@@ -68,11 +68,11 @@ function HomeNav() {
             </LinkContainer>
           )}
 
-          {isAdmin && (
+          {/* {isAdmin && (
             <LinkContainer to={ROUTES.ADMIN}>
               <Nav.Link>Users Management</Nav.Link>
             </LinkContainer>
-          )}
+          )} */}
           {isLogined && (
             <LinkContainer to={ROUTES.SIGN_OUT}>
               <Nav.Link>Sign Out</Nav.Link>

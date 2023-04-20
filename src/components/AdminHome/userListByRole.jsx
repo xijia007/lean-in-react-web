@@ -12,9 +12,11 @@ const UserItemByRole = ({
     <div className="card">
       <div className="card-body">
         <h5 className="card-title">
-          {user.firstName} {user.lastName}
+          <h5>
+            User Name: {user.firstName} {user.lastName}
+          </h5>
         </h5>
-        <h6 className="card-subtitle mb-2 text-muted">{user.role}</h6>
+        <h6 className="card-subtitle mb-2 text-muted">Role: {user.role}</h6>
         <button
           className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
           onClick={() => {
