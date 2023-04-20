@@ -4,7 +4,11 @@ import { convertDate } from '../../../utils/convertData';
 
 const initialState2 = { educations };
 
-const initialState = {};
+const initialState = {
+  educations: [],
+};
+
+console.log(initialState2);
 
 const educationSlice = createSlice({
   name: 'educations',
