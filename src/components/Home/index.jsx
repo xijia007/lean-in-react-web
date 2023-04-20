@@ -28,7 +28,8 @@ function Home() {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        dispatch(removeCurrentUser());
+        // dispatch(removeCurrentUser());
+        localStorage.removeItem('userData');
         navigate('/');
         console.log('Signed out successfully');
       })
@@ -53,24 +54,6 @@ function Home() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   async function fetchUsers() {
-  //     const users = await findUsers();
-  //     console.log(users);
-  //   }
-
-  //   async function fetchUser(uid) {
-  //     const user = await findUser(uid);
-  //     console.log(user);
-  //   }
-
-  //   fetchUsers();
-
-  //   fetchUser('1EesaL499STDpjv6OzjV');
-  // }, []);
-
-  // const userEmail = auth().currentUser.email;
-  // const isUserLoggedIn = auth?.currentUser;
   const email = auth?.currentUser?.email;
   // const { email } = user ?? undefined;
   console.log('email', email);

@@ -5,6 +5,7 @@ import SearchPage from '../Search/SearchScreen';
 import SearchDetailsPage from '../Search/SearchDetailsScreen';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
+import SignOutPage from '../SignOut';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AdminPage from '../Admin';
@@ -37,6 +38,7 @@ function App() {
           />
           <Route exact path={ROUTES.SIGN_UP} element={<SignUpPage />} />
           <Route exact path={ROUTES.SIGN_IN} element={<SignInPage />} />
+          <Route exact path={ROUTES.SIGN_OUT} element={<SignOutPage />} />
           <Route
             exact
             path={ROUTES.PASSWORD_FORGET}

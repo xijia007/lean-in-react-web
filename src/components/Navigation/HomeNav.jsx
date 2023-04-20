@@ -3,12 +3,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import LoginComponent from './LoginComponent';
 import * as ROUTES from '../../constants/routes';
 
 function HomeNav() {
-  const { user, isLogined } = useSelector((state) => state.userInfo);
-  const { firstName, role } = user;
+  const { user } = useSelector((state) => state.userInfo);
+  const { firstName, role, isLogined } = user;
   const isAdmin = role === 'admin';
   const isUser = role === 'user';
   const isCompany = role === 'company';
@@ -18,7 +17,7 @@ function HomeNav() {
       <Container fluid>
         <Navbar.Brand href="#">LeanIn</Navbar.Brand>
         <Nav className="ml-auto">
-          {/* {isLogined ? (
+          {isLogined ? (
             <LinkContainer to={ROUTES.PROFILE}>
               <Nav.Link>Hello, {firstName}</Nav.Link>
             </LinkContainer>
@@ -26,7 +25,7 @@ function HomeNav() {
             <LinkContainer to={ROUTES.SIGN_IN}>
               <Nav.Link>Sign In</Nav.Link>
             </LinkContainer>
-          )} */}
+          )}
           {isUser && (
             <LinkContainer to={ROUTES.HOME}>
               <Nav.Link>Home</Nav.Link>
@@ -69,21 +68,16 @@ function HomeNav() {
             </LinkContainer>
           )}
 
-          {/* <LinkContainer to={ROUTES.SEARCH}>
-            <Nav.Link>Search</Nav.Link>
-          </LinkContainer> */}
-
-          {/* <LinkContainer to={ROUTES.PROFILE}>
-            <Nav.Link>Profile</Nav.Link>
-          </LinkContainer> */}
-
           {isAdmin && (
             <LinkContainer to={ROUTES.ADMIN}>
               <Nav.Link>Users Management</Nav.Link>
             </LinkContainer>
           )}
-
-          <LoginComponent />
+          {isLogined && (
+            <LinkContainer to={ROUTES.SIGN_OUT}>
+              <Nav.Link>Sign Out</Nav.Link>
+            </LinkContainer>
+          )}
         </Nav>
       </Container>
     </Navbar>
