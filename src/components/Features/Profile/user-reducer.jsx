@@ -1,16 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import user from './user.jsx';
 import {
-  currentUserProfileThunk, findUserThunk,
+  currentUserProfileThunk,
+  findUserThunk,
   recordCurrentUserThunk,
   removeCurrentUserThunk,
-  updateUserThunk
-} from "../../../services/user-thunk.js";
+  updateUserThunk,
+} from '../../../services/user-thunk.js';
 
 // const initialState = { user };
-const initialState = {
-  user: {firstName: '', role: 'user',},
-  isLogined: false,
+
+const storedUserDataRaw = localStorage.getItem('userData');
+const storedUserData = storedUserDataRaw
+  ? { user: JSON.parse(storedUserDataRaw) }
+  : null;
+const initialState = storedUserData ?? {
+  user: { firstName: '', role: 'user', isLogined: false },
 };
 
 // const initialState2 = {
@@ -41,10 +46,10 @@ const usersSlice = createSlice({
     [recordCurrentUserThunk.fulfilled]: (state, action) => {
       state.user = action.payload;
       state.isLogined = true;
-      console.log("fulfilled recordCurrentUserThunk", state.user);
+      console.log('fulfilled recordCurrentUserThunk', state.user);
     },
     [removeCurrentUserThunk.fulfilled]: (state, action) => {
-      state.user = {firstName: '', role: 'user',};
+      state.user = { firstName: '', role: 'user' };
       state.isLogined = false;
     },
     [currentUserProfileThunk.fulfilled]: (state, action) => {

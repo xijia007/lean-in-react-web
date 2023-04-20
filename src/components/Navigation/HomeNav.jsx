@@ -7,8 +7,9 @@ import LoginComponent from './LoginComponent';
 import * as ROUTES from '../../constants/routes';
 
 function HomeNav() {
-  const { user, isLogined } = useSelector((state) => state.userInfo);
-  const { firstName, role } = user;
+  const { user } = useSelector((state) => state.userInfo);
+  const { firstName, role, isLogined } = user;
+  console.log(isLogined);
   const isAdmin = role === 'admin';
   return (
     <Navbar>
@@ -40,7 +41,7 @@ function HomeNav() {
             </LinkContainer>
           )}
 
-          <LoginComponent />
+          <LoginComponent isLogined={isLogined} />
         </Nav>
       </Container>
     </Navbar>
