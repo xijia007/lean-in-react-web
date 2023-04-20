@@ -24,5 +24,6 @@ module.exports = {
     'react/prop-types': 0,
     'no-param-reassign': ['error', { props: false }],
     'jsx-a11y/label-has-associated-control': 0,
+    'no-underscore-dangle': 0,
   },
 };

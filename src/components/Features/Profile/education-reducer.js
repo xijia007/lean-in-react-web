@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import educations from './educations';
-import { convertDate } from '../../../utils/convertData';
+import { convertDate } from '../../../utils/timeUtil';
 
 // const initialState2 = { educations };
 
