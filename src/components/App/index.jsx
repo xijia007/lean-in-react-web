@@ -10,9 +10,9 @@ import HomePage from '../Home';
 import AdminPage from '../Admin';
 import ProfilePage from '../Profile';
 import * as ROUTES from '../../constants/routes';
-import EditProfileScreen from "../Profile/EditProfileScreen/index.jsx";
-import AddExperienceScreen from "../Profile/experience/add-experience.jsx";
-import AddEducationScreen from "../Profile/education/add-education.jsx";
+import EditProfileScreen from '../Profile/EditProfileScreen/index.jsx';
+import AddExperienceScreen from '../Profile/experience/add-experience.jsx';
+import AddEducationScreen from '../Profile/education/add-education.jsx';
 
 function App() {
   return (
@@ -28,7 +28,11 @@ function App() {
             element={<SearchDetailsPage />}
           /> */}
           {/* <Route exact path={`${ROUTES.SEARCHDETAILS}/*`} element={<SearchDetailsPage />} /> */}
-          <Route exact path={`${ROUTES.SEARCHDETAILS}/:jobId`} element={<SearchDetailsPage />} />
+          <Route
+            exact
+            path={`${ROUTES.SEARCHDETAILS}/:jobId`}
+            element={<SearchDetailsPage />}
+          />
           <Route exact path={ROUTES.SIGN_UP} element={<SignUpPage />} />
           <Route exact path={ROUTES.SIGN_IN} element={<SignInPage />} />
           <Route
@@ -39,9 +43,21 @@ function App() {
           <Route exact path={ROUTES.HOME} element={<HomePage />} />
           <Route exact path={ROUTES.ADMIN} element={<AdminPage />} />
           <Route exact path={ROUTES.PROFILE} element={<ProfilePage />} />
-          <Route exact path={ROUTES.EDITPROFILE} element={<EditProfileScreen />} />
-          <Route exact path={ROUTES.ADDEXPERIENCE} element={<AddExperienceScreen />} />
-          <Route exact path={ROUTES.ADDEDUCATION} element={<AddEducationScreen />} />
+          <Route
+            exact
+            path={ROUTES.EDITPROFILE}
+            element={<EditProfileScreen />}
+          />
+          <Route
+            exact
+            path={ROUTES.ADDEXPERIENCE}
+            element={<AddExperienceScreen />}
+          />
+          <Route
+            exact
+            path={ROUTES.ADDEDUCATION}
+            element={<AddEducationScreen />}
+          />
           <Route path={`${ROUTES.PROFILE}/:userId`} element={<ProfilePage />} />
         </Routes>
       </div>

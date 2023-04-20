@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { findUser } from '../../services/user-service';
 import { setUpUserId, setUpUserPassword } from '../Features/Login/LoginSlice';
 import { updateUser } from '../Features/Profile/user-reducer.jsx';
-import { recordCurrentUserThunk } from "../../services/user-thunk.js";
+import { recordCurrentUserThunk } from '../../services/user-thunk.js';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -25,9 +25,10 @@ function SignIn() {
         email,
         password
       );
+      console.log('userCredential', userCredential);
       const { uid } = userCredential.user;
       const userData = await findUser(uid);
-      dispatch(recordCurrentUserThunk(userData))
+      dispatch(recordCurrentUserThunk(userData));
       // dispatch(updateUser({ ...userData, isLogined: true }));
       navigate('/');
     } catch (error) {

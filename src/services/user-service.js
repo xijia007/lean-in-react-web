@@ -33,12 +33,17 @@ export const updateUser = (newUser) => {
 
 export const recordCurrentUser = (user) => {
   return axios.post(`${USER_API}/recordCurrentUser`, user);
-}
+};
 
 export const removeCurrentUser = () => {
   return axios.post(`${USER_API}/removeCurrentUser`);
-}
+};
 
 export const currentUserProfile = () => {
   return axios.get(`${USER_API}/currentUserProfile`);
-}
+};
+
+export const getUserEducation = async (uid) => {
+  const response = await axios.get(`${USER_API}/getEducations/${uid}`);
+  return response.data;
+};

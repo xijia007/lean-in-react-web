@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
-import JobsSideBar from "../JobsSideBar/index.jsx";
-import ProfileCard from "./ProfileCard.jsx";
-import RecentJobLists from "./recentJobLists/index.jsx";
+import JobsSideBar from '../JobsSideBar/index.jsx';
+import ProfileCard from './ProfileCard.jsx';
+import RecentJobLists from './recentJobLists/index.jsx';
 
-import { findUsers, findUser, removeCurrentUser } from "../../services/user-service";
-import { useDispatch, useSelector } from "react-redux";
-import Admin from "../Admin/index.jsx";
+import {
+  findUsers,
+  findUser,
+  removeCurrentUser,
+} from '../../services/user-service';
+import Admin from '../Admin/index.jsx';
 
 function Home() {
-  const {user} = useSelector((state) => state.userInfo);
-  const {role} = user;
+  const { user } = useSelector((state) => state.userInfo);
+  const { role } = user;
   const isAdmin = role === 'admin';
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,21 +50,21 @@ function Home() {
     });
   }, []);
 
-  useEffect(() => {
-    async function fetchUsers() {
-      const users = await findUsers();
-      console.log(users);
-    }
+  // useEffect(() => {
+  //   async function fetchUsers() {
+  //     const users = await findUsers();
+  //     console.log(users);
+  //   }
 
-    async function fetchUser(uid) {
-      const user = await findUser(uid);
-      console.log(user);
-    }
+  //   async function fetchUser(uid) {
+  //     const user = await findUser(uid);
+  //     console.log(user);
+  //   }
 
-    fetchUsers();
+  //   fetchUsers();
 
-    fetchUser('1EesaL499STDpjv6OzjV');
-  }, []);
+  //   fetchUser('1EesaL499STDpjv6OzjV');
+  // }, []);
 
   // const userEmail = auth().currentUser.email;
   // const isUserLoggedIn = auth?.currentUser;
@@ -73,18 +77,17 @@ function Home() {
       <h2>Welcome to LeanIn {email}</h2>
       <div className="row mt-2">
         <div className="col-2 col-md-2 col-lg-1 col-xl-2">
-
-          <ProfileCard/>
+          <ProfileCard />
         </div>
-        <div className="col-9 col-md-10 col-lg-7 col-xl-6"
-             style={{"position": "relative"}}>
-
-          <RecentJobLists/>
+        <div
+          className="col-9 col-md-10 col-lg-7 col-xl-6"
+          style={{ position: 'relative' }}
+        >
+          <RecentJobLists />
         </div>
         <div className="col-3 col-lg-2 col-xl-4">
-          <JobsSideBar/>
+          <JobsSideBar />
         </div>
-
       </div>
       <div>
         <button onClick={handleLogout}>Logout</button>

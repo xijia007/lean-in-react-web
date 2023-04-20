@@ -10,7 +10,6 @@ function HomeNav() {
   const { user, isLogined } = useSelector((state) => state.userInfo);
   const { firstName, role } = user;
   const isAdmin = role === 'admin';
-  console.log("from HomeNav", user)
   return (
     <Navbar>
       <Container fluid>
