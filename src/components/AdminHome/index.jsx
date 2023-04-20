@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { findAllUsersThunk } from '../../services/user-thunk.js';
-import UserItem from './userListItem.jsx';
+import UserItemByRole from './userListByRole.jsx';
+import * as ROUTES from '../../constants/routes';
 
-function Admin() {
+function AdminHome() {
   const { users } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -13,13 +14,15 @@ function Admin() {
 
   return (
     <div className="container">
-      <h1>Admin</h1>
-      <ul className="list-group">
+      <h1>Admin Home</h1>
+      <div className="row">
         <h2>Hi, LeanIn Admin</h2>
-        {users && users.map((user) => <UserItem key={user.id} user={user} />)}
-      </ul>
+
+        {users &&
+          users.map((user) => <UserItemByRole key={user.id} user={user} />)}
+      </div>
     </div>
   );
 }
 
-export default Admin;
+export default AdminHome;
