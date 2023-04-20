@@ -3,13 +3,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import LoginComponent from './LoginComponent';
 import * as ROUTES from '../../constants/routes';
 
 function HomeNav() {
   const { user } = useSelector((state) => state.userInfo);
   const { firstName, role, isLogined } = user;
-  console.log(isLogined);
   const isAdmin = role === 'admin';
   return (
     <Navbar>
@@ -34,14 +32,16 @@ function HomeNav() {
           <LinkContainer to={ROUTES.PROFILE}>
             <Nav.Link>Profile</Nav.Link>
           </LinkContainer>
-
           {isAdmin && (
             <LinkContainer to={ROUTES.ADMIN}>
               <Nav.Link>Admin</Nav.Link>
             </LinkContainer>
           )}
-
-          <LoginComponent isLogined={isLogined} />
+          {isLogined && (
+            <LinkContainer to={ROUTES.SIGN_OUT}>
+              <Nav.Link>Sign Out</Nav.Link>
+            </LinkContainer>
+          )}
         </Nav>
       </Container>
     </Navbar>
