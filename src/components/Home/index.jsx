@@ -69,7 +69,7 @@ function Home() {
           </h2>
           <UserHome />
           <div>
-            <button className="btn btn-danger" onClick={handleLogout}>
+            <button className="btn btn-danger float-end" onClick={handleLogout}>
               Logout
             </button>
           </div>
@@ -83,7 +83,7 @@ function Home() {
 
           <CompanyHome />
           <div>
-            <button className="btn btn-danger"
+            <button className="btn btn-danger float-end"
               onClick={handleLogout}>Logout</button>
           </div>
         </nav>
@@ -95,7 +95,7 @@ function Home() {
           </h2>
           <AdminHome />
           <div>
-            <button className='btn btn-danger'
+            <button className='btn btn-danger float-end'
               onClick={handleLogout}>Logout</button>
           </div>
         </nav>
