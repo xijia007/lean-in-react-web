@@ -105,7 +105,7 @@ function Home() {
         <nav>
           <h2>Hi, LeanIn Visiter</h2>
           <h6>
-            Welcome to LeanIn, <Link to={ROUTES.SIGN_UP}>Sign up</Link> or <Link to={ROUTES.SIGN_IN}>Log in </Link>
+            Welcome to LeanIn, <Link to={ROUTES.SIGN_UP}>Sign up</Link> or <Link to={ROUTES.SIGN_IN}>Sign in </Link>
           </h6>
           <VisiterHome />
         </nav>
