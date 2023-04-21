@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from '../Navigation/HomeNav';
@@ -7,14 +8,15 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import SignOutPage from '../SignOut';
 import PasswordForgetPage from '../PasswordForget';
-import HomePage from '../Home';
+import AdminHomePage from '../AdminHome';
+import CompanyHomePage from '../CompanyHome';
+import UserHomePage from '../UserHome';
 import AdminPage from '../Admin';
 import ProfilePage from '../Profile';
 import * as ROUTES from '../../constants/routes';
 import EditProfileScreen from '../Profile/EditProfileScreen/index.jsx';
 import AddExperienceScreen from '../Profile/experience/add-experience.jsx';
 import AddEducationScreen from '../Profile/education/add-education.jsx';
-import AdminHomePage from '../AdminHome';
 import CompanyProfilePage from '../CompanyProfile/index.jsx';
 
 function App() {
@@ -44,7 +46,7 @@ function App() {
             path={ROUTES.PASSWORD_FORGET}
             element={<PasswordForgetPage />}
           />
-          <Route exact path={ROUTES.HOME} element={<HomePage />} />
+          {/* <Route exact path={ROUTES.HOME} element={<HomePage />} /> */}
           <Route exact path={ROUTES.ADMIN} element={<AdminPage />} />
           <Route exact path={ROUTES.PROFILE} element={<ProfilePage />} />
           <Route
@@ -65,7 +67,12 @@ function App() {
           <Route path={`${ROUTES.PROFILE}/:userId`} element={<ProfilePage />} />
           <Route exact path={ROUTES.ADMINHOME} element={<AdminHomePage />} />
           <Route exact path={ROUTES.JOBS} element={<SearchPage />} />
-          <Route exact path={ROUTES.COMPANYHOME} element={<HomePage />} />
+          <Route
+            exact
+            path={ROUTES.COMPANYHOME}
+            element={<CompanyHomePage />}
+          />
+          <Route exact path={ROUTES.USERHOME} element={<UserHomePage />} />
           <Route
             exact
             path={ROUTES.COMPANY_PROFILE}

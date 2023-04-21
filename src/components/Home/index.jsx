@@ -3,26 +3,25 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
-import JobsSideBar from '../JobsSideBar/index.jsx';
-import ProfileCard from './ProfileCard.jsx';
-import RecentJobLists from './recentJobLists/index.jsx';
+
 import CompanyHome from '../CompanyHome/index.jsx';
+import AdminHome from '../AdminHome/index.jsx';
+import UserHome from '../UserHome/index.jsx';
 
 import {
   findUsers,
   findUser,
   removeCurrentUser,
 } from '../../services/user-service';
-import AdminHome from '../AdminHome/index.jsx';
 
 function Home() {
   const { user } = useSelector((state) => state.userInfo);
   const { role } = user;
   const isAdmin = role === 'admin';
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const isUser = role === 'user';
   const isCompany = role === 'company';
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     signOut(auth)
@@ -39,6 +38,7 @@ function Home() {
       });
   };
   useEffect(() => {
+    // eslint-disable-next-line no-shadow
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -65,22 +65,11 @@ function Home() {
           <h2>
             Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
           </h2>
-          <div className="row mt-2">
-            <div className="col-3 col-md-2">
-              <ProfileCard />
-            </div>
-            <div
-              className="col-9 col-md-10 col-lg-7"
-              style={{ position: 'relative' }}
-            >
-              <RecentJobLists />
-            </div>
-            <div className="d-done d-sm-none d-lg-block col-lg-3">
-              <JobsSideBar />
-            </div>
-          </div>
+          <UserHome />
           <div>
-            <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </nav>
       )}
@@ -89,8 +78,11 @@ function Home() {
           <h2>
             Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
           </h2>
-          <h3>Company home page</h3>
+
           <CompanyHome />
+          <div>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
         </nav>
       )}
       {isAdmin && (
@@ -99,6 +91,9 @@ function Home() {
             Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
           </h2>
           <AdminHome />
+          <div>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
         </nav>
       )}
     </div>
