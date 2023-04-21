@@ -7,7 +7,7 @@ const SavedJobsComponent = () => {
   const {savedJobs} = useSelector((state) => state.savedJobs)
   const navigate = useNavigate();
   const NavigateJobDetails = (id) => navigate(`/search-details/${id}`)
-  console.log("savedJobs: ", savedJobs)
+  // console.log("savedJobs: ", savedJobs)
   return(
     <div className="list-group">
       <div className="list-group-item"><h5 className="fw-bold mt-2 mb-1">Saved Jobs</h5></div>
