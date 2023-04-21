@@ -55,3 +55,7 @@ export const addUserEducation = async (uid, educationData) => {
   );
   return response.data;
 };
+
+export const deleteUserEducation = (uid, eid) => {
+  return axios.delete(`${USER_API}/deleteEducation/${eid}/${uid}`);
+};
