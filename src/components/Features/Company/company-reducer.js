@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { findCompanyThunk } from "../../../services/company-thunk.js";
 
-const storedUserDataRaw = localStorage.getItem('userData');
-const storedUserData = storedUserDataRaw
-  ? { user: JSON.parse(storedUserDataRaw) }
-  : null;
-
-const initialState = storedUserData ?? {
+const initialState = {
   company : {
     "company_id": 1,
     "name": "Google",

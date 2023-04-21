@@ -19,6 +19,7 @@ import AddExperienceScreen from '../Profile/experience/add-experience.jsx';
 import AddEducationScreen from '../Profile/education/add-education.jsx';
 import CompanyProfilePage from '../CompanyProfile/index.jsx';
 import Home from "../Home/index.jsx";
+import EditCompanyProfileScreen from "../CompanyProfile/EditCompanyProfile.jsx";
 
 function App() {
   return (
@@ -76,8 +77,18 @@ function App() {
           <Route exact path={ROUTES.USERHOME} element={<Home />} />
           <Route
             exact
+            path={`${ROUTES.COMPANYHOME}/:companyId`}
+            element={<CompanyProfilePage />}
+          />
+          <Route
+            exact
             path={ROUTES.COMPANY_PROFILE}
             element={<CompanyProfilePage />}
+          />
+          <Route
+            exact
+            path={ROUTES.EDIT_COMPANY_PROFILE}
+            element={<EditCompanyProfileScreen />}
           />
         </Routes>
       </div>
