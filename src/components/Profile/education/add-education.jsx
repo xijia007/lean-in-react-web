@@ -34,7 +34,7 @@ function AddEducationScreen() {
       description,
       school_name,
       degree,
-      education_id: Date.now(),
+      education_id: Date.now().toString(),
       start_time: convertDateTimestamp(start),
       end_time: convertDateTimestamp(end),
     };
@@ -56,7 +56,7 @@ function AddEducationScreen() {
           <div className="list-group-item">
             <button
               type="submit"
-              className="btn btn-primary rounded-pill float-end border-secondary border-1 mt-2"
+              className="btn btn-primary rounded-pill float-end mt-2"
               onClick={handleSaveButton}
             >
               Save

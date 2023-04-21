@@ -59,16 +59,17 @@ function Home() {
   console.log('email', email);
 
   return (
-    <>
+    <div className="container-fluid">
       {isUser && (
         <nav>
           <h2>
             Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
           </h2>
           <UserHome />
-
           <div>
-            <button onClick={handleLogout}>Logout</button>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </nav>
       )}
@@ -95,7 +96,7 @@ function Home() {
           </div>
         </nav>
       )}
-    </>
+    </div>
   );
 }
 

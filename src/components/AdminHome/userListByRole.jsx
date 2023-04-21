@@ -18,7 +18,7 @@ function UserItemByRole({ user = { firstName: '', lastName: '', role: '' } }) {
         <h6 className="card-text text-muted">User ID: {user.uid}</h6>
         <h6 className="card-text text-muted">Email: {user.email}</h6>
         <button
-          className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
+          className="btn btn-primary rounded-pill mt-2 float-end"
           onClick={() => {
             navigate(`/admin/user/${user.uid}`);
           }}

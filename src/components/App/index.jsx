@@ -24,7 +24,7 @@ function App() {
     <BrowserRouter>
       <div>
         <Navigation />
-
+        <br/>
         <Routes>
           <Route exact path={ROUTES.SEARCH} element={<SearchPage />} />
           {/* <Route

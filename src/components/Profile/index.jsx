@@ -25,7 +25,7 @@ function ProfileScreen() {
               <div>
                 {isMyProfile && (
                   <button
-                    className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
+                    className="btn btn-primary rounded-pill mt-2 float-end"
                     onClick={() => {
                       navigate('/edit-profile');
                     }}
@@ -34,7 +34,7 @@ function ProfileScreen() {
                   </button>
                 )}
 
-                <h3 className="fa-bold">{`${userInfo.firstName} ${userInfo.lastName}`}</h3>
+                <h3 className="fw-bold">{`${userInfo.firstName} ${userInfo.lastName}`}</h3>
               </div>
 
               <p className="mb-2">{userInfo.bio}</p>

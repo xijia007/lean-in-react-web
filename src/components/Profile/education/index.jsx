@@ -6,8 +6,10 @@ import {
   addEducation,
   deleteEducation,
 } from '../../Features/Profile/education-reducer';
-// import "../../index.css"
-import { getUserEducation } from '../../../services/user-service';
+import {
+  getUserEducation,
+  deleteUserEducation,
+} from '../../../services/user-service';
 
 function EducationComponent() {
   const { userId } = useParams();
@@ -22,6 +24,7 @@ function EducationComponent() {
     navigate('/add-education');
   };
   const deleteEducationHandler = (id) => {
+    deleteUserEducation(uid, id);
     dispatch(deleteEducation(id));
   };
 
@@ -43,12 +46,12 @@ function EducationComponent() {
     <div className="list-group">
       <div className="list-group-item d-flex justify-content-between">
         <div className="pt-2 pb-2">
-          <h4>Education</h4>
+          <h4 className="fw-bold">Education</h4>
         </div>
         {isMyProfile && (
           <div>
             <button
-              className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
+              className="btn btn-primary rounded-pill mt-2 float-end"
               onClick={() => {
                 addEducationHandler();
               }}
@@ -65,7 +68,7 @@ function EducationComponent() {
             className="list-group-item d-flex justify-content-between"
           >
             <div>
-              <h5>{e.entityName}</h5>
+              <h5 className="fw-bold">{e.entityName}</h5>
               <div>{e.role}</div>
               <div>{`${e.start} - ${e.end}`}</div>
               <div>{e.description}</div>

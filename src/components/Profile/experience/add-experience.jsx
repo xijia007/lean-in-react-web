@@ -24,7 +24,7 @@ const AddExperienceScreen = () => {
     return (
         <div className="container border border-1 border-opacity-75 p-3 rounded-4">
             <div className="border-bottom pb-3">
-                <button className="btn btn-primary rounded-pill float-end border-secondary border-1 mt-2" onClick={handleSaveButton}>Save</button>
+                <button className="btn btn-primary rounded-pill float-end mt-2" onClick={handleSaveButton}>Save</button>
                 <div className="d-flex justify-content-start">
                     <div><h3 className="mt-3 clickable" onClick={() => navigate(-1)}><ArrowLeft/></h3></div>
                     <div className="ms-4 mt-3">
