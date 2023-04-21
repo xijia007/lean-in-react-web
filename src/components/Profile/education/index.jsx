@@ -6,7 +6,10 @@ import {
   addEducation,
   deleteEducation,
 } from '../../Features/Profile/education-reducer';
-import { getUserEducation } from '../../../services/user-service';
+import {
+  getUserEducation,
+  deleteUserEducation,
+} from '../../../services/user-service';
 
 function EducationComponent() {
   const { userId } = useParams();
@@ -21,6 +24,7 @@ function EducationComponent() {
     navigate('/add-education');
   };
   const deleteEducationHandler = (id) => {
+    deleteUserEducation(uid, id);
     dispatch(deleteEducation(id));
   };
 

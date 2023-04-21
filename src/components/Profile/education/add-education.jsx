@@ -34,7 +34,7 @@ function AddEducationScreen() {
       description,
       school_name,
       degree,
-      education_id: Date.now(),
+      education_id: Date.now().toString(),
       start_time: convertDateTimestamp(start),
       end_time: convertDateTimestamp(end),
     };
