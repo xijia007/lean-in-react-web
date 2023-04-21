@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
 
@@ -13,10 +13,14 @@ import {
   findUser,
   removeCurrentUser,
 } from '../../services/user-service';
+import VisiterHome from "../VisiterHome/index.jsx";
+import * as ROUTES from "../../constants/routes.js";
+import Nav from "react-bootstrap/Nav";
+import { LinkContainer } from "react-router-bootstrap";
 
 function Home() {
   const { user } = useSelector((state) => state.userInfo);
-  const { role } = user;
+  const { role, isLogined } = user;
   const isAdmin = role === 'admin';
   const isUser = role === 'user';
   const isCompany = role === 'company';
@@ -55,45 +59,55 @@ function Home() {
   }, []);
 
   const email = auth?.currentUser?.email;
-  // const { email } = user ?? undefined;
-  console.log('email', email);
-
+  console.log("visiter?",!(isUser || isCompany || isAdmin));
   return (
     <div className="container-fluid">
-      {isUser && (
+      {isUser && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className='text-primary'>{email}</span>
           </h2>
           <UserHome />
           <div>
-            <button className="btn btn-danger" onClick={handleLogout}>
+            <button className="btn btn-danger float-end" onClick={handleLogout}>
               Logout
             </button>
           </div>
         </nav>
       )}
-      {isCompany && (
+      {isCompany && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className='text-primary'>{email}</span>
           </h2>
 
           <CompanyHome />
           <div>
-            <button onClick={handleLogout}>Logout</button>
+            <button className="btn btn-danger float-end"
+              onClick={handleLogout}>Logout</button>
           </div>
         </nav>
       )}
-      {isAdmin && (
+      {isAdmin && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className='text-primary'>{email}</span>
           </h2>
           <AdminHome />
           <div>
-            <button onClick={handleLogout}>Logout</button>
+            <button className='btn btn-danger float-end'
+              onClick={handleLogout}>Logout</button>
           </div>
+        </nav>
+      )}
+
+      {!(isLogined) && (
+        <nav>
+          <h2>Hi, LeanIn Visiter</h2>
+          <h6>
+            Welcome to LeanIn, <Link to={ROUTES.SIGN_UP}>Sign up</Link> or <Link to={ROUTES.SIGN_IN}>Log in </Link>
+          </h6>
+          <VisiterHome />
         </nav>
       )}
     </div>

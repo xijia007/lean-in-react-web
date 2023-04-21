@@ -18,6 +18,7 @@ import EditProfileScreen from '../Profile/EditProfileScreen/index.jsx';
 import AddExperienceScreen from '../Profile/experience/add-experience.jsx';
 import AddEducationScreen from '../Profile/education/add-education.jsx';
 import CompanyProfilePage from '../CompanyProfile/index.jsx';
+import Home from "../Home/index.jsx";
 
 function App() {
   return (
@@ -72,7 +73,7 @@ function App() {
             path={ROUTES.COMPANYHOME}
             element={<CompanyHomePage />}
           />
-          <Route exact path={ROUTES.USERHOME} element={<UserHomePage />} />
+          <Route exact path={ROUTES.USERHOME} element={<Home />} />
           <Route
             exact
             path={ROUTES.COMPANY_PROFILE}
