@@ -18,8 +18,8 @@ const SearchBar = () => {
             }
           };
         axios.request(options).then(function (response) {
-            console.log("response.data.data: ",response.data.data);
             console.log("response: ",response);
+            console.log("response.data.data: ",response.data.data);
             setResults(response.data.data);
             console.log("results 1: ", results);
             return response.data.data
@@ -27,17 +27,7 @@ const SearchBar = () => {
             console.error(error);
         });
     };
-
-    // const searchJobs = async () => { 
-    //     const response = await searchJobByKeyword(search);
-    //     console.log("final_response: ", response);
-    //     setResults(response);
-    //     console.log("results: ", results);
-    //     // navigate(`/search/${search}`);
-    // };
-        
-
-
+    console.log("results 2: ", results);
     return (
         <div className="row" id="wd-search-bar">
             <div className="input-group mb-3 ps-0">
