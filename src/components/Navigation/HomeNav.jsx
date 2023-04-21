@@ -18,7 +18,7 @@ function HomeNav() {
         <Navbar.Brand href="#"><img className="logo_size" src="./images/logo-transparent-png.png"/></Navbar.Brand>
         <Nav className="ml-auto">
           {isLogined ? (
-            <LinkContainer to={ROUTES.HOME}>
+            <LinkContainer to={ROUTES.USERHOME}>
               <Nav.Link>Hello, {firstName}</Nav.Link>
             </LinkContainer>
           ) : (

@@ -13,7 +13,10 @@ export const ADDEXPERIENCE = '/add-experience';
 export const ADDEDUCATION = '/add-education';
 export const JOBS = '/jobs';
 export const COMPANY_PROFILE = '/company-profile';
+export const EDIT_COMPANY_PROFILE = '/edit-company-profile';
 export const ADMINHOME = '/admin-home';
 export const COMPANYHOME = '/company-home';
 export const USERHOME = '/user-home';
 export const NOTLOGINHOME = '/not-login-home';
+
+

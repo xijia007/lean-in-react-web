@@ -9,9 +9,10 @@ import jobsReducer from '../Search/reducer/jobs-reducer';
 
 import DBjobsReducer from '../Home/reducer/DBjobs-reducer';
 import RecruiterJobsReducer from '../Home/reducer/RecruiterJobs-reducer';
+import userReducer from '../Features/Profile/user-reducer.jsx';
+import usersReducer from '../Features/admin/users-reducer.jsx';
+import companyReducer from "../Features/Company/company-reducer.js";
 
-import userReducer from '../Features/Profile/user-reducer';
-import usersReducer from '../Features/admin/users-reducer';
 
 export default configureStore({
   reducer: {
@@ -26,5 +27,6 @@ export default configureStore({
     DBjobs: DBjobsReducer,
     Recruiterjobs: RecruiterJobsReducer,
     users: usersReducer,
+    company: companyReducer,
   },
 });
