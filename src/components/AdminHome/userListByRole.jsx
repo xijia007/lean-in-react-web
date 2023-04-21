@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ function UserItemByRole({ user = { firstName: '', lastName: '', role: '' } }) {
         <button
           className="btn btn-primary rounded-pill mt-2 float-end"
           onClick={() => {
-            navigate(`/admin/user/${user.uid}`);
+            navigate(`/user/${user.uid}`);
           }}
         >
           Delete
