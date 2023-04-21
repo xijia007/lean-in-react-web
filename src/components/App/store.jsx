@@ -12,6 +12,7 @@ import RecruiterJobsReducer from '../Home/reducer/RecruiterJobs-reducer';
 
 import userReducer from '../Features/Profile/user-reducer.jsx';
 import usersReducer from '../Features/admin/users-reducer.jsx';
+import companyReducer from "../Features/Company/company-reducer.js";
 
 export default configureStore({
   reducer: {
@@ -26,5 +27,6 @@ export default configureStore({
     DBjobs: DBjobsReducer,
     Recruiterjobs: RecruiterJobsReducer,
     users: usersReducer,
+    company: companyReducer,
   },
 });
