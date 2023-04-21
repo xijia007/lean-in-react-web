@@ -11,7 +11,7 @@ function AppliedJobsComponent() {
   return (
     <div className="list-group">
       <div className="list-group-item">
-        <h4>Applied Jobs</h4>
+        <h5 className="fw-bold mt-2 mb-1">Applied Jobs</h5>
       </div>
       {appliedJobs &&
         appliedJobs.map((job) => (
@@ -20,8 +20,8 @@ function AppliedJobsComponent() {
             className="list-group-item d-flex justify-content-between"
           >
             <div>
-              <h6>{job.title}</h6>
-              <span className="text-secondary">{job.company}</span>
+              <h6 className="fw-bold">{job.title}</h6>
+              <span>{job.company}</span>
             </div>
             <div
               className="clickable mt-2"

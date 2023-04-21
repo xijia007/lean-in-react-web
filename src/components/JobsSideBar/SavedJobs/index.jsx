@@ -10,12 +10,12 @@ const SavedJobsComponent = () => {
   console.log("savedJobs: ", savedJobs)
   return(
     <div className="list-group">
-      <div className="list-group-item"><h4>Saved Jobs</h4></div>
+      <div className="list-group-item"><h5 className="fw-bold mt-2 mb-1">Saved Jobs</h5></div>
       {savedJobs && savedJobs.map((job) =>
         <div key={job._id} className="list-group-item d-flex justify-content-between">
           <div>
-            <h6>{job.title}</h6>
-            <span className="text-secondary">{job.company}</span>
+            <h6 className="fw-bold">{job.title}</h6>
+            <span>{job.company}</span>
           </div>
           <div className="clickable mt-2"
                onClick={() => NavigateJobDetails(job._id)}>

@@ -10,18 +10,20 @@ function UserItemByRole({ user = { firstName: '', lastName: '', role: '' } }) {
     <div className="card">
       <div className="card-body">
         <h5 className="card-title">
-          <h5>
+          <h6>
             User Name: {user.firstName} {user.lastName}
-          </h5>
+          </h6>
         </h5>
-        <h6 className="card-subtitle mb-2 text-muted">Role: {user.role}</h6>
+        <h6 className="card-text text-muted">Role: {user.role}</h6>
+        <h6 className="card-text text-muted">User ID: {user.uid}</h6>
+        <h6 className="card-text text-muted">Email: {user.email}</h6>
         <button
-          className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
+          className="btn btn-primary rounded-pill mt-2 float-end"
           onClick={() => {
             navigate(`/user/${user.uid}`);
           }}
         >
-          View
+          Delete
         </button>
       </div>
     </div>
