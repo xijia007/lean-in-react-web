@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import searchJobByKeyword from "./search-job-service";
-import { useParams } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+
 const SearchBar = () => {
-    // const { searchTerm } = useParams();
-    // const navigate = useNavigate();
-    // const [search, setSearch] = useState(searchTerm);
+
     const [search, setSearch] = useState("");
     console.log("searching: ", search)
     const [results, setResults] = useState({});
@@ -31,7 +27,7 @@ const SearchBar = () => {
             console.error(error);
         });
     };
-    
+
     // const searchJobs = async () => { 
     //     const response = await searchJobByKeyword(search);
     //     console.log("final_response: ", response);
