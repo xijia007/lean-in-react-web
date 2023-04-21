@@ -12,6 +12,7 @@ const searchJobsByKeyword = async (searchTerm) => {
       };
     axios.request(options).then(function (response) {
         console.log("response.data.data in job-service: ",response.data.data);
+        // console.log("response in job-service: ",response);
         // console.log("response: ",response);
         // setResults(response.data.data);
         // console.log("results 1: ", results);
