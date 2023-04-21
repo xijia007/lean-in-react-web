@@ -47,3 +47,11 @@ export const getUserEducation = async (uid) => {
   const response = await axios.get(`${USER_API}/getEducations/${uid}`);
   return response.data;
 };
+
+export const addUserEducation = async (uid, educationData) => {
+  const response = await axios.post(
+    `${USER_API}/addEducation/${uid}`,
+    educationData
+  );
+  return response.data;
+};
