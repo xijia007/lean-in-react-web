@@ -1,11 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 
-const UserItemByRole = ({
-  user = { firstName: '', lastName: '', role: '' },
-}) => {
+function UserItemByRole({ user = { firstName: '', lastName: '', role: '' } }) {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +18,7 @@ const UserItemByRole = ({
         <button
           className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
           onClick={() => {
-            navigate(`/admin/user/${user.uid}`);
+            navigate(`/user/${user.uid}`);
           }}
         >
           View
@@ -28,6 +26,6 @@ const UserItemByRole = ({
       </div>
     </div>
   );
-};
+}
 
 export default UserItemByRole;
