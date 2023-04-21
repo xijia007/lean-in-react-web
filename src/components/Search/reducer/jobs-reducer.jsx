@@ -16,6 +16,7 @@ const jobsSlice = createSlice({
         description,
         location,
         apply,
+        company_name: company,
         post_time: postedTime,
       } = action.payload;
 
@@ -26,6 +27,7 @@ const jobsSlice = createSlice({
         location,
         apply,
         postedTime,
+        company,
       };
 
       // console.log('existingJob:', existingJob);
