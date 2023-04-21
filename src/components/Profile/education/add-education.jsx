@@ -56,7 +56,7 @@ function AddEducationScreen() {
           <div className="list-group-item">
             <button
               type="submit"
-              className="btn btn-primary rounded-pill float-end border-secondary border-1 mt-2"
+              className="btn btn-primary rounded-pill float-end mt-2"
               onClick={handleSaveButton}
             >
               Save

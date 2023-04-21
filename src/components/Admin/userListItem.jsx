@@ -13,7 +13,7 @@ const UserItem = ({ user = {firstName: "", lastName: "", role: ""} }) => {
   return(
     <li className="list-group-item d-flex justify-content-between">
       <div>
-        <h2 className="clickable" onClick={() => navigate(`profile/${user.uid}`)}>{`${user.firstName} ${user.lastName}`}</h2>
+        <h2 className="clickable" onClick={() => navigate(`/profile/${user.uid}`)}>{`${user.firstName} ${user.lastName}`}</h2>
         <h4>{`Role: ${user.role}`}</h4>
       </div>
       <div>

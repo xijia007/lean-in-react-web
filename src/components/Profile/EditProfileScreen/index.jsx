@@ -20,7 +20,7 @@ const EditProfileScreen = () => {
         <div className="container">
             <div className="list-group">
                 <div className="list-group-item">
-                    <button className="btn btn-primary rounded-pill float-end border-secondary border-1 mt-3" onClick={handleSaveButton}>Save</button>
+                    <button className="btn btn-primary rounded-pill float-end mt-3" onClick={handleSaveButton}>Save</button>
                     <div className="d-flex justify-content-start">
                         <div><h3 className="mt-3 clickable" onClick={() => navigate(-1)}><ArrowLeft/></h3></div>
                         <div className="ms-4">
