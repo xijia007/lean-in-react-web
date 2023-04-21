@@ -18,7 +18,7 @@ const UserItemByRole = ({
         </h5>
         <h6 className="card-subtitle mb-2 text-muted">Role: {user.role}</h6>
         <button
-          className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
+          className="btn btn-primary rounded-pill mt-2 float-end"
           onClick={() => {
             navigate(`/admin/user/${user.uid}`);
           }}

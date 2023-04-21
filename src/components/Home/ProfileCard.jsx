@@ -8,9 +8,9 @@ const ProfileCard = () => {
     return(
         <div className="list-group">
             <div className="list-group-item p-3">
-                <p className="mb-2">{user.firstName} {user.lastName}</p>
+                <h4 className="mb-2 fw-bold">{user.firstName} {user.lastName}</h4>
                 <p className="mb-2">{user.bio}</p>
-                <p className="mb-2">{`Skills: ${user.skills}`}</p>
+                <p className="mb-2">{`Skills: ${user.skills ? user.skills : "add your skills..."}`}</p>
 
             </div>
         </div>

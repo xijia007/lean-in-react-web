@@ -16,7 +16,7 @@
 
 #root {
   width: 100%;
-  padding: 10px 10px;
+  padding-bottom: 40px;
 }
 
 a {
@@ -112,4 +112,10 @@ label {
 }
 .clickable:hover {
   color: #747bff;
+}
+
+.logo_size {
+  width: 125px;
+  height: 30px;
+  object-fit: cover;
 }
