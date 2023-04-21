@@ -65,7 +65,7 @@ function Home() {
       {isUser && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className='text-primary'>{email}</span>
           </h2>
           <UserHome />
           <div>
@@ -78,23 +78,25 @@ function Home() {
       {isCompany && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className='text-primary'>{email}</span>
           </h2>
 
           <CompanyHome />
           <div>
-            <button onClick={handleLogout}>Logout</button>
+            <button className="btn btn-danger"
+              onClick={handleLogout}>Logout</button>
           </div>
         </nav>
       )}
       {isAdmin && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className='text-primary'>{email}</span>
           </h2>
           <AdminHome />
           <div>
-            <button onClick={handleLogout}>Logout</button>
+            <button className='btn btn-danger'
+              onClick={handleLogout}>Logout</button>
           </div>
         </nav>
       )}
