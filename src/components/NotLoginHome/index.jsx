@@ -4,13 +4,13 @@ import { findAllUsersThunk } from '../../services/user-thunk.js';
 
 import * as ROUTES from '../../constants/routes';
 
-function CompanyHome() {
+function NotLoginHome() {
   return (
     <div className="container">
-      <h2>Hi, LeanIn Company</h2>
-      <h1>Company Home Page</h1>
+      <h2>Hi, Please sign up to explore more </h2>
+      <h1>Not Login Home Page</h1>
     </div>
   );
 }
 
-export default CompanyHome;
+export default NotLoginHome;

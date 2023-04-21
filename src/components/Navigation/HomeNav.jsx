@@ -27,7 +27,7 @@ function HomeNav() {
             </LinkContainer>
           )}
           {isUser && (
-            <LinkContainer to={ROUTES.HOME}>
+            <LinkContainer to={ROUTES.USERHOME}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
           )}

@@ -8,6 +8,7 @@ import { findUser } from '../../services/user-service';
 import { setUpUserId, setUpUserPassword } from '../Features/Login/LoginSlice';
 import { updateUser } from '../Features/Profile/user-reducer.jsx';
 import { recordCurrentUserThunk } from '../../services/user-thunk.js';
+import * as ROUTES from '../../constants/routes';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -32,8 +33,16 @@ function SignIn() {
       userData.isLogined = true;
       dispatch(updateUser(userData));
       localStorage.setItem('userData', JSON.stringify(userData));
+      const { role } = userData;
+      if (role === 'admin') {
+        navigate(ROUTES.ADMINHOME);
+      } else if (role === 'company') {
+        navigate(ROUTES.COMPANYHOME);
+      } else if (role === 'user') {
+        navigate(ROUTES.USERHOME);
+      }
 
-      navigate('/');
+      // navigate('/');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
