@@ -10,7 +10,7 @@ import CompanyHome from '../CompanyHome';
 import AdminHome from '../AdminHome';
 import UserHome from '../UserHome';
 
-import { addDBJob } from './reducer/DBjobs-reducer';
+// import { addDBJob } from './reducer/DBjobs-reducer';
 import { addJob } from '../Search/reducer/jobs-reducer';
 import { addSavedJob } from '../Features/AppliedSavedJobs/saved-jobs-reducer';
 
@@ -18,6 +18,7 @@ import { getUserSavedJobs } from '../../services/user-service';
 import { getAllJobsSearch } from '../../services/job-service';
 import VisiterHome from '../VisiterHome';
 import * as ROUTES from '../../constants/routes';
+import { addDBJob } from "../Features/Home/DBjobs-reducer.jsx";
 
 function Home() {
   const { user } = useSelector((state) => state.userInfo);
