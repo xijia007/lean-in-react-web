@@ -17,7 +17,7 @@ export const getJob = async (jid) => {
   return response.data;
 };
 
-const JOB_COMPANYS = ['apple', 'google', 'adobe', 'facebook'];
+const JOB_COMPANYS = ['apple', 'google', 'adobe', 'facebook', 'microsoft'];
 
 export const getAllJobsSearch = async () => {
   const urls = JOB_COMPANYS.map((url) => `${JOB_SEARCH_API}${url}`);

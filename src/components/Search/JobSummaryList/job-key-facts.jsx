@@ -1,16 +1,16 @@
-import { convertDate, convertISODate } from '../../../utils/timeUtil';
+import { convertISODate } from '../../../utils/timeUtil';
 
 function JobKeyFacts(job) {
-  const { title, company, location, postedTime } = job;
-  //   const time = postedTime ? convertDate(postedTime) : null;
-  const time = postedTime ? convertISODate(postedTime) : null;
+  const { title, company_name, post_time, add_city, add_state } = job;
+  const location = `${add_city}, ${add_state}`;
+  const time = post_time ? convertISODate(post_time) : null;
   return (
     <div>
       <div className="row">
         <b>Job Title: {title}</b>
       </div>
       <div className="row">
-        <b>Company: {company}</b>
+        <b>Company: {company_name}</b>
       </div>
       <div className="row">
         <div className="col-12"> Job Location: {location} </div>

@@ -1,15 +1,15 @@
 import React from 'react';
-import AppliedJobsComponent from "./AppliedJobs/index.jsx";
-import SavedJobsComponent from "./SavedJobs/index.jsx";
+import AppliedJobsComponent from './AppliedJobs/index';
+import SavedJobsComponent from './SavedJobs/index';
 
-const JobsSideBar = () => {
-  return(
+function JobsSideBar() {
+  return (
     <>
-      <AppliedJobsComponent/>
-      <br/>
-      <SavedJobsComponent/>
+      <AppliedJobsComponent />
+      <br />
+      <SavedJobsComponent />
     </>
   );
-};
+}
 
 export default JobsSideBar;
