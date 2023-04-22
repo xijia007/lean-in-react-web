@@ -1,28 +1,32 @@
 import React, { useEffect } from 'react';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+// import Nav from 'react-bootstrap/Nav';
+// import { LinkContainer } from 'react-router-bootstrap';
 import { auth } from '../Firebase/firebase';
-import JobsSideBar from '../JobsSideBar/index.jsx';
-import ProfileCard from './ProfileCard.jsx';
-import RecentJobLists from './recentJobLists/index.jsx';
-import CompanyHome from '../CompanyHome/index.jsx';
 
-import {
-  findUsers,
-  findUser,
-  removeCurrentUser,
-} from '../../services/user-service';
-import AdminHome from '../AdminHome/index.jsx';
+import CompanyHome from '../CompanyHome';
+import AdminHome from '../AdminHome';
+import UserHome from '../UserHome';
+
+import { addDBJob } from './reducer/DBjobs-reducer';
+import { addJob } from '../Search/reducer/jobs-reducer';
+import { addSavedJob } from '../Features/AppliedSavedJobs/saved-jobs-reducer';
+
+import { getUserSavedJobs } from '../../services/user-service';
+import { getAllJobsSearch } from '../../services/job-service';
+import VisiterHome from '../VisiterHome';
+import * as ROUTES from '../../constants/routes';
 
 function Home() {
   const { user } = useSelector((state) => state.userInfo);
-  const { role } = user;
+  const { role, isLogined, uid } = user;
   const isAdmin = role === 'admin';
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const isUser = role === 'user';
   const isCompany = role === 'company';
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     signOut(auth)
@@ -38,70 +42,91 @@ function Home() {
         // An error happened.
       });
   };
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const { email } = user;
-        // ...
-        console.log('email', email);
-      } else {
-        // User is signed out
-        // ...
-        console.log('user is logged out');
-      }
-    });
-  }, []);
+    async function fetchAllJobsSearch() {
+      const jobResponse = await getAllJobsSearch();
+
+      const sortedJobs = jobResponse.sort(
+        (a, b) => Date.parse(b.post_time) - Date.parse(a.post_time)
+      );
+      sortedJobs.forEach((job) => {
+        dispatch(addJob(job));
+      });
+      const sortedJobsSlice = sortedJobs.slice(0, 10);
+      sortedJobsSlice.forEach((job) => {
+        dispatch(addDBJob(job));
+      });
+    }
+    async function fetchSavedJobs() {
+      const jobResponse = await getUserSavedJobs(uid);
+
+      jobResponse.forEach((job) => {
+        // console.log(job);
+        dispatch(addSavedJob(job));
+      });
+    }
+
+    fetchAllJobsSearch();
+    fetchSavedJobs();
+  }, [dispatch, uid]);
 
   const email = auth?.currentUser?.email;
-  // const { email } = user ?? undefined;
-  console.log('email', email);
-
+  console.log('visiter?', !(isUser || isCompany || isAdmin));
   return (
-    <>
-      {isUser && (
+    <div className="container-fluid">
+      {isUser && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className="text-primary">{email}</span>
           </h2>
-          <div className="row mt-2">
-            <div className="col-2 col-md-2 col-lg-1 col-xl-2">
-              <ProfileCard />
-            </div>
-            <div
-              className="col-9 col-md-10 col-lg-7 col-xl-6"
-              style={{ position: 'relative' }}
-            >
-              <RecentJobLists />
-            </div>
-            <div className="col-3 col-lg-2 col-xl-4">
-              <JobsSideBar />
-            </div>
-          </div>
+          <UserHome />
           <div>
-            <button onClick={handleLogout}>Logout</button>
+            <button className="btn btn-danger float-end" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </nav>
       )}
-      {isCompany && (
+      {isCompany && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className="text-primary">{email}</span>
           </h2>
-          <h3>Company home page</h3>
+
           <CompanyHome />
+          <div>
+            <button className="btn btn-danger float-end" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </nav>
       )}
-      {isAdmin && (
+      {isAdmin && isLogined && (
         <nav>
           <h2>
-            Welcome to LeanIn, <span style={{ color: 'blue' }}>{email}</span>
+            Welcome to LeanIn, <span className="text-primary">{email}</span>
           </h2>
           <AdminHome />
+          <div>
+            <button className="btn btn-danger float-end" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </nav>
       )}
-    </>
+
+      {!isLogined && (
+        <nav>
+          <h2>Hi, LeanIn Visiter</h2>
+          <h6>
+            Welcome to LeanIn, <Link to={ROUTES.SIGN_UP}>Sign up</Link> or{' '}
+            <Link to={ROUTES.SIGN_IN}>Sign in </Link>
+          </h6>
+          <VisiterHome />
+        </nav>
+      )}
+    </div>
   );
 }
 

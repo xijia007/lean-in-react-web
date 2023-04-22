@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import {useSelector} from "react-redux";
+
 import PostJob from './postJob';
 import PostedJobsComponent from './postedJob';
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { findCompany } from "../../services/company-service.js";
+import { findCompanyThunk } from "../../services/company-thunk.js";
 
 function CompanyHome() {
 
     const userInfo = useSelector((state) =>
     state.userInfo.user
      );
-
-
   return (
     <div className="container">
+      <h2>Hi, LeanIn Company</h2>
       <h1>Company Home Page</h1>
         <div className="row">
             <div className="col-9">

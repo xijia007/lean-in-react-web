@@ -1,29 +1,73 @@
-import {createSlice} from "@reduxjs/toolkit";
-import savedJobs from "./savedJobs.jsx";
+import { createSlice } from '@reduxjs/toolkit';
+// import savedJobs from "./savedJobs.jsx";
 
-const initialState = {savedJobs};
+// const initialState = {savedJobs};
+
+const initialState = {
+  jobs: [],
+};
 
 const savedJobsSlice = createSlice({
-  name: "savedJobs",
+  name: 'savedJobs',
   initialState,
   reducers: {
-    saveUnsaveJob(state, action) { // combine save or unsave a job
-      const saved = state.savedJobs.find(e => e._id === action.payload._id);
-      if (saved) {
-        state.savedJobs = state.savedJobs.filter(e => e._id !== action.payload._id);
-      } else {
-          state.savedJobs.unshift(action.payload); // show the latest saved job at the top
+    addSavedJob: (state, action) => {
+      const {
+        job_id,
+        title,
+        description,
+        add_city,
+        add_state,
+        apply,
+        image,
+        company_name,
+        post_time,
+      } = action.payload;
+
+      const newState = {
+        job_id,
+        title,
+        description,
+        add_city,
+        add_state,
+        image,
+        apply,
+        company_name,
+        post_time,
+      };
+
+      // console.log('existingJob:', existingJob);
+
+      const existingJob = state.jobs.find((job) => job.job_id === job_id);
+
+      if (existingJob) {
+        // If the education object already exists, replace it with the new data
+        return {
+          ...state,
+          jobs: state.jobs.map((job) => {
+            if (job.job_id === job_id) {
+              return newState;
+            }
+            return job;
+          }),
+        };
       }
+      // If the education object does not exist, add it to the array
+      return {
+        ...state,
+        jobs: [...state.jobs, newState],
+      };
     },
-    // saveJob(state, action) {
-    //   state.savedJobs.push(action.payload);
-    // },
-    // unSaveJob(state, action) {
-    //   state.savedJobs = state.savedJobs.filter(e => e._id !== action.payload);
-    // },
+    removeSavedJob: (state, action) => {
+      const { job_id } = action.payload;
+      return {
+        ...state,
+        jobs: state.jobs.filter((job) => job.job_id !== job_id),
+      };
+    },
   },
 });
 
 export default savedJobsSlice.reducer;
 
-export const {saveJob, unSaveJob, saveUnsaveJob} = savedJobsSlice.actions;
+export const { addSavedJob, removeSavedJob } = savedJobsSlice.actions;

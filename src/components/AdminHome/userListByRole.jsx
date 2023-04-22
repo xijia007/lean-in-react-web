@@ -1,33 +1,44 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
-const UserItemByRole = ({
-  user = { firstName: '', lastName: '', role: '' },
-}) => {
+function UserItemByRole({ user = { firstName: '', lastName: '', role: '', userCompanyId: 0, uid: ''} }) {
   const navigate = useNavigate();
+
+  const visitProfile = () => {
+    if (user.role === 'user') {
+      return navigate(`../profile/${user.uid}`);
+    }
+    if (user.role === 'company') {
+      return navigate(`../company-profile/${user.userCompanyId}`);
+    }
+    return "";
+  }
 
   return (
     <div className="card">
       <div className="card-body">
-        <h5 className="card-title">
-          <h5>
+        <h6 className={`card-title ${user.role === 'admin' ? "" : "clickable"}`} onClick={visitProfile}>
             User Name: {user.firstName} {user.lastName}
-          </h5>
-        </h5>
-        <h6 className="card-subtitle mb-2 text-muted">Role: {user.role}</h6>
-        <button
-          className="btn btn-primary rounded-pill border-secondary border-1 mt-2 float-end"
-          onClick={() => {
-            navigate(`/admin/user/${user.uid}`);
-          }}
-        >
-          View
-        </button>
+        </h6>
+        <h6 className="card-text text-muted">Role: {user.role}</h6>
+        <h6 className="card-text text-muted">User ID: {user.uid}</h6>
+        <h6 className="card-text text-muted">Email: {user.email}</h6>
+        {user.role !== "admin" &&
+          <button
+            className="btn btn-primary rounded-pill mt-2 float-end"
+            onClick={() => {
+              navigate(`/user/${user.uid}`);
+            }}
+          >
+            Delete
+          </button>
+        }
+
       </div>
     </div>
   );
-};
+}
 
 export default UserItemByRole;

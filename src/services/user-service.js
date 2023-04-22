@@ -55,3 +55,51 @@ export const addUserEducation = async (uid, educationData) => {
   );
   return response.data;
 };
+
+export const deleteUserEducation = (uid, eid) => {
+  return axios.delete(`${USER_API}/deleteEducation/${eid}/${uid}`);
+};
+
+export const getUserSavedJobs = async (uid) => {
+  const response = await axios.get(`${USER_API}/savedJobs/${uid}`);
+  return response.data;
+};
+export const addUserSavedJobs = async (uid, jobData) => {
+  const response = await axios.post(`${USER_API}/saveJob/${uid}`, jobData);
+  return response.data;
+};
+export const removeUserSavedJobs = async (uid, jobData) => {
+  const response = await axios.post(`${USER_API}/unsaveJob/${uid}`, jobData);
+  return response.data;
+};
+
+export const getUserExperience = async (uid) => {
+  const response = await axios.get(`${USER_API}/getExperiences/${uid}`);
+  return response.data;
+};
+
+export const addUserExperience = async (uid, experienceData) => {
+  const response = await axios.post(
+    `${USER_API}/addExperience/${uid}`,
+    experienceData
+  );
+  return response.data;
+};
+
+export const deleteUserExperience = (uid, eid) => {
+  // console.log("delete uid, eid", uid, eid)
+  return axios.delete(`${USER_API}/deleteExperience/${eid}/${uid}`);
+};
+
+export const getUserAppliedJobs = async (uid) => {
+  const response = await axios.get(`${USER_API}/appliedJobs/${uid}`);
+  return response.data;
+};
+export const addUserAppliedJobs = async (uid, jobData) => {
+  const response = await axios.post(`${USER_API}/applyJob/${uid}`, jobData);
+  return response.data;
+};
+
+
+// router.post('/saveJob/:uid', userController.saveJob);
+//     router.post('/unsaveJob/:uid', userController.unsaveJob);

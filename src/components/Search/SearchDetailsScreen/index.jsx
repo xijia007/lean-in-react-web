@@ -1,19 +1,17 @@
-import SearchBar from '../SearchScreen/search-bar.jsx';
-import JobDetailsList from '../JobDetailsList/index.jsx';
 import { useParams } from 'react-router-dom';
-import JobDetail from '../JobDetails/index.jsx';
+import SearchBar from '../SearchScreen/search-bar';
+import JobDetailsList from '../JobDetailsList/index';
+import JobDetail from '../JobDetails/index';
 
 function SearchDetails() {
-  
   // const { id } = useParams();
-  // console.log("id for SearchDetails: ", id)
   return (
     <div className="container">
       <h1>Search Details</h1>
-      <SearchBar />
+      {/* <SearchBar /> */}
 
       <div className="row" id="wd-search-details">
-        <JobDetail/>
+        <JobDetail />
         {/* <JobDetailsList /> */}
       </div>
     </div>

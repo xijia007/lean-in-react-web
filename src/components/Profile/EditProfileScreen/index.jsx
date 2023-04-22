@@ -20,7 +20,7 @@ const EditProfileScreen = () => {
         <div className="container">
             <div className="list-group">
                 <div className="list-group-item">
-                    <button className="btn btn-primary rounded-pill float-end border-secondary border-1 mt-3" onClick={handleSaveButton}>Save</button>
+                    <button className="btn btn-primary rounded-pill float-end mt-3" onClick={handleSaveButton}>Save</button>
                     <div className="d-flex justify-content-start">
                         <div><h3 className="mt-3 clickable" onClick={() => navigate(-1)}><ArrowLeft/></h3></div>
                         <div className="ms-4">
@@ -54,22 +54,22 @@ const EditProfileScreen = () => {
                     <br/>
 
                     <form className="row">
-                        <label className="col-sm-2 col-form-label">Skills</label>
+                        <label className="col-sm-2 col-form-label">Bio</label>
                         <div className="col-sm-10">
                             <textarea className="form-control"
-                                      placeholder="Ex: I am good at ..." value={userInfo.skills} rows={3} cols={40}
-                                      onChange={(e) => setUserInfo({...userInfo, skills: e.target.value})}
+                                      placeholder="Ex: I love..." value={userInfo.bio} rows={4} cols={40}
+                                      onChange={(e) => setUserInfo({...userInfo, bio: e.target.value})}
                             />
                         </div>
                     </form>
                     <br/>
 
                     <form className="row">
-                        <label className="col-sm-2 col-form-label">Bio</label>
+                        <label className="col-sm-2 col-form-label">Skills</label>
                         <div className="col-sm-10">
                             <textarea className="form-control"
-                                      placeholder="Ex: I love..." value={userInfo.bio} rows={4} cols={40}
-                                      onChange={(e) => setUserInfo({...userInfo, bio: e.target.value})}
+                                      placeholder="Ex: I am good at ..." value={userInfo.skills} rows={3} cols={40}
+                                      onChange={(e) => setUserInfo({...userInfo, skills: e.target.value})}
                             />
                         </div>
                     </form>

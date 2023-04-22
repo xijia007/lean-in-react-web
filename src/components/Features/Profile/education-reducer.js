@@ -63,10 +63,13 @@ const educationSlice = createSlice({
         (e) => e.id !== action.payload
       );
     },
+    clearEducation(state, action) {
+      state.educations = [];
+    }
   },
 });
 
 export default educationSlice.reducer;
 
-export const { addEducation, deleteEducation, updateEducation } =
+export const { addEducation, deleteEducation, clearEducation } =
   educationSlice.actions;

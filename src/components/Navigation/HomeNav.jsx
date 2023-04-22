@@ -13,12 +13,12 @@ function HomeNav() {
   const isCompany = role === 'company';
 
   return (
-    <Navbar>
+    <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary">
       <Container fluid>
-        <Navbar.Brand href="#">LeanIn</Navbar.Brand>
+        <Navbar.Brand href="#"><img className="logo_size" src="./images/logo-transparent-png.png"/></Navbar.Brand>
         <Nav className="ml-auto">
           {isLogined ? (
-            <LinkContainer to={ROUTES.HOME}>
+            <LinkContainer to={ROUTES.USERHOME}>
               <Nav.Link>Hello, {firstName}</Nav.Link>
             </LinkContainer>
           ) : (
@@ -27,7 +27,7 @@ function HomeNav() {
             </LinkContainer>
           )}
           {isUser && (
-            <LinkContainer to={ROUTES.HOME}>
+            <LinkContainer to={ROUTES.USERHOME}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
           )}
@@ -62,7 +62,7 @@ function HomeNav() {
             </LinkContainer>
           )}
 
-          {isUser && (
+          {isUser && isLogined && (
             <LinkContainer to={ROUTES.PROFILE}>
               <Nav.Link>Profile</Nav.Link>
             </LinkContainer>
