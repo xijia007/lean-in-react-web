@@ -77,7 +77,7 @@ function App() {
           <Route exact path={ROUTES.USERHOME} element={<Home />} />
           <Route
             exact
-            path={`${ROUTES.COMPANYHOME}/:companyId`}
+            path={`${ROUTES.COMPANY_PROFILE}/:companyId`}
             element={<CompanyProfilePage />}
           />
           <Route

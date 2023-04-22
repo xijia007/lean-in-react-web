@@ -11,28 +11,26 @@ function CompanyProfile() {
   const { companyId } = useParams();
   const { company } = useSelector((state) => state.company);
   let {user} = useSelector((state) => state.userInfo);
-  user = {...user, userCompanyId: 1}; // this line is hard coded, and will be deleted after user structure updated
   const {userCompanyId} = user;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isMyCompany = companyId === undefined;
   const [companyInfo, setCompanyInfo] = useState(company);
-  // useEffect( () => {
-  //   async function fetchCompany() {
-  //     if (companyId) {
-  //       const company = await findCompany(companyId);
-  //       console.log("View other company's profile", company);
-  //       setCompanyInfo(company)
-  //       return;
-  //     }
-  //     console.log("user company id", userCompanyId)
-  //     const response = await dispatch(findCompanyThunk(userCompanyId));
-  //     setCompanyInfo(response.payload)
-  //     console.log("View my company profile", response.payload)
-  //   }
-  //   fetchCompany();
-  // }, [companyId]);
-
+  useEffect( () => {
+    async function fetchCompany() {
+      if (companyId) {
+        const company = await findCompany(companyId);
+        console.log("View other company's profile", company);
+        setCompanyInfo(company)
+        return;
+      }
+      console.log("user company id", userCompanyId)
+      const response = await dispatch(findCompanyThunk(userCompanyId));
+      setCompanyInfo(response.payload)
+      console.log("View my company profile", response.payload)
+    }
+    fetchCompany();
+  }, [companyId]);
 
   return (
     <div className="container">
