@@ -87,6 +87,7 @@ export const addUserExperience = async (uid, experienceData) => {
 };
 
 export const deleteUserExperience = (uid, eid) => {
+  // console.log("delete uid, eid", uid, eid)
   return axios.delete(`${USER_API}/deleteExperience/${eid}/${uid}`);
 };
 
