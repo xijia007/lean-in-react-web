@@ -50,9 +50,12 @@ const experienceSlice = createSlice({
         deleteExperience(state, action) {
             state.experiences = state.experiences.filter(e => e.id !== action.payload);
         },
+        clearExperience(state, action) {
+            state.experiences = [];
+        }
     },
 });
 
 export default experienceSlice.reducer;
 
-export const {addExperience, deleteExperience} = experienceSlice.actions;
+export const {addExperience, deleteExperience, clearExperience} = experienceSlice.actions;

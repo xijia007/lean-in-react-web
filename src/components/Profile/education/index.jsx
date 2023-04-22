@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { XLg } from 'react-bootstrap-icons';
 import {
-  addEducation,
-  deleteEducation,
-} from '../../Features/Profile/education-reducer';
+  addEducation, clearEducation,
+  deleteEducation
+} from "../../Features/Profile/education-reducer";
 import {
   getUserEducation,
   deleteUserEducation,
@@ -32,7 +32,10 @@ function EducationComponent() {
     async function fetchUserEducations() {
       if (userId) {
         const educationResponse = await getUserEducation(userId);
-
+        if (Object.keys(educationResponse).length === 0) {
+          dispatch(clearEducation());
+          return;
+        }
         educationResponse.forEach((element) => {
           dispatch(addEducation(element));
         });

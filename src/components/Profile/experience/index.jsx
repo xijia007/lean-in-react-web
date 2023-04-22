@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import {
-    addExperience,
+    addExperience, clearExperience,
     deleteExperience
 } from "../../Features/Profile/experience-reducer.jsx";
 import {XLg} from "react-bootstrap-icons";
@@ -32,7 +32,10 @@ const ExperienceComponent = () => {
         async function fetchUserExperiences() {
             if (userId) {
                 const experienceResponse = await getUserExperience(userId);
-
+                if (Object.keys(experienceResponse).length === 0) {
+                    dispatch(clearExperience());
+                    return;
+                }
                 experienceResponse.forEach((element) => {
                     dispatch(addExperience(element));
                 });
