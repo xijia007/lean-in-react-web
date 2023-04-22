@@ -18,9 +18,9 @@ import EditProfileScreen from '../Profile/EditProfileScreen/index.jsx';
 import AddExperienceScreen from '../Profile/experience/add-experience.jsx';
 import AddEducationScreen from '../Profile/education/add-education.jsx';
 import CompanyProfilePage from '../CompanyProfile/index.jsx';
+import CompanyHome from '../CompanyHome';
 import Home from "../Home/index.jsx";
 import EditCompanyProfileScreen from "../CompanyProfile/EditCompanyProfile.jsx";
-
 function App() {
   return (
     <BrowserRouter>
