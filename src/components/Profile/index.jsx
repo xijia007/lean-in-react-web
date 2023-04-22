@@ -7,14 +7,36 @@ import EducationComponent from './education/index.jsx';
 // import { findUser } from '../../services/user-service.js';
 // import { findUserThunk } from '../../services/user-thunk.js';
 import JobsSideBar from '../JobsSideBar/index.jsx';
+import { findCompany } from "../../services/company-service.js";
+import { findCompanyThunk } from "../../services/company-thunk.js";
+import { findUser } from "../../services/user-service.js";
+import { findUserThunk } from "../../services/user-thunk.js";
 
 function ProfileScreen() {
   const { userId } = useParams();
-  const { user: userInfo } = useSelector((state) => state.userInfo);
-  // const [userInfo, setUserInfo] = useState(user);
-  // const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userInfo);
+  const {uid} = user;
+  const [userInfo, setUserInfo] = useState(user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isMyProfile = userId === undefined;
+  console.log("profile: ", userInfo)
+  useEffect( () => {
+    async function fetchUserProfile() {
+      if (userId) {
+        const user = await findUser(userId);
+        setUserInfo(user);
+        return;
+      }
+      // const response = await dispatch(findUserThunk(uid));
+      // setUserInfo(response.payload);
+      // console.log("View my profile", response.payload)
+
+      // setUserInfo(response.payload);
+      // console.log("View my profile", response.payload)
+    }
+    fetchUserProfile();
+  }, [uid]);
 
   return (
     <div className="container">
@@ -63,9 +85,11 @@ function ProfileScreen() {
           <br />
           <EducationComponent isMyProfile={isMyProfile} />
         </div>
-        <div className="col-3">
-          <JobsSideBar />
-        </div>
+        {isMyProfile &&
+          <div className="col-3">
+            <JobsSideBar />
+          </div>
+        }
       </div>
     </div>
   );

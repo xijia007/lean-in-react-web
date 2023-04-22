@@ -30,16 +30,25 @@ function EducationComponent() {
 
   useEffect(() => {
     async function fetchUserEducations() {
+      if (userId) {
+        const educationResponse = await getUserEducation(userId);
+
+        educationResponse.forEach((element) => {
+          dispatch(addEducation(element));
+        });
+        return;
+      }
       const educationResponse = await getUserEducation(uid);
 
       educationResponse.forEach((element) => {
         dispatch(addEducation(element));
       });
     }
-
-    if (uid) {
-      fetchUserEducations(uid);
-    }
+    //
+    // if (uid) {
+    //   fetchUserEducations(uid);
+    // }
+    fetchUserEducations();
   }, [dispatch, uid]);
 
   return (

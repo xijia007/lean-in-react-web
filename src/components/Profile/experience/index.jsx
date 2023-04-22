@@ -1,21 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import {deleteExperience} from "../../Features/Profile/experience-reducer.jsx";
+import {
+    addExperience,
+    deleteExperience
+} from "../../Features/Profile/experience-reducer.jsx";
 import {XLg} from "react-bootstrap-icons";
+import {
+    deleteUserExperience,
+    getUserExperience
+} from "../../../services/user-service.js";
 
 const ExperienceComponent = () => {
     const { userId } = useParams();
     const isMyProfile = userId === undefined;
 
     const {experiences} = useSelector((state) => state.experience)
+    const { user } = useSelector((state) => state.userInfo);
+    const { uid } = user;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const addExperienceHandler = () => {navigate("/add-experience");};
     const deleteExperienceHandler = (id) => {
+        deleteUserExperience(uid, id)
+        console.log("delete uid, eid", uid, id)
         dispatch(deleteExperience(id))
     };
+
+    useEffect(() => {
+        async function fetchUserExperiences() {
+            if (userId) {
+                const experienceResponse = await getUserExperience(userId);
+
+                experienceResponse.forEach((element) => {
+                    dispatch(addExperience(element));
+                });
+                return;
+            }
+            const experienceResponse = await getUserExperience(uid);
+
+            experienceResponse.forEach((element) => {
+                dispatch(addExperience(element));
+            });
+        }
+        fetchUserExperiences();
+    }, [dispatch, uid]);
 
     return(
         <div className="list-group">
@@ -32,8 +62,8 @@ const ExperienceComponent = () => {
                   </div>
                 }
             </div>
-            {experiences && experiences.map((e) =>
-                <div key={e._id} className="list-group-item d-flex justify-content-between">
+            {Array.isArray(experiences) && experiences.map((e) =>
+                <div key={e.id} className="list-group-item d-flex justify-content-between">
                     <div>
                         <h5 className="fw-bold">{e.entityName}</h5>
                         <div>{e.role}</div>
@@ -44,7 +74,7 @@ const ExperienceComponent = () => {
                     </div>
                     {isMyProfile &&
                       <div>
-                          <h5 className="clickable" onClick={() => deleteExperienceHandler(e._id)}><XLg/></h5>
+                          <h5 className="clickable" onClick={() => deleteExperienceHandler(e.id)}><XLg/></h5>
                       </div>
                     }
 
