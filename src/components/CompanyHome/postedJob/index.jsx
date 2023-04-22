@@ -4,8 +4,8 @@ import {ChevronRight } from "react-bootstrap-icons";
 import {useNavigate} from "react-router";
 
 
-const postedJobsComponent = () => {
-    const {postedJobs} = useSelector((state) => state.postedJobs)
+const PostedJobsComponent = () => {
+    const postedJobs = useSelector((state) => state.postjobs.postJobs);
     const navigate = useNavigate();
     const NavigateJobDetails = (id) => navigate(`/search-details/${id}`)
 
@@ -27,4 +27,4 @@ const postedJobsComponent = () => {
     );
 };
 
-export default postedJobsComponent();
+export default PostedJobsComponent;

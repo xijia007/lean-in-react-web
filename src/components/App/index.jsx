@@ -16,7 +16,7 @@ import AddExperienceScreen from '../Profile/experience/add-experience.jsx';
 import AddEducationScreen from '../Profile/education/add-education.jsx';
 import AdminHomePage from '../AdminHome';
 import CompanyProfilePage from '../CompanyProfile/index.jsx';
-
+import CompanyHome from '../CompanyHome';
 function App() {
   return (
     <BrowserRouter>
@@ -65,7 +65,7 @@ function App() {
           <Route path={`${ROUTES.PROFILE}/:userId`} element={<ProfilePage />} />
           <Route exact path={ROUTES.ADMINHOME} element={<AdminHomePage />} />
           <Route exact path={ROUTES.JOBS} element={<SearchPage />} />
-          <Route exact path={ROUTES.COMPANYHOME} element={<HomePage />} />
+          <Route exact path={ROUTES.COMPANYHOME} element={<CompanyHome />} />
           <Route
             exact
             path={ROUTES.COMPANY_PROFILE}

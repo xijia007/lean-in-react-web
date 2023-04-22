@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector} from "react-redux";
-import postedJobs from "../Features/CompanyHome/postedJobs.jsx";
-import postJobs from "../Features/CompanyHome/postJobs.jsx";
-
-
+import PostJob from './postJob';
+import PostedJobsComponent from './postedJob';
 
 function CompanyHome() {
 
-    const { user: userInfo } = useSelector((state) => state.userInfo);
+    const userInfo = useSelector((state) =>
+    state.userInfo.user
+     );
 
 
   return (
@@ -18,7 +18,7 @@ function CompanyHome() {
                 <div className="list-group">
                     <div className="list-group-item p-3">
                         <div>
-                            <postJobs/>
+                            <PostJob />
                         </div>
 
 
@@ -28,7 +28,7 @@ function CompanyHome() {
 
             </div>
             <div className="col-3">
-                <postedJobs/>
+                <PostedJobsComponent/>
             </div>
         </div>
     </div>

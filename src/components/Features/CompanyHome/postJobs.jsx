@@ -1,4 +1,4 @@
-export default [
+const PostJobs =  [
     {
         _id: 123,
         company: "company1",
@@ -16,3 +16,5 @@ export default [
         end: '1/1/18',
     },
 ];
+
+export default PostJobs;

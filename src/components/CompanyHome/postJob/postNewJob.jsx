@@ -3,46 +3,41 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { ArrowLeft } from 'react-bootstrap-icons';
-import { addJob } from "../../Features/CompanyHome/postJob-reducer.jsx";
-
+import { addJob, changePostJobScreen } from "../../Features/CompanyHome/postJob-reducer.jsx";
+import { v4 as uuidv4 } from 'uuid';
 import { convertDateTimestamp } from '../../../utils/timeUtil';
-
-function postNewjobScreen() {
-    const [job, setJob] = useState({
-        company: '',
-        title: '',
-        start: '',
-        end: '',
-        description: '',
-    });
-
+function PostNewjobScreen() {
+    const [company , setCompany] = useState("");
+    const [title , setTitle] = useState("");
+    const [start , setStart] = useState("");
+    const [end , setEnd] = useState("");
+    const [description , setDescription] = useState("");
     const { uid } = useSelector((state) => state.userInfo.user);
-
+    const  postJobScreen = useSelector((state) => state.postjobs.postJobScreen);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSaveButton = (e) => {
         e.preventDefault();
-
-        const {
-            company: company_name,
-            title: job_title,
-            start,
-            end,
-            description,
-        } = newJob;
-        const newJobObj = {
-            description,
-            company_name,
-            job_title,
-            new_id: Date.now(),
-            start_time: convertDateTimestamp(start),
-            end_time: convertDateTimestamp(end),
-        };
-
-
+        const uniqueId = uuidv4();
+        const newjob = {
+            _id: uniqueId,
+            company: company,
+            description: description,
+            title: title,
+            start: start,
+            end: end,
+        }
+        console.log(start);
+        dispatch(changePostJobScreen());
+        dispatch(addJob(newjob));
 
     };
+
+
+    const handleBackArrow = (e) =>{
+        dispatch(changePostJobScreen());
+    }
 
     return (
         <div className="container">
@@ -58,7 +53,9 @@ function postNewjobScreen() {
                         </button>
                         <div className="d-flex justify-content-start mt-3">
                             <div>
-                                <h3 className="clickable" onClick={() => navigate(-1)}>
+                                <h3 className="clickable" onClick={() => {
+                                handleBackArrow();
+                            }}>
                                     <ArrowLeft />
                                 </h3>
                             </div>
@@ -79,9 +76,9 @@ function postNewjobScreen() {
                                     type="text"
                                     className="form-control"
                                     placeholder="Ex: Software Development Engineer"
-                                    value={job.title}
+                                    value={title}
                                     onChange={(e) =>
-                                        setJob({ ...job, title: e.target.value })
+                                        setTitle(e.target.value)
                                     }
                                 />
                             </div>
@@ -95,9 +92,9 @@ function postNewjobScreen() {
                                     type="text"
                                     className="form-control"
                                     placeholder="Ex: Amazon"
-                                    value={job.company}
+                                    value={company}
                                     onChange={(e) =>
-                                        setJob({ ...job, company: e.target.value })
+                                        setCompany(e.target.value)
                                     }
                                 />
                             </div>
@@ -111,9 +108,9 @@ function postNewjobScreen() {
                                     type="date"
                                     className="form-control"
                                     placeholder="mm/dd/yyyy"
-                                    value={job.start}
+                                    value={start}
                                     onChange={(e) =>
-                                        setJob({ ...job, start: e.target.value })
+                                        setStart(e.target.value)
                                     }
                                 />
                             </div>
@@ -127,9 +124,9 @@ function postNewjobScreen() {
                                     type="date"
                                     className="form-control"
                                     placeholder="mm/dd/yyyy"
-                                    value={job.end}
+                                    value={end}
                                     onChange={(e) =>
-                                        setJob({ ...job, end: e.target.value })
+                                        setEnd(e.target.value)
                                     }
                                 />
                             </div>
@@ -142,10 +139,10 @@ function postNewjobScreen() {
                 <textarea
                     className="form-control"
                     placeholder="Say something..."
-                    value={job.description}
+                    value={description}
                     style={{ height: '100px' }}
                     onChange={(e) =>
-                        setJob({ ...job, description: e.target.value })
+                        setDescription(e.target.value)
                     }
                 />
                             </div>
@@ -158,4 +155,4 @@ function postNewjobScreen() {
     );
 }
 
-export default postNewjobScreen;
+export default PostNewjobScreen;

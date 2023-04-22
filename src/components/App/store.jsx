@@ -11,7 +11,6 @@ import RecruiterJobsReducer from '../Features/Home/RecruiterJobs-reducer';
 
 import userReducer from '../Features/Profile/user-reducer.jsx';
 import usersReducer from '../Features/admin/users-reducer.jsx';
-import postedJobsReducer from "../Features/CompanyHome/postedJobs-reducer.jsx";
 import postJobReducer from "../Features/CompanyHome/postJob-reducer.jsx";
 
 export default configureStore({
@@ -27,7 +26,6 @@ export default configureStore({
     DBjobs: DBjobsReducer,
     Recruiterjobs: RecruiterJobsReducer,
     users: usersReducer,
-    postedJobs: postedJobsReducer,
     postjobs: postJobReducer,
 
   },
