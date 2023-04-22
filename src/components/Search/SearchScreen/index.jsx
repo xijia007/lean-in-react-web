@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from './search-bar';
 import JobSummaryList from '../JobSummaryList/index';
-import { getAllJobs } from '../../../services/job-service';
+import { getAllJobs, getAllJobsSearch } from '../../../services/job-service';
 
 import { addJob } from '../reducer/jobs-reducer';
 
@@ -12,7 +12,7 @@ function Search() {
     async function fetchAlljobs() {
       const jobResponse = await getAllJobs();
 
-      console.log(jobResponse);
+      // console.log(jobResponse);
 
       jobResponse.forEach((job) => {
         console.log(job);
@@ -21,7 +21,25 @@ function Search() {
     }
 
     // if (uid) {
-    fetchAlljobs();
+    // fetchAlljobs();
+    // }
+  }, []);
+  useEffect(() => {
+    async function fetchAllJobsSearch() {
+      const jobResponse = await getAllJobsSearch();
+
+      const sortedJobs = jobResponse.sort(
+        (a, b) => Date.parse(b.post_time) - Date.parse(a.post_time)
+      );
+      // console.log(sortedJobs);
+      sortedJobs.forEach((job) => {
+        // console.log(job);
+        dispatch(addJob(job));
+      });
+    }
+
+    // if (uid) {
+    fetchAllJobsSearch();
     // }
   }, []);
   return (

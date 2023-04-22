@@ -4,13 +4,15 @@ import JobKeyFacts from './job-key-facts';
 
 function JobSummaryItem(job) {
   const navigate = useNavigate();
-  const NavigateJobDetails = (id) => navigate(`/search-details/${id}`);
+  const { id, image, company } = job;
+  const imageSrc = image || `https://logo.clearbit.com/${company}.com`;
+  const NavigateJobDetails = () => navigate(`/search-details/${id}`);
   return (
     <div className="list-group-item">
       <div className="row">
         <div className="col-2 text-center">
           <img
-            src={`https://logo.clearbit.com/${job.company}.com`}
+            src={imageSrc}
             onError={(e) => {
               e.target.src = '/images/default_logo.jpg';
             }} // set default image URL
@@ -29,7 +31,7 @@ function JobSummaryItem(job) {
             type="button"
             className="btn btn-outline-secondary"
             onClick={() => {
-              NavigateJobDetails(job.id);
+              NavigateJobDetails();
             }}
           >
             View details
