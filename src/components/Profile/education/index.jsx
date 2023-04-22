@@ -31,7 +31,6 @@ function EducationComponent() {
   useEffect(() => {
     async function fetchUserEducations() {
       const educationResponse = await getUserEducation(uid);
-
       educationResponse.forEach((element) => {
         dispatch(addEducation(element));
       });

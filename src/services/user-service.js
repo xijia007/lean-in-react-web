@@ -43,6 +43,23 @@ export const currentUserProfile = () => {
   return axios.get(`${USER_API}/currentUserProfile`);
 };
 
+export const getUserExperience  = async (uid) => {
+  const response = await axios.get(`${USER_API}/getExperiences/${uid}`);
+  return response.data;
+};
+
+export const addUserExperience = async (uid, experienceData) => {
+  const response = await axios.post(
+    `${USER_API}/addExperience/${uid}`,
+    experienceData
+  );
+  return response.data;
+};
+
+export const deleteUserExperience = (uid, eid) => {
+  return axios.delete(`${USER_API}/deleteExperience/${eid}/${uid}`);
+};
+
 export const getUserEducation = async (uid) => {
   const response = await axios.get(`${USER_API}/getEducations/${uid}`);
   return response.data;
@@ -59,6 +76,7 @@ export const addUserEducation = async (uid, educationData) => {
 export const deleteUserEducation = (uid, eid) => {
   return axios.delete(`${USER_API}/deleteEducation/${eid}/${uid}`);
 };
+
 
 export const getUserSavedJobs = async (uid) => {
   const response = await axios.get(`${USER_API}/savedJobs/${uid}`);

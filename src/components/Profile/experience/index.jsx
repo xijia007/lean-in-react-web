@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { useNavigate, useParams } from "react-router";
-import {deleteExperience} from "../../Features/Profile/experience-reducer.jsx";
+import {useNavigate, useParams } from "react-router";
+import {addExperience, deleteExperience} from "../../Features/Profile/experience-reducer.jsx";
+import {
+  getUserExperience,
+} from '../../../services/user-service';
 import {XLg} from "react-bootstrap-icons";
 
 const ExperienceComponent = () => {
@@ -9,6 +12,8 @@ const ExperienceComponent = () => {
     const isMyProfile = userId === undefined;
 
     const {experiences} = useSelector((state) => state.experience)
+    const { user } = useSelector((state) => state.userInfo);
+    const { uid } = user;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -16,6 +21,20 @@ const ExperienceComponent = () => {
     const deleteExperienceHandler = (id) => {
         dispatch(deleteExperience(id))
     };
+
+    useEffect(() => {
+      async function fetchUserExperiences() {
+        const experienceResponse = await getUserExperience(uid);
+        console.log("experienceResponse for uid:", uid, experienceResponse)
+        experienceResponse.forEach((element) => {
+          dispatch(addExperience(element));
+        });
+      }
+  
+      if (uid) {
+        fetchUserExperiences(uid);
+      }
+    }, [dispatch, uid]);
 
     return(
         <div className="list-group">
