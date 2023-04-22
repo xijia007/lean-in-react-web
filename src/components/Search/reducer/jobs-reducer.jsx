@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import jobs from './jobs';
+// import jobs from './jobs';
 
 const initialState = {
   jobs: [],
@@ -14,8 +14,12 @@ const jobsSlice = createSlice({
         job_id: id,
         title,
         description,
-        location,
+        // location,
+        addCity,
+        addState,
         apply,
+        image,
+        company_name: company,
         post_time: postedTime,
       } = action.payload;
 
@@ -23,9 +27,11 @@ const jobsSlice = createSlice({
         id,
         title,
         description,
-        location,
-        apply,
+        location: `${addCity}, ${addState}`,
+        image,
+        // apply,
         postedTime,
+        company,
       };
 
       // console.log('existingJob:', existingJob);

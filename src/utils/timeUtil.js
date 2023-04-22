@@ -19,4 +19,17 @@ const convertDateTimestamp = (dateString) => {
   return timestampObject;
 };
 
-export { convertDate, convertDateTimestamp };
+const convertISODate = (dateString) => {
+  const date = new Date(dateString);
+
+  const options = {
+    month: '2-digit',
+    day: '2-digit',
+    year: 'numeric',
+  };
+
+  const formattedDate = date.toLocaleDateString('en-US', options);
+  return formattedDate;
+};
+
+export { convertDate, convertDateTimestamp, convertISODate };
