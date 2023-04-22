@@ -1,12 +1,6 @@
-/* eslint-disable import/extensions */
-import React, { useEffect, useState } from 'react';
-
-import { findAllUsersThunk } from '../../services/user-thunk.js';
-
-import * as ROUTES from '../../constants/routes';
-import JobsSideBar from '../JobsSideBar/index.jsx';
-import ProfileCard from '../Home/ProfileCard.jsx';
-import RecentJobLists from '../Home/recentJobLists/index.jsx';
+import JobsSideBar from '../JobsSideBar/index';
+import ProfileCard from '../Home/ProfileCard';
+import RecentJobLists from '../Home/recentJobLists/index';
 
 function UserHome() {
   return (

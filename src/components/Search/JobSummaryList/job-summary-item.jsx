@@ -4,9 +4,9 @@ import JobKeyFacts from './job-key-facts';
 
 function JobSummaryItem(job) {
   const navigate = useNavigate();
-  const { id, image, company } = job;
-  const imageSrc = image || `https://logo.clearbit.com/${company}.com`;
-  const NavigateJobDetails = () => navigate(`/search-details/${id}`);
+  const { job_id, image, company_name } = job;
+  const imageSrc = image || `https://logo.clearbit.com/${company_name}.com`;
+  const NavigateJobDetails = () => navigate(`/search-details/${job_id}`);
   return (
     <div className="list-group-item">
       <div className="row">

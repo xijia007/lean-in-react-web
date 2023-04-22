@@ -4,29 +4,53 @@ import { useSelector, useDispatch } from 'react-redux';
 import JobKeyFacts from '../JobSummaryList/job-key-facts';
 import CompanyImage from '../JobSummaryList/company-image';
 // import {saveJob} from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
-import { saveUnsaveJob } from '../../Features/AppliedSavedJobs/saved-jobs-reducer';
+import {
+  addSavedJob,
+  removeSavedJob,
+} from '../../Features/AppliedSavedJobs/saved-jobs-reducer';
 import { applyJob } from '../../Features/AppliedSavedJobs/applied-jobs-reducer';
+import {
+  addUserSavedJobs,
+  removeUserSavedJobs,
+} from '../../../services/user-service';
 
 function JobDetails() {
   const { jobId } = useParams();
+  const { uid } = useSelector((state) => state.userInfo.user);
   // console.log("selected id for JobDetails: ", jobId)
 
   //   const jobsArray = useSelector((state) => state.jobs);
   const { jobs } = useSelector((state) => state.jobs);
+  const { jobs: savedJobs } = useSelector((state) => state.savedJobs);
   // console.log("all jobs for JobDetails: ", jobsArray)
 
-  const job = jobs.find((item) => item.id === jobId);
-  // console.log("selected job for JobDetails: ", job)
+  const job = jobs.find((item) => item.job_id === jobId);
+  // console.log('selected job for JobDetails: ', job);
 
-  const { savedJobs } = useSelector((state) => state.savedJobs);
   const { appliedjobs } = useSelector((state) => state.appliedJobs);
-  const saved = savedJobs.find((e) => e.id === job.id);
+  const saved = savedJobs.find((e) => e.job_id === job.job_id);
 
   const dispatch = useDispatch();
-  const onJobSaveUnsave = (item) => {
+  const onJobSaveUnsave = async () => {
     // combine save/unsave button function
-    dispatch(saveUnsaveJob(item));
-    console.log('savedJob: ', item);
+    if (saved) {
+      try {
+        const removeJob = {
+          job_id: job.job_id,
+        };
+        await removeUserSavedJobs(uid, removeJob);
+        dispatch(removeSavedJob(job));
+      } catch (error) {
+        console.err(error);
+      }
+    } else {
+      try {
+        await addUserSavedJobs(uid, job);
+        dispatch(addSavedJob(job));
+      } catch (error) {
+        console.err(error);
+      }
+    }
   };
 
   const onJobApply = (item) => {
@@ -69,7 +93,7 @@ function JobDetails() {
               <button
                 type="button"
                 // onClick= {() => onJobSave(job)}
-                onClick={() => onJobSaveUnsave(job)}
+                onClick={() => onJobSaveUnsave()}
                 className="btn btn-outline-secondary col m-3"
               >
                 {saved ? 'Unsave this job' : 'Save this job'}

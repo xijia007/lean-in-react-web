@@ -2,10 +2,10 @@ import React from 'react';
 import { convertISODate } from '../../../utils/timeUtil';
 
 function RecentJobItem(job) {
-  const { title, image, company, postedTime, location } = job;
-  console.log(title, image, company, postedTime, location);
-  const imageSrc = image || `https://logo.clearbit.com/${company}.com`;
-  const time = postedTime ? convertISODate(postedTime) : null;
+  const { title, image, company_name, post_time, add_city, add_state } = job;
+  const location = `${add_city}, ${add_state}`;
+  const imageSrc = image || `https://logo.clearbit.com/${company_name}.com`;
+  const time = post_time ? convertISODate(post_time) : null;
   return (
     <div className="list-group-item">
       <div className="row">
@@ -25,7 +25,7 @@ function RecentJobItem(job) {
               <b>Job Title: {title}</b>
             </div>
             <div className="row">
-              <b>Company: {company}</b>
+              <b>Company: {company_name}</b>
             </div>
             <div className="row">
               <div className="col-12"> Job Location: {location} </div>

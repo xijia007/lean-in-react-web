@@ -2,11 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import JobKeyFacts from '../JobSummaryList/job-key-facts';
 import CompanyImage from '../JobSummaryList/company-image';
-import { saveJob } from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
+import { addSavedJob } from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
 import { applyJob } from '../../Features/AppliedSavedJobs/applied-jobs-reducer.jsx';
 
 function JobDetailItem(job) {
-  const { savedJobs } = useSelector((state) => state.savedJobs);
+  const { jobs: savedJobs } = useSelector((state) => state.savedJobs);
   const { appliedjobs } = useSelector((state) => state.appliedJobs);
   const dispatch = useDispatch();
   const onJobSave = (job) => {
