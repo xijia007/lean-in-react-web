@@ -2,9 +2,12 @@ import React from 'react';
 // import { useDispatch } from 'react-redux';
 
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteAuthUserThunk } from "services/user-thunk.js";
 
 function UserItemByRole({ user = { firstName: '', lastName: '', role: '', userCompanyId: 0, uid: ''} }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const visitProfile = () => {
     if (user.role === 'user') {
@@ -29,7 +32,8 @@ function UserItemByRole({ user = { firstName: '', lastName: '', role: '', userCo
           <button
             className="btn btn-primary rounded-pill mt-2 float-end"
             onClick={() => {
-              navigate(`/user/${user.uid}`);
+              dispatch(deleteAuthUserThunk(user.uid));
+              console.log("delete uid", user.uid)
             }}
           >
             Delete

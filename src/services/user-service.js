@@ -20,8 +20,9 @@ export const createUser = async (user) => {
   return response.data;
 };
 
-export const deleteUser = (id) => {
-  return axios.delete(`${USER_API}/${id}`);
+export const deleteAuthUser = async (uid) => {
+  const response = await axios.delete(`${USER_API}/deleteAuthUser/${uid}`);
+  return response.data;
 };
 
 export const updateUser = (newUser) => {
