@@ -5,20 +5,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // import Nav from 'react-bootstrap/Nav';
 // import { LinkContainer } from 'react-router-bootstrap';
-import { addJob } from 'reducers/jobs-reducer';
+import { addJob } from '../../reducers/jobs-reducer';
 import { auth } from '../Firebase/firebase';
 
 import CompanyHome from '../CompanyHome';
 import AdminHome from '../AdminHome';
 import UserHome from '../UserHome';
 
-import { addDBJob } from './reducer/DBjobs-reducer';
 import { addSavedJob } from '../Features/AppliedSavedJobs/saved-jobs-reducer';
 
 import { getUserSavedJobs } from '../../services/user-service';
 import { getAllJobsSearch } from '../../services/job-service';
 import VisiterHome from '../VisiterHome';
 import * as ROUTES from '../../constants/routes';
+import { addDBJob } from '../../reducers/DBjobs-reducer';
 
 function Home() {
   const { user } = useSelector((state) => state.userInfo);

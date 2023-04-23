@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import { ArrowLeft, XLg } from "react-bootstrap-icons";
+import { updateCompanyThunk } from "../../services/company-thunk.js";
 
 const EditCompanyProfileScreen = () => {
   const { company } = useSelector((state) => state.company);
@@ -9,8 +10,9 @@ const EditCompanyProfileScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  console.log(companyInfo)
   const handleSaveButton = async () => {
-    // await dispatch(updateCompanyThunk(companyInfo));
+    await dispatch(updateCompanyThunk(companyInfo));
     console.log("save companyinfo", companyInfo);
     navigate(-1);
   };
@@ -43,9 +45,9 @@ const EditCompanyProfileScreen = () => {
           <form className="row">
             <label className="col-sm-2 col-form-label">Description</label>
             <div className="col-sm-10">
-              <input type="text" className="form-control"
-                     placeholder="Ex: add your company description..." value={companyInfo.description}
-                     onChange={(e) => setCompanyInfo({...companyInfo, description: e.target.value})}
+              <textarea className="form-control"
+                        placeholder="Ex: Add your company description..." value={companyInfo.description} rows={4} cols={40}
+                        onChange={(e) => setCompanyInfo({...companyInfo, description: e.target.value})}
               />
             </div>
           </form>

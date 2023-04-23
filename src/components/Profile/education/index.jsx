@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { XLg } from 'react-bootstrap-icons';
 import {
-  addEducation,
-  deleteEducation,
-} from '../../Features/Profile/education-reducer';
+  addEducation, clearEducation,
+  deleteEducation
+} from "../../Features/Profile/education-reducer";
 import {
   getUserEducation,
   deleteUserEducation,
@@ -30,16 +30,28 @@ function EducationComponent() {
 
   useEffect(() => {
     async function fetchUserEducations() {
+      if (userId) {
+        const educationResponse = await getUserEducation(userId);
+        if (Object.keys(educationResponse).length === 0) {
+          dispatch(clearEducation());
+          return;
+        }
+        educationResponse.forEach((element) => {
+          dispatch(addEducation(element));
+        });
+        return;
+      }
       const educationResponse = await getUserEducation(uid);
 
       educationResponse.forEach((element) => {
         dispatch(addEducation(element));
       });
     }
-
-    if (uid) {
-      fetchUserEducations(uid);
-    }
+    //
+    // if (uid) {
+    //   fetchUserEducations(uid);
+    // }
+    fetchUserEducations();
   }, [dispatch, uid]);
 
   return (
