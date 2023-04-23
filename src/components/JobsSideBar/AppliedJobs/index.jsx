@@ -25,7 +25,7 @@ function AppliedJobsComponent() {
             </div>
             <div
               className="clickable mt-2"
-              onClick={() => NavigateJobDetails(job._id)}
+              onClick={() => NavigateJobDetails(job.job_id)}
             >
               <h4>
                 <ChevronRight />
