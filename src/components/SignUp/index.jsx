@@ -1,8 +1,9 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { auth } from '../Firebase/firebase';
+import { useState, useEffect } from 'react';
+import { getAllCompanies } from 'services/company-service';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import {
   checkEmailAddress,
   checkFirstName,
@@ -10,14 +11,18 @@ import {
   checkPassword,
   checkRetypePassword,
   updateOrgnization,
+  updateUserRole,
+  updateCompanyId,
 } from '../Features/SignUp/SignUpSlice';
-import { updateUserRole } from '../Features/admin/users-reducer';
 import { createUser } from '../../services/user-service';
-import { useState } from 'react';
+
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectedButton, setSelectedButton] = useState('0');
+  const [selectedButton, setSelectedButton] = useState('user');
+  const [companyList, setCompanyList] = useState([]);
+  const [selectedOption, setSelectedOption] = useState('Plesae select');
+
   const handleFirstNameChange = (event) => {
     dispatch(checkFirstName(event.target.value));
   };
@@ -38,15 +43,39 @@ function Signup() {
     dispatch(checkRetypePassword(event.target.value));
   };
 
-  const handleRoleButtonClick = (event) =>{
-   const id = event.target.id;
-   setSelectedButton(id);
-   dispatch(updateUserRole(id));
-  }
+  const handleRoleButtonClick = (event) => {
+    const { id } = event.target;
+    if (id !== 'company') {
+      dispatch(updateCompanyId(''));
+    }
+    setSelectedButton(id);
+    dispatch(updateUserRole(id));
+  };
+
+  const handleDropdownSelect = (eventKey) => {
+    setSelectedOption(eventKey);
+    dispatch(updateCompanyId(eventKey));
+  };
   const submitStatus = useSelector((state) => state.signup.submitStatus);
-  const { email, password, firstName, lastName, orgnization } = useSelector(
-    (state) => state.signup
-  );
+  const {
+    email,
+    password,
+    firstName,
+    lastName,
+    orgnization,
+    role,
+    userCompanyId,
+  } = useSelector((state) => state.signup);
+  const isCompanyUser = role === 'company';
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      const response = await getAllCompanies();
+      setCompanyList(response);
+    };
+
+    fetchCompanies();
+  }, [submitStatus]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +86,8 @@ function Signup() {
       firstName,
       lastName,
       orgnization,
+      role,
+      userCompanyId,
     };
 
     console.log(user);
@@ -126,17 +157,56 @@ function Signup() {
               onChange={handleRetypePwdChange}
             />
           </div>
-          <div className="signup-role-button btn-group mt-3" role="group" aria-label="User type">
-        <button type="button" className={`btn btn-secondary${selectedButton === '1' ? ' selected' : ''}`} id='1'   onClick={handleRoleButtonClick}>
-          Web Admin
-        </button>
-        <button type="button" className={`btn btn-secondary${selectedButton === '2' ? ' selected' : ''}`} id = '2'onClick={handleRoleButtonClick}>
-          Job Seeker
-        </button>
-        <button type="button" className={`btn btn-secondary${selectedButton === '3' ? ' selected' : ''}`} id = '3' onClick={handleRoleButtonClick}>
-          Company
-        </button>
-      </div>
+          <div
+            className="signup-role-button btn-group mt-3"
+            role="group"
+            aria-label="User type"
+          >
+            <button
+              type="button"
+              className={`btn btn-secondary${
+                selectedButton === 'user' ? ' selected' : ''
+              }`}
+              id="user"
+              onClick={handleRoleButtonClick}
+            >
+              Job Seeker
+            </button>
+            <button
+              type="button"
+              className={`btn btn-secondary${
+                selectedButton === 'company' ? ' selected' : ''
+              }`}
+              id="company"
+              onClick={handleRoleButtonClick}
+            >
+              Company
+            </button>
+            <button
+              type="button"
+              className={`btn btn-secondary${
+                selectedButton === 'admin' ? ' selected' : ''
+              }`}
+              id="admin"
+              onClick={handleRoleButtonClick}
+            >
+              Web Admin
+            </button>
+          </div>
+          {isCompanyUser && (
+            <DropdownButton
+              id="dropdown-basic-button"
+              title={selectedOption}
+              onSelect={handleDropdownSelect}
+              className="form-group mt-3"
+            >
+              {companyList.map((company) => (
+                <Dropdown.Item key={company.company_id} eventKey={company.name}>
+                  {company.name}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+          )}
           <div className="d-grid gap-2 mt-3">
             <button
               type="submit"
