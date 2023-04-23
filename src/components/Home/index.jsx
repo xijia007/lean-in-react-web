@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 // import Nav from 'react-bootstrap/Nav';
 // import { LinkContainer } from 'react-router-bootstrap';
+import { addJob } from 'reducers/jobs-reducer';
 import { auth } from '../Firebase/firebase';
 
 import CompanyHome from '../CompanyHome';
@@ -11,7 +13,6 @@ import AdminHome from '../AdminHome';
 import UserHome from '../UserHome';
 
 import { addDBJob } from './reducer/DBjobs-reducer';
-import { addJob } from '../Search/reducer/jobs-reducer';
 import { addSavedJob } from '../Features/AppliedSavedJobs/saved-jobs-reducer';
 
 import { getUserSavedJobs } from '../../services/user-service';
@@ -46,10 +47,16 @@ function Home() {
   useEffect(() => {
     async function fetchAllJobsSearch() {
       const jobResponse = await getAllJobsSearch();
-
-      const sortedJobs = jobResponse.sort(
-        (a, b) => Date.parse(b.post_time) - Date.parse(a.post_time)
+      // console.log(jobResponse.slice(0, 10));
+      const sortedJobs = jobResponse.slice().sort((a, b) =>
+        a.title.localeCompare(b.title, undefined, {
+          sensitivity: 'base',
+        })
       );
+      // console.log(sortedJobs.slice(0, 10));
+      // const sortedJobsTime = jobResponse
+      //   .slice()
+      //   .sort((a, b) => Date.parse(b.post_time) - Date.parse(a.post_time));
       sortedJobs.forEach((job) => {
         dispatch(addJob(job));
       });

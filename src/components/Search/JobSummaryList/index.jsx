@@ -3,8 +3,7 @@ import { useSelector } from 'react-redux';
 import JobSummaryItem from './job-summary-item';
 // import jobs from '../reducer/jobs';
 
-function JobSummaryList() {
-  const { jobs } = useSelector((state) => state.jobs);
+function JobSummaryList({ jobs }) {
   return (
     <div className="list-group">
       {Array.isArray(jobs) &&

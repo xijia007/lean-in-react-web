@@ -1,29 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Fuse from 'fuse.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllJobsSearch } from 'services/job-service';
+import { addJob } from 'reducers/jobs-reducer';
 import SearchBar from './search-bar';
 import JobSummaryList from '../JobSummaryList/index';
-import { getAllJobs, getAllJobsSearch } from '../../../services/job-service';
-
-import { addJob } from '../reducer/jobs-reducer';
 
 function Search() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    async function fetchAlljobs() {
-      const jobResponse = await getAllJobs();
+  const { jobs } = useSelector((state) => state.jobs);
+  const [searchTerm, setSearchTerm] = useState('');
 
-      // console.log(jobResponse);
+  const handleSearch = (keyword) => {
+    setSearchTerm(keyword);
+  };
 
-      jobResponse.forEach((job) => {
-        console.log(job);
-        dispatch(addJob(job));
-      });
-    }
+  const options = {
+    keys: ['title', 'company_name'],
+    includeScore: true,
+    threshold: 0.3,
+  };
 
-    // if (uid) {
-    // fetchAlljobs();
-    // }
-  }, []);
+  const fuse = new Fuse(jobs, options);
+
+  const filteredList = searchTerm
+    ? fuse.search(searchTerm).map((result) => result.item)
+    : jobs;
+
+  const searchResultsCount = filteredList.length;
+
   useEffect(() => {
     async function fetchAllJobsSearch() {
       const jobResponse = await getAllJobsSearch();
@@ -38,22 +43,23 @@ function Search() {
       });
     }
 
-    // if (uid) {
-    fetchAllJobsSearch();
-    // }
-  }, []);
+    if (jobs.length === 0) {
+      fetchAllJobsSearch();
+    }
+  }, [dispatch, jobs.length]);
   return (
     <div className="container">
       <h1>Search</h1>
-      <SearchBar />
+      <SearchBar setKeyword={handleSearch} />
+
+      <h4>Results: {searchResultsCount}</h4>
+
+      {searchResultsCount === 0 && (
+        <h2>Sorry, There is no results matching your search keyword.</h2>
+      )}
 
       <div className="row" id="wd-search-results">
-        <JobSummaryList />
-      </div>
-
-      <div className="row">
-        Recent Job Lists: To be updated with the same component from Home
-        Screen, or a similar one as the search results?
+        <JobSummaryList jobs={filteredList} />
       </div>
     </div>
   );
