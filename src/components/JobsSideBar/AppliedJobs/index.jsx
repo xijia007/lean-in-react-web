@@ -11,7 +11,7 @@ function AppliedJobsComponent() {
   return (
     <div className="list-group">
       <div className="list-group-item">
-        <h5 className="fw-bold mt-2 mb-1">Applied Jobs</h5>
+        <h4 className="fw-bold mt-2 mb-1">Applied Jobs</h4>
       </div>
       {appliedJobs &&
         appliedJobs.map((job) => (

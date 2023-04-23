@@ -19,22 +19,6 @@ function Home() {
   const isAdmin = role === 'admin';
   const isUser = role === 'user';
   const isCompany = role === 'company';
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        // dispatch(removeCurrentUser());
-        localStorage.removeItem('userData');
-        navigate('/');
-        console.log('Signed out successfully');
-      })
-      .catch((error) => {
-        console.error(error);
-        // An error happened.
-      });
-  };
 
   const email = auth?.currentUser?.email;
   console.log('visiter?', !(isUser || isCompany || isAdmin));
@@ -47,11 +31,6 @@ function Home() {
             <br/>You're logged in as a Job Seeker.
           </h2>
           <UserHome />
-          <div>
-            <button className="btn btn-danger float-end" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
         </nav>
       )}
       {isCompany && isLogined && (
@@ -60,13 +39,7 @@ function Home() {
             Welcome to LeanIn, <span className="text-primary">{email}</span>
             <br/>You're logged in as a Company.
           </h2>
-
           <CompanyHome />
-          <div>
-            <button className="btn btn-danger float-end" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
         </nav>
       )}
       {isAdmin && isLogined && (
@@ -76,11 +49,6 @@ function Home() {
             <br/>You're logged in as an Admin.
           </h2>
           <AdminHome />
-          <div>
-            <button className="btn btn-danger float-end" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
         </nav>
       )}
 
