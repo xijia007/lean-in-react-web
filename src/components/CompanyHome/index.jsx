@@ -1,40 +1,33 @@
 import React, { useEffect, useState } from 'react';
 
-import PostJob from './postJob';
+import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import PostedJobsComponent from './postedJob';
-import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { findCompany } from "../../services/company-service.js";
-import { findCompanyThunk } from "../../services/company-thunk.js";
+import PostJob from './postJob';
+import { findCompany } from '../../services/company-service.js';
+import { findCompanyThunk } from '../../services/company-thunk.js';
 
 function CompanyHome() {
-
-    const userInfo = useSelector((state) =>
-    state.userInfo.user
-     );
+  const userInfo = useSelector((state) => state.userInfo.user);
   return (
     <div className="container">
       {/* <h2>Hi, LeanIn Company</h2> */}
       <h1>Company Home Page</h1>
-        <div className="row">
-            <div className="col-9">
-                <div className="list-group">
-                    <div className="list-group-item p-3">
-                        <div>
-                            <PostJob />
-                        </div>
-
-
-
-                    </div>
-                </div>
-
+      <div className="row">
+        <div className="col-9">
+          <div className="list-group">
+            <div className="list-group-item p-3">
+              <div>
+                <PostJob />
+              </div>
             </div>
-            <div className="col-3">
-                <PostedJobsComponent/>
-            </div>
+          </div>
         </div>
+        <div className="col-3">
+          <PostedJobsComponent />
+        </div>
+      </div>
     </div>
   );
 }
