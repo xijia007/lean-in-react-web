@@ -25,74 +25,21 @@ function App() {
         <Navigation />
         <br />
         <Routes>
+          <Route exact path={ROUTES.HOME} element={<Home />} />
           <Route exact path={ROUTES.SEARCH} element={<SearchPage />} />
-          {/* <Route
-            exact
-            path={ROUTES.SEARCHDETAILS}
-            element={<SearchDetailsPage />}
-          /> */}
-          {/* <Route exact path={`${ROUTES.SEARCHDETAILS}/*`} element={<SearchDetailsPage />} /> */}
-          <Route
-            exact
-            path={`${ROUTES.SEARCHDETAILS}/:jobId`}
-            element={<SearchDetailsPage />}
-          />
+          <Route exact path={`${ROUTES.SEARCHDETAILS}/:jobId`} element={<SearchDetailsPage />}/>
           <Route exact path={ROUTES.SIGN_UP} element={<SignUpPage />} />
           <Route exact path={ROUTES.SIGN_IN} element={<SignInPage />} />
           <Route exact path={ROUTES.SIGN_OUT} element={<SignOutPage />} />
-          <Route
-            exact
-            path={ROUTES.PASSWORD_FORGET}
-            element={<PasswordForgetPage />}
-          />
-          <Route exact path={ROUTES.HOME} element={<SearchPage />} />
-          <Route exact path={ROUTES.ADMIN} element={<AdminPage />} />
+          <Route exact path={ROUTES.PASSWORD_FORGET} element={<PasswordForgetPage />}/>
           <Route exact path={ROUTES.PROFILE} element={<ProfilePage />} />
-          <Route
-            exact
-            path={ROUTES.EDITPROFILE}
-            element={<EditProfileScreen />}
-          />
-          <Route
-            exact
-            path={ROUTES.ADDEXPERIENCE}
-            element={<AddExperienceScreen />}
-          />
-          <Route
-            exact
-            path={ROUTES.ADDEDUCATION}
-            element={<AddEducationScreen />}
-          />
+          <Route exact path={ROUTES.EDITPROFILE} element={<EditProfileScreen />}/>
+          <Route exact path={ROUTES.ADDEXPERIENCE} element={<AddExperienceScreen />}/>
+          <Route exact path={ROUTES.ADDEDUCATION} element={<AddEducationScreen />}/>
           <Route path={`${ROUTES.PROFILE}/:userId`} element={<ProfilePage />} />
-          <Route
-            exact
-            path={ROUTES.ADMINHOME}
-            //  element={<AdminHomePage />}
-            element={<Home />}
-          />
-          <Route exact path={ROUTES.JOBS} element={<SearchPage />} />
-          <Route
-            exact
-            path={ROUTES.COMPANYHOME}
-            // element={<CompanyHomePage />}
-            element={<Home />}
-          />
-          <Route exact path={ROUTES.USERHOME} element={<Home />} />
-          <Route
-            exact
-            path={`${ROUTES.COMPANY_PROFILE}/:companyId`}
-            element={<CompanyProfilePage />}
-          />
-          <Route
-            exact
-            path={ROUTES.COMPANY_PROFILE}
-            element={<CompanyProfilePage />}
-          />
-          <Route
-            exact
-            path={ROUTES.EDIT_COMPANY_PROFILE}
-            element={<EditCompanyProfileScreen />}
-          />
+          <Route exact path={ROUTES.COMPANY_PROFILE} element={<CompanyProfilePage />}/>
+          <Route exact path={ROUTES.EDIT_COMPANY_PROFILE} element={<EditCompanyProfileScreen />}/>
+          <Route exact path={`${ROUTES.COMPANY_PROFILE}/:companyId`}element={<CompanyProfilePage />}/>
         </Routes>
       </div>
     </BrowserRouter>
