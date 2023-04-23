@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import JobKeyFacts from './job-key-facts';
 
-function JobSummaryItem(job) {
+function JobSummaryItem({ job }) {
   const navigate = useNavigate();
   const { job_id, image, company_name } = job;
   const imageSrc = image || `https://logo.clearbit.com/${company_name}.com`;
@@ -20,8 +20,6 @@ function JobSummaryItem(job) {
             className="img-fluid"
             width={120}
           />
-          {/* <img src={`/images/${job.image}`} alt="Company Logo" className="img-fluid w-100 h-100"/> */}
-          {/* <img src="https://via.placeholder.com/100" alt="Company Logo" className="img-fluid"/> */}
         </div>
         <div className="col-8">
           <JobKeyFacts {...job} />
@@ -36,10 +34,6 @@ function JobSummaryItem(job) {
           >
             View details
           </button>
-          {/* <button type="button" className="btn btn-outline-secondary"
-                            onClick={() => {navigate('/search-details');}}>
-                        View details
-                    </button> */}
         </div>
       </div>
     </div>
