@@ -15,7 +15,7 @@ function AdminHome() {
 
   return (
     <div className="container">
-      <h2>Hi, LeanIn Admin</h2>
+      {/* <h2>Hi, LeanIn Admin</h2> */}
       <div className="row">
         <div className="col-4">
           {' '}

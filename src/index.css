@@ -119,3 +119,8 @@ label {
   height: 30px;
   object-fit: cover;
 }
+
+.wd-greeting {
+  margin-left: 0.5em;
+  margin-bottom: 0.5em;
+}

@@ -5,7 +5,7 @@ import RecentJobLists from '../Home/recentJobLists/index';
 function UserHome() {
   return (
     <div className="container">
-      <h2>Hi, LeanIn Job Seeker</h2>
+      {/* <h2>Hi, LeanIn Job Seeker</h2> */}
 
       <div className="row mt-2">
         <div className="col-3 col-md-2">
