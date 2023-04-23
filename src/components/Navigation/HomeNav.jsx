@@ -14,19 +14,26 @@ function HomeNav() {
   const greetingRoute = () => {
     if (isUser) {
       return ROUTES.USERHOME;
-    } else if (isCompany) {
-      return ROUTES.COMPANYHOME;
-    } else if (isAdmin) {
-      return ROUTES.ADMINHOME;
-    } else {
-      return ROUTES.SIGN_IN;
     }
+    if (isCompany) {
+      return ROUTES.COMPANYHOME;
+    }
+    if (isAdmin) {
+      return ROUTES.ADMINHOME;
+    }
+    return ROUTES.SIGN_IN;
   };
 
   return (
     <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary">
       <Container fluid>
-        <Navbar.Brand><img className="logo_size" src="./images/logo-transparent-png.png"/></Navbar.Brand>
+        <Navbar.Brand>
+          <img
+            alt="logo"
+            className="logo_size"
+            src="/images/logo-transparent-png.png"
+          />
+        </Navbar.Brand>
         <Nav className="ml-auto">
           {isLogined ? (
             <LinkContainer to={greetingRoute()}>

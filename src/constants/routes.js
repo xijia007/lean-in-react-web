@@ -18,5 +18,3 @@ export const ADMINHOME = '/admin-home';
 export const COMPANYHOME = '/company-home';
 export const USERHOME = '/user-home';
 export const NOTLOGINHOME = '/not-login-home';
-
-

@@ -1,36 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import * as ROUTES from '../../constants/routes';
-import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { findCompany } from "../../services/company-service.js";
-import { findCompanyThunk } from "../../services/company-thunk.js";
-import RecentJobList from "../Home/recentJobLists/index.jsx";
+import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import useFetchJobs from 'customhooks/fetchJob';
+import { findCompany } from '../../services/company-service';
+import { findCompanyThunk } from '../../services/company-thunk';
+// import RecentJobList from '../Home/recentJobLists/index';
+import CompanyJobLists from './compnayJobLists.jsx';
 
 function CompanyProfile() {
+  useFetchJobs();
   const { companyId } = useParams();
   const { company } = useSelector((state) => state.company);
-  let {user} = useSelector((state) => state.userInfo);
-  const {userCompanyId} = user;
+  const { user } = useSelector((state) => state.userInfo);
+  const { userCompanyId } = user;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isMyCompany = companyId === undefined;
   const [companyInfo, setCompanyInfo] = useState(company);
-  useEffect( () => {
+  useEffect(() => {
     async function fetchCompany() {
       if (companyId) {
-        const company = await findCompany(companyId);
-        console.log("View other company's profile", company);
-        setCompanyInfo(company)
+        const companyData = await findCompany(companyId);
+        setCompanyInfo(companyData);
         return;
       }
-      console.log("user company id", userCompanyId)
       const response = await dispatch(findCompanyThunk(userCompanyId));
-      setCompanyInfo(response.payload)
-      console.log("View my company profile", response.payload)
+      setCompanyInfo(response.payload);
     }
     fetchCompany();
-  }, [companyId]);
+  }, [companyId, dispatch, userCompanyId]);
 
   return (
     <div className="container">
@@ -51,16 +50,20 @@ function CompanyProfile() {
 
             <h2 className="fw-bold">{companyInfo.name}</h2>
           </div>
+          <p className="mb-2">Location: {companyInfo.location}</p>
 
           <p className="mb-2">{companyInfo.description}</p>
-          <p className="mb-2"><Link to={companyInfo.url}>Company Website</Link></p>
 
+          <p className="mb-2">
+            <b>
+              Company Website: <a href={companyInfo.url}>{companyInfo.name}</a>
+            </b>
+          </p>
         </div>
       </div>
 
-      <br/>
-      <RecentJobList/>
-
+      <br />
+      <CompanyJobLists companyName={companyInfo.name} />
     </div>
   );
 }
