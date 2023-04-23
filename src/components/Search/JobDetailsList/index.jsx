@@ -1,30 +1,15 @@
 import React from 'react';
-import JobDetailItem from './job-details-item';
-// import jobs from '../reducer/jobs';
 import { useSelector } from 'react-redux';
+import JobDetailItem from './job-details-item';
 
-const JobDetailsList = () => {
-  const jobsArray = useSelector(state => state.jobs);
-  console.log("for job details list: ",jobsArray)
+function JobDetailsList() {
+  const jobsArray = useSelector((state) => state.jobs);
   return (
-        <div className="list-group">
-          {jobsArray.map(job => 
-            <JobDetailItem key={job._id} {...job} />
-            )}
-        </div>
-    );
+    <div className="list-group">
+      {jobsArray.map((job) => (
+        <JobDetailItem key={job._id} {...job} />
+      ))}
+    </div>
+  );
 }
 export default JobDetailsList;
-
-// const JobDetailsList = () => {
-//   const jobsArray = useSelector(state => state.jobs);
-//   console.log(jobsArray)
-//   return (
-//         <div className="list-group">
-//           {jobs.map(job => 
-//             <JobDetailItem key={job._id} {...job} />
-//             )}
-//         </div>
-//     );
-// }
-// export default JobDetailsList;

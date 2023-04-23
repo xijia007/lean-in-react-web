@@ -7,13 +7,12 @@ function AppliedJobsComponent() {
   const { jobs: appliedJobs } = useSelector((state) => state.appliedJobs);
   const navigate = useNavigate();
   const NavigateJobDetails = (id) => navigate(`/search-details/${id}`);
-  console.log('appliedJobs in AppliedJobsComponent: ', appliedJobs);
   return (
     <div className="list-group">
       <div className="list-group-item">
         <h4 className="fw-bold mt-2 mb-1">Applied Jobs</h4>
       </div>
-      {appliedJobs &&
+      {Array.isArray(appliedJobs) &&
         appliedJobs.map((job) => (
           <div
             key={job._id}

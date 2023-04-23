@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function SearchBar({ setKeyword }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const initialSearchTerm = useSelector((state) => state.searchTerm.searchTerm);
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
