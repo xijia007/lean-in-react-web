@@ -11,13 +11,13 @@ import {
   checkRetypePassword,
   updateOrgnization,
 } from '../Features/SignUp/SignUpSlice';
-
+import { updateUserRole } from '../Features/admin/users-reducer';
 import { createUser } from '../../services/user-service';
-
+import { useState } from 'react';
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [selectedButton, setSelectedButton] = useState('0');
   const handleFirstNameChange = (event) => {
     dispatch(checkFirstName(event.target.value));
   };
@@ -37,6 +37,12 @@ function Signup() {
   const handleRetypePwdChange = (event) => {
     dispatch(checkRetypePassword(event.target.value));
   };
+
+  const handleRoleButtonClick = (event) =>{
+   const id = event.target.id;
+   setSelectedButton(id);
+   dispatch(updateUserRole(id));
+  }
   const submitStatus = useSelector((state) => state.signup.submitStatus);
   const { email, password, firstName, lastName, orgnization } = useSelector(
     (state) => state.signup
@@ -120,6 +126,17 @@ function Signup() {
               onChange={handleRetypePwdChange}
             />
           </div>
+          <div className="signup-role-button btn-group mt-3" role="group" aria-label="User type">
+        <button type="button" className={`btn btn-secondary${selectedButton === '1' ? ' selected' : ''}`} id='1'   onClick={handleRoleButtonClick}>
+          Web Admin
+        </button>
+        <button type="button" className={`btn btn-secondary${selectedButton === '2' ? ' selected' : ''}`} id = '2'onClick={handleRoleButtonClick}>
+          Job Seeker
+        </button>
+        <button type="button" className={`btn btn-secondary${selectedButton === '3' ? ' selected' : ''}`} id = '3' onClick={handleRoleButtonClick}>
+          Company
+        </button>
+      </div>
           <div className="d-grid gap-2 mt-3">
             <button
               type="submit"
