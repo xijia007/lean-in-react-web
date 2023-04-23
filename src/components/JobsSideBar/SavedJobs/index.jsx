@@ -15,7 +15,7 @@ function SavedJobsComponent() {
   return (
     <div className="list-group">
       <div className="list-group-item">
-        <h5 className="fw-bold mt-2 mb-1">Saved Jobs</h5>
+        <h4 className="fw-bold mt-2 mb-1">Saved Jobs</h4>
       </div>
       {savedJobs &&
         savedJobs.map((job) => (

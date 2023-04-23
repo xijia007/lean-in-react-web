@@ -19,7 +19,7 @@ function AdminHome() {
       <div className="row">
         <div className="col-4">
           {' '}
-          <h3>Job Seeker Role List</h3>
+          <h3>Job Seeker List</h3>
           {users
             .filter((user) => user.role === 'user')
             .map((user) => (
@@ -28,7 +28,7 @@ function AdminHome() {
         </div>
         <div className="col-4">
           {' '}
-          <h3>Company Role List</h3>
+          <h3>Company List</h3>
           {users
             .filter((user) => user.role === 'company')
             .map((user) => (
@@ -37,7 +37,7 @@ function AdminHome() {
         </div>
         <div className="col-4">
           {' '}
-          <h3>Admin Role List</h3>
+          <h3>Admin List</h3>
           {users
             .filter((user) => user.role === 'admin')
             .map((user) => (
