@@ -9,11 +9,9 @@ import {
   addSavedJob,
   removeSavedJob,
 } from '../../Features/AppliedSavedJobs/saved-jobs-reducer';
-import { applyJob } from '../../Features/AppliedSavedJobs/applied-jobs-reducer';
-import {
-  addUserSavedJobs,
-  removeUserSavedJobs,
-} from '../../../services/user-service';
+import { addAppliedJob } from "../../Features/AppliedSavedJobs/applied-jobs-reducer";
+import { addUserAppliedJobs, addUserSavedJobs, removeUserSavedJobs } from "services/user-service.js";
+
 
 function JobDetails() {
   useFetchJobs();
@@ -24,9 +22,9 @@ function JobDetails() {
 
   const job = jobs.find((item) => item.job_id === jobId);
 
-  const { appliedjobs } = useSelector((state) => state.appliedJobs);
+  const { jobs: appliedJobs } = useSelector((state) => state.appliedJobs);
   const saved = savedJobs.find((e) => e.job_id === job.job_id);
-
+  const applied = appliedJobs.find((e) => e.job_id === job.job_id);
   const dispatch = useDispatch();
   const onJobSaveUnsave = async () => {
     // combine save/unsave button function
@@ -50,9 +48,19 @@ function JobDetails() {
     }
   };
 
-  const onJobApply = (item) => {
-    dispatch(applyJob(item));
-    console.log('appliedJob: ', item);
+  const onJobApply = async () => {
+
+    if (!applied) {
+      try {
+        await addUserAppliedJobs(uid, job);
+        dispatch(addAppliedJob(job));
+        console.log("applied job", job)
+      } catch (error) {
+        console.err(error);
+      }}
+    console.log("unapplied job", job)
+    console.log("appolied job?", applied)
+
   };
 
   return (
@@ -82,7 +90,7 @@ function JobDetails() {
             <div className="row">
               <button
                 type="button"
-                onClick={() => onJobApply(job)}
+                onClick={() => onJobApply()}
                 className="btn btn-primary col m-3"
               >
                 Apply for this job

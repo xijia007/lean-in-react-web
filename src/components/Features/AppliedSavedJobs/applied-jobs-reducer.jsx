@@ -1,25 +1,59 @@
 import { createSlice } from '@reduxjs/toolkit';
-import appliedJobs from './appliedJobs.jsx';
 
-const initialState = { appliedJobs };
+const initialState = { jobs: [] };
 
 const appliedJobsSlice = createSlice({
   name: 'appliedJobs',
   initialState,
   reducers: {
-    applyJob(state, action) {
-      // state.appliedJobs.push(action.payload);
-      state.appliedJobs.unshift(action.payload); // show the latest applied job at the top
-      // console.log("state.appliedJobs in appliedJobsSlice: ", state.appliedJobs)
-    },
+    addAppliedJob: (state, action) => {
+      const {
+        job_id,
+        title,
+        description,
+        add_city,
+        add_state,
+        apply,
+        image,
+        company_name,
+        post_time,
+      } = action.payload;
 
-    // no need to un-apply a job
-    // unapplyJob(state, action) {
-    //   state.appliedJobs = state.appliedJobs.filter(e => e._id !== action.payload);
-    // },
+      const newState = {
+        job_id,
+        title,
+        description,
+        add_city,
+        add_state,
+        image,
+        apply,
+        company_name,
+        post_time,
+      };
+
+      // console.log('existingJob:', existingJob);
+
+      const existingJob = state.jobs.find((job) => job.job_id === job_id);
+
+      if (existingJob) {
+        return {
+          ...state,
+          jobs: state.jobs.map((job) => {
+            if (job.job_id === job_id) {
+              return newState;
+            }
+            return job;
+          }),
+        };
+      }
+      return {
+        ...state,
+        jobs: [...state.jobs, newState],
+      };
+    },
   },
 });
 
 export default appliedJobsSlice.reducer;
 
-export const { applyJob } = appliedJobsSlice.actions;
+export const { addAppliedJob } = appliedJobsSlice.actions;
