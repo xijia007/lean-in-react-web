@@ -50,8 +50,25 @@ function EditCompanyProfileScreen() {
                 className="form-control"
                 placeholder="Ex: John"
                 value={companyInfo.name}
+                readOnly
                 onChange={(e) =>
                   setCompanyInfo({ ...companyInfo, name: e.target.value })
+                }
+              />
+            </div>
+          </form>
+          <br />
+
+          <form className="row">
+            <label className="col-sm-2 col-form-label">Company Address</label>
+            <div className="col-sm-10">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Ex: John"
+                value={companyInfo.location}
+                onChange={(e) =>
+                  setCompanyInfo({ ...companyInfo, location: e.target.value })
                 }
               />
             </div>
@@ -93,7 +110,7 @@ function EditCompanyProfileScreen() {
             </div>
           </form>
           <br />
-        </div>
+          </div>
       </div>
     </div>
   );
