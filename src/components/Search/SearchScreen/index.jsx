@@ -5,30 +5,31 @@ import useFetchJobs from 'customhooks/fetchJob';
 import SearchBar from './search-bar';
 import JobSummaryList from '../JobSummaryList/index';
 import { updateSearchTerm } from '../../../reducers/search-reducer';
+import { useNavigate } from 'react-router';
 
 function Search() {
   useFetchJobs();
   const { jobs } = useSelector((state) => state.jobs);
-  console.log('jobs:', jobs);
+  // console.log('jobs:', jobs);
   const initialSearchTerm = useSelector((state) => state.searchTerm.searchTerm);
-  console.log('initialSearchTerm:', initialSearchTerm);
-  // if (typeof initialSearchTerm === 'string' || initialSearchTerm instanceof String) {
-  //   console.log('initialSearchTerm is a string');
-  // }
-  // else {
-  //     console.log('initialSearchTerm is not a string');
-  // }
+  // console.log('initialSearchTerm:', initialSearchTerm);
 
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSearch = (keyword) => {
     setSearchTerm(keyword);
     dispatch(updateSearchTerm(keyword));
+    if (keyword) {
+      navigate(`/search?criteria=${keyword}`);
+    } else {
+      navigate(`/search`);
+    }
   };
 
-  console.log('searchTerm:', searchTerm);
+  // console.log('searchTerm:', searchTerm);
 
   const options = {
     keys: ['title', 'company_name'],
@@ -42,7 +43,7 @@ function Search() {
     ? fuse.search(searchTerm).map((result) => result.item)
     : jobs;
 
-  console.log('searchResults:', searchedList);
+  // console.log('searchResults:', searchedList);
   const searchResultsCount = searchedList.length;
 
   return (
