@@ -7,7 +7,7 @@ function AppliedJobsComponent() {
   const { jobs: appliedJobs } = useSelector((state) => state.appliedJobs);
   const navigate = useNavigate();
   const NavigateJobDetails = (id) => navigate(`/search-details/${id}`);
-  console.log("appliedJobs in AppliedJobsComponent: ", appliedJobs)
+  console.log('appliedJobs in AppliedJobsComponent: ', appliedJobs);
   return (
     <div className="list-group">
       <div className="list-group-item">
@@ -21,7 +21,7 @@ function AppliedJobsComponent() {
           >
             <div>
               <h6 className="fw-bold">{job.title}</h6>
-              <span>{job.company}</span>
+              <span>{job.company_name}</span>
             </div>
             <div
               className="clickable mt-2"

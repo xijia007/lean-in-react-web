@@ -9,10 +9,6 @@ function RecentJobList() {
         jobs.map((job) => {
           return <RecentJobItem key={job.job_id} {...job} />;
         })}
-
-      {/* {recruiterJobsArray.RecruiterJobs.map((job) => {
-        return <RecentJobItem job={job} />;
-      })} */}
     </div>
   );
 }

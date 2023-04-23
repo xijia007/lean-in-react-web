@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import useFetchJobs from 'customhooks/fetchJob';
 import { findCompany } from '../../services/company-service';
 import { findCompanyThunk } from '../../services/company-thunk';
-import RecentJobList from '../Home/recentJobLists/index';
+// import RecentJobList from '../Home/recentJobLists/index';
+import CompanyJobLists from './compnayJobLists.jsx';
 
 function CompanyProfile() {
+  useFetchJobs();
   const { companyId } = useParams();
   const { company } = useSelector((state) => state.company);
   const { user } = useSelector((state) => state.userInfo);
@@ -18,18 +21,15 @@ function CompanyProfile() {
   useEffect(() => {
     async function fetchCompany() {
       if (companyId) {
-        const company = await findCompany(companyId);
-        console.log("View other company's profile", company);
-        setCompanyInfo(company);
+        const companyData = await findCompany(companyId);
+        setCompanyInfo(companyData);
         return;
       }
-      console.log('user company id', userCompanyId);
       const response = await dispatch(findCompanyThunk(userCompanyId));
       setCompanyInfo(response.payload);
-      console.log('View my company profile', response.payload);
     }
     fetchCompany();
-  }, [companyId]);
+  }, [companyId, dispatch, userCompanyId]);
 
   return (
     <div className="container">
@@ -50,16 +50,20 @@ function CompanyProfile() {
 
             <h2 className="fw-bold">{companyInfo.name}</h2>
           </div>
+          <p className="mb-2">Location: {companyInfo.location}</p>
 
           <p className="mb-2">{companyInfo.description}</p>
+
           <p className="mb-2">
-            <Link to={companyInfo.url}>Company Website</Link>
+            <b>
+              Company Website: <a href={companyInfo.url}>{companyInfo.name}</a>
+            </b>
           </p>
         </div>
       </div>
 
       <br />
-      <RecentJobList />
+      <CompanyJobLists companyName={companyInfo.name} />
     </div>
   );
 }
