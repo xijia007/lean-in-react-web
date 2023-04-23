@@ -67,13 +67,15 @@ function App() {
             element={<AddEducationScreen />}
           />
           <Route path={`${ROUTES.PROFILE}/:userId`} element={<ProfilePage />} />
-          <Route exact path={ROUTES.ADMINHOME} element={<AdminHomePage />} />
+          <Route exact path={ROUTES.ADMINHOME} 
+                 //  element={<AdminHomePage />}
+                 element={<Home />}/>
           <Route exact path={ROUTES.JOBS} element={<SearchPage />} />
           <Route
             exact
             path={ROUTES.COMPANYHOME}
-            element={<CompanyHomePage />}
-          />
+            // element={<CompanyHomePage />}
+            element={<Home />}/>
           <Route exact path={ROUTES.USERHOME} element={<Home />} />
           <Route
             exact

@@ -11,6 +11,17 @@ function HomeNav() {
   const isAdmin = role === 'admin';
   const isUser = role === 'user';
   const isCompany = role === 'company';
+  const greetingRoute = () => {
+    if (isUser) {
+      return ROUTES.USERHOME;
+    } else if (isCompany) {
+      return ROUTES.COMPANYHOME;
+    } else if (isAdmin) {
+      return ROUTES.ADMINHOME;
+    } else {
+      return ROUTES.SIGN_IN;
+    }
+  };
 
   return (
     <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -18,7 +29,7 @@ function HomeNav() {
         <Navbar.Brand href="#"><img className="logo_size" src="./images/logo-transparent-png.png"/></Navbar.Brand>
         <Nav className="ml-auto">
           {isLogined ? (
-            <LinkContainer to={ROUTES.USERHOME}>
+            <LinkContainer to={greetingRoute()}>
               <Nav.Link>Hello, {firstName}</Nav.Link>
             </LinkContainer>
           ) : (
@@ -26,6 +37,16 @@ function HomeNav() {
               <Nav.Link>Sign In</Nav.Link>
             </LinkContainer>
           )}
+          {/* {isLogined ? (
+            <LinkContainer to={ROUTES.USERHOME}>
+              <Nav.Link>Hello, {firstName}</Nav.Link>
+            </LinkContainer>
+          ) : (
+            <LinkContainer to={ROUTES.SIGN_IN}>
+              <Nav.Link>Sign In</Nav.Link>
+            </LinkContainer>
+          )} */}
+
           {isUser && (
             <LinkContainer to={ROUTES.USERHOME}>
               <Nav.Link>Home</Nav.Link>
