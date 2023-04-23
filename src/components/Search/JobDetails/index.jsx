@@ -16,10 +16,9 @@ import { addUserAppliedJobs, addUserSavedJobs, removeUserSavedJobs } from "servi
 function JobDetails() {
   useFetchJobs();
   const { jobId } = useParams();
-  const { uid } = useSelector((state) => state.userInfo.user);
+  const { uid, isLogined } = useSelector((state) => state.userInfo.user);
   const { jobs } = useSelector((state) => state.jobs);
   const { jobs: savedJobs } = useSelector((state) => state.savedJobs);
-
   const job = jobs.find((item) => item.job_id === jobId);
 
   const { jobs: appliedJobs } = useSelector((state) => state.appliedJobs);
@@ -87,23 +86,25 @@ function JobDetails() {
                 <p className="m-3">{job.description}</p>
               </div>
             </div>
-            <div className="row">
-              <button
-                type="button"
-                onClick={() => onJobApply()}
-                className="btn btn-primary col m-3"
-              >
-                Apply for this job
-              </button>
-              <button
-                type="button"
-                // onClick= {() => onJobSave(job)}
-                onClick={() => onJobSaveUnsave()}
-                className="btn btn-outline-secondary col m-3"
-              >
-                {saved ? 'Unsave this job' : 'Save this job'}
-              </button>
-            </div>
+            {isLogined &&
+              <div className="row">
+                <button
+                  type="button"
+                  onClick={() => onJobApply()}
+                  className={`btn btn-primary col m-3 ${applied ? "disabled" : ""}`}
+                >
+                  {applied ? "Already applied" : "Apply for this job"}
+                </button>
+                <button
+                  type="button"
+                  // onClick= {() => onJobSave(job)}
+                  onClick={() => onJobSaveUnsave()}
+                  className="btn btn-outline-secondary col m-3"
+                >
+                  {saved ? 'Unsave this job' : 'Save this job'}
+                </button>
+              </div>
+            }
           </div>
         </div>
       </div>
