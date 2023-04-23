@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
@@ -11,13 +12,13 @@ import {
   checkRetypePassword,
   updateOrgnization,
 } from '../Features/SignUp/SignUpSlice';
-import { updateUserRole } from '../Features/admin/users-reducer';
+import { updateUserRole } from '../Features/Profile/user-reducer';
 import { createUser } from '../../services/user-service';
 import { useState } from 'react';
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectedButton, setSelectedButton] = useState('0');
+  const [selectedButton, setSelectedButton] = useState('user');
   const handleFirstNameChange = (event) => {
     dispatch(checkFirstName(event.target.value));
   };
@@ -126,17 +127,39 @@ function Signup() {
               onChange={handleRetypePwdChange}
             />
           </div>
-          <div className="signup-role-button btn-group mt-3" role="group" aria-label="User type">
-        <button type="button" className={`btn btn-secondary${selectedButton === '1' ? ' selected' : ''}`} id='1'   onClick={handleRoleButtonClick}>
-          Web Admin
-        </button>
-        <button type="button" className={`btn btn-secondary${selectedButton === '2' ? ' selected' : ''}`} id = '2'onClick={handleRoleButtonClick}>
-          Job Seeker
-        </button>
-        <button type="button" className={`btn btn-secondary${selectedButton === '3' ? ' selected' : ''}`} id = '3' onClick={handleRoleButtonClick}>
-          Company
-        </button>
-      </div>
+        
+
+        <Form>
+        <div className="mb-3">
+      <Form.Check
+        type="radio"
+        id="admin"
+        name="role"
+        label="Web Admin"
+        onClick={handleRoleButtonClick}
+        checked={selectedButton === 'admin'}
+      />
+
+      <Form.Check
+        type="radio"
+        id="user"
+        name="role"
+        label="Job Seeker"
+        onClick={handleRoleButtonClick}
+        checked={selectedButton === 'user'}
+      />
+
+      <Form.Check
+        type="radio"
+        id="company"
+        name="role"
+        label="Company"
+        onClick={handleRoleButtonClick}
+        checked={selectedButton === 'company'}
+      />
+    </div>
+    </Form>
+      
           <div className="d-grid gap-2 mt-3">
             <button
               type="submit"

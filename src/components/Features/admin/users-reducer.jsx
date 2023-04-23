@@ -5,7 +5,6 @@ const initialState = {
   users: [],
   loading: false,
   error: null,
-  role: '1'
 };
 
 const usersSlice = createSlice({
@@ -37,10 +36,7 @@ const usersSlice = createSlice({
     
   },
   reducers: {
-    updateUserRole(state,action){
-      const role = action.payload;
-      state.role = role;
-    },
+    
     deleteUser(state, action) {
       state.users = state.users.filter(u => u.uid !== action.payload);
     },
@@ -49,5 +45,7 @@ const usersSlice = createSlice({
 });
 
 export default usersSlice.reducer;
-export const {updateUserRole, deleteUser } =
+
+export const { deleteUser } =
 usersSlice.actions;
+
