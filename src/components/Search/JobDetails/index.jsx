@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import useFetchJobs from 'customhooks/fetchJob';
 import JobKeyFacts from '../JobSummaryList/job-key-facts';
 import CompanyImage from '../JobSummaryList/company-image';
 // import {saveJob} from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
@@ -15,17 +16,13 @@ import {
 } from '../../../services/user-service';
 
 function JobDetails() {
+  useFetchJobs();
   const { jobId } = useParams();
   const { uid } = useSelector((state) => state.userInfo.user);
-  // console.log("selected id for JobDetails: ", jobId)
-
-  //   const jobsArray = useSelector((state) => state.jobs);
   const { jobs } = useSelector((state) => state.jobs);
   const { jobs: savedJobs } = useSelector((state) => state.savedJobs);
-  // console.log("all jobs for JobDetails: ", jobsArray)
 
   const job = jobs.find((item) => item.job_id === jobId);
-  // console.log('selected job for JobDetails: ', job);
 
   const { appliedjobs } = useSelector((state) => state.appliedJobs);
   const saved = savedJobs.find((e) => e.job_id === job.job_id);

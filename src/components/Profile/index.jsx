@@ -2,31 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import useFetchJobs from 'customhooks/fetchJob';
 import ExperienceComponent from './experience/index.jsx';
 import EducationComponent from './education/index.jsx';
 // import { findUser } from '../../services/user-service.js';
 // import { findUserThunk } from '../../services/user-thunk.js';
 import JobsSideBar from '../JobsSideBar/index.jsx';
-import { findCompany } from "../../services/company-service.js";
-import { findCompanyThunk } from "../../services/company-thunk.js";
-import { findUser } from "../../services/user-service.js";
-import { findUserThunk } from "../../services/user-thunk.js";
+import { findCompany } from '../../services/company-service.js';
+import { findCompanyThunk } from '../../services/company-thunk.js';
+import { findUser } from '../../services/user-service.js';
+import { findUserThunk } from '../../services/user-thunk.js';
 
 function ProfileScreen() {
+  useFetchJobs();
   const { userId } = useParams();
   const { user } = useSelector((state) => state.userInfo);
-  const {uid} = user;
+  const { uid } = user;
   const [userInfo, setUserInfo] = useState(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isMyProfile = userId === undefined;
-  console.log("profile: ", userInfo)
-  useEffect( () => {
+  console.log('profile: ', userInfo);
+  useEffect(() => {
     async function fetchUserProfile() {
       if (userId) {
         const user = await findUser(userId);
         setUserInfo(user);
-        return;
       }
       // const response = await dispatch(findUserThunk(uid));
       // setUserInfo(response.payload);
@@ -85,11 +86,11 @@ function ProfileScreen() {
           <br />
           <EducationComponent isMyProfile={isMyProfile} />
         </div>
-        {isMyProfile &&
+        {isMyProfile && (
           <div className="col-3">
             <JobsSideBar />
           </div>
-        }
+        )}
       </div>
     </div>
   );

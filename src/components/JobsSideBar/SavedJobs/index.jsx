@@ -1,14 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { ArrowRight, ChevronRight } from 'react-bootstrap-icons';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ChevronRight } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router';
+// import { getUserSavedJobs } from '../../../services/user-service';
+// import { addSavedJob } from '../../Features/AppliedSavedJobs/saved-jobs-reducer';
 
 function SavedJobsComponent() {
-  // const { savedJobs } = useSelector((state) => state.savedJobs);
+  // const { uid } = useSelector((state) => state.userInfo.user);
   const { jobs: savedJobs } = useSelector((state) => state.savedJobs);
   const navigate = useNavigate();
+  // const dispatch = useDispatch();
   const NavigateJobDetails = (id) => navigate(`/search-details/${id}`);
-  // console.log("savedJobs: ", savedJobs)
+
   return (
     <div className="list-group">
       <div className="list-group-item">
