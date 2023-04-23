@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getAllCompanies } from 'services/company-service';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Form from 'react-bootstrap/Form';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import {
   checkEmailAddress,
@@ -22,7 +23,6 @@ function Signup() {
   const [selectedButton, setSelectedButton] = useState('user');
   const [companyList, setCompanyList] = useState([]);
   const [selectedOption, setSelectedOption] = useState('Plesae select');
-
   const handleFirstNameChange = (event) => {
     dispatch(checkFirstName(event.target.value));
   };
@@ -90,7 +90,6 @@ function Signup() {
       userCompanyId,
     };
 
-    console.log(user);
     await createUser(user)
       .then((res) => {
         console.log(res);
@@ -157,42 +156,34 @@ function Signup() {
               onChange={handleRetypePwdChange}
             />
           </div>
-          <div
-            className="signup-role-button btn-group mt-3"
-            role="group"
-            aria-label="User type"
-          >
-            <button
-              type="button"
-              className={`btn btn-secondary${
-                selectedButton === 'user' ? ' selected' : ''
-              }`}
+
+          <div className="form-group mt-3">
+            <Form.Check
+              type="radio"
               id="user"
-              onClick={handleRoleButtonClick}
-            >
-              Job Seeker
-            </button>
-            <button
-              type="button"
-              className={`btn btn-secondary${
-                selectedButton === 'company' ? ' selected' : ''
-              }`}
-              id="company"
-              onClick={handleRoleButtonClick}
-            >
-              Company
-            </button>
-            <button
-              type="button"
-              className={`btn btn-secondary${
-                selectedButton === 'admin' ? ' selected' : ''
-              }`}
+              name="role"
+              label="Job Seeker"
+              onChange={handleRoleButtonClick}
+              checked={selectedButton === 'user'}
+            />
+            <Form.Check
+              type="radio"
               id="admin"
-              onClick={handleRoleButtonClick}
-            >
-              Web Admin
-            </button>
+              name="role"
+              label="Web Admin"
+              onChange={handleRoleButtonClick}
+              checked={selectedButton === 'admin'}
+            />
+            <Form.Check
+              type="radio"
+              id="company"
+              name="role"
+              label="Company"
+              onChange={handleRoleButtonClick}
+              checked={selectedButton === 'company'}
+            />
           </div>
+
           {isCompanyUser && (
             <DropdownButton
               id="dropdown-basic-button"
@@ -207,6 +198,7 @@ function Signup() {
               ))}
             </DropdownButton>
           )}
+
           <div className="d-grid gap-2 mt-3">
             <button
               type="submit"
