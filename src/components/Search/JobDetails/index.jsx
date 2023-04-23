@@ -67,7 +67,7 @@ function JobDetails() {
     <div className="list-group">
       <div className="list-group-item">
         <div className="row">
-          <h4>Job Details for selected id: {jobId}</h4>
+          {/* <h4>Job Details for selected id: {jobId}</h4> */}
           <div className="col-2 text-center">
             <CompanyImage {...job} />
             {/* <img  src={`https://logo.clearbit.com/${job.company}.com`}
