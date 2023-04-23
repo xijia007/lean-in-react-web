@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // eslint-disable-next-line import/extensions
-import { findAllUsersThunk } from '../../services/user-thunk.js';
 // eslint-disable-next-line import/extensions
 import UserItemByRole from './userListByRole.jsx';
+import { findAllUsersThunk } from "services/user-thunk.js";
 
 function AdminHome() {
   const { users } = useSelector((state) => state.users);

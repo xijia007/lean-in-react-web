@@ -1,6 +1,5 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import { deleteUserThunk } from "../../services/user-thunk.js";
 import { useNavigate } from "react-router-dom";
 
 const UserItem = ({ user = {firstName: "", lastName: "", role: ""} }) => {
