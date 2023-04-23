@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertISODate } from '../../../utils/timeUtil';
 
-function RecentJobItem(job) {
+function RecentJobItem({ job }) {
   const { title, image, company_name, post_time, add_city, add_state } = job;
   const location = `${add_city}, ${add_state}`;
   const imageSrc = image || `https://logo.clearbit.com/${company_name}.com`;
