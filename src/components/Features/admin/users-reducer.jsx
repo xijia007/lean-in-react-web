@@ -5,7 +5,6 @@ const initialState = {
   users: [],
   loading: false,
   error: null,
-  role: '1'
 };
 
 const usersSlice = createSlice({
@@ -31,16 +30,7 @@ const usersSlice = createSlice({
       state.error = action.error.message;
     },
     
-  },
-  reducers: {
-    updateUserRole(state,action){
-      const role = action.payload;
-      state.role = role;
-    }
-      
   }
 });
 
 export default usersSlice.reducer;
-export const {updateUserRole } =
-usersSlice.actions;
