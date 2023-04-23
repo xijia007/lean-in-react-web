@@ -34,15 +34,7 @@ function SignIn() {
       dispatch(updateUser(userData));
       localStorage.setItem('userData', JSON.stringify(userData));
       const { role } = userData;
-      if (role === 'admin') {
-        navigate(ROUTES.ADMINHOME);
-      } else if (role === 'company') {
-        navigate(ROUTES.COMPANYHOME);
-      } else if (role === 'user') {
-        navigate(ROUTES.USERHOME);
-      }
-
-      // navigate('/');
+      navigate(ROUTES.HOME);
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;

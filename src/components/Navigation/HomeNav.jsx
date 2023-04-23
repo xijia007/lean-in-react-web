@@ -11,18 +11,6 @@ function HomeNav() {
   const isAdmin = role === 'admin';
   const isUser = role === 'user';
   const isCompany = role === 'company';
-  const greetingRoute = () => {
-    if (isUser) {
-      return ROUTES.USERHOME;
-    }
-    if (isCompany) {
-      return ROUTES.COMPANYHOME;
-    }
-    if (isAdmin) {
-      return ROUTES.ADMINHOME;
-    }
-    return ROUTES.SIGN_IN;
-  };
 
   return (
     <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -36,7 +24,7 @@ function HomeNav() {
         </Navbar.Brand>
         <Nav className="ml-auto">
           {isLogined ? (
-            <LinkContainer to={greetingRoute()}>
+            <LinkContainer to={ROUTES.HOME}>
               <Nav.Link>Hello, {firstName}</Nav.Link>
             </LinkContainer>
           ) : (
@@ -44,39 +32,32 @@ function HomeNav() {
               <Nav.Link>Sign In</Nav.Link>
             </LinkContainer>
           )}
-          {/* {isLogined ? (
-            <LinkContainer to={ROUTES.USERHOME}>
-              <Nav.Link>Hello, {firstName}</Nav.Link>
-            </LinkContainer>
-          ) : (
-            <LinkContainer to={ROUTES.SIGN_IN}>
-              <Nav.Link>Sign In</Nav.Link>
-            </LinkContainer>
-          )} */}
 
-          {isUser && (
-            <LinkContainer to={ROUTES.USERHOME}>
+          {/* {isLogined && ( */}
+            <LinkContainer to={ROUTES.HOME}>
+              <Nav.Link>Home</Nav.Link>
+            </LinkContainer>
+          {/* )} */}
+
+          
+          {/* {isUser && (
+            <LinkContainer to={ROUTES.HOME}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
           )}
 
           {isAdmin && (
-            <LinkContainer to={ROUTES.ADMINHOME}>
+            <LinkContainer to={ROUTES.HOME}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
           )}
 
           {isCompany && (
-            <LinkContainer to={ROUTES.COMPANYHOME}>
+            <LinkContainer to={ROUTES.HOME}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-          )}
-          {/* 
-          {isCompany && (
-            <LinkContainer to={ROUTES.JOBS}>
-              <Nav.Link>Jobs</Nav.Link>
-            </LinkContainer>
           )} */}
+
 
           {isCompany && (
             <LinkContainer to={ROUTES.COMPANY_PROFILE}>
