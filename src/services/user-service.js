@@ -92,7 +92,7 @@ export const deleteUserExperience = (uid, eid) => {
 };
 
 export const getUserAppliedJobs = async (uid) => {
-  const response = await axios.get(`${USER_API}/appliedJobs/${uid}`);
+  const response = await axios.get(`${USER_API}/getAppliedJobs/${uid}`);
   return response.data;
 };
 export const addUserAppliedJobs = async (uid, jobData) => {

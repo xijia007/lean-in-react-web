@@ -4,10 +4,10 @@ import { ChevronRight } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router';
 
 function AppliedJobsComponent() {
-  const { appliedJobs } = useSelector((state) => state.appliedJobs);
+  const { jobs: appliedJobs } = useSelector((state) => state.appliedJobs);
   const navigate = useNavigate();
   const NavigateJobDetails = (id) => navigate(`/search-details/${id}`);
-  // console.log("appliedJobs in AppliedJobsComponent: ", appliedJobs)
+  console.log("appliedJobs in AppliedJobsComponent: ", appliedJobs)
   return (
     <div className="list-group">
       <div className="list-group-item">
