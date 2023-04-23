@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import COMPANY_ID from 'constants/company';
 
 const updateSubmitStatus = (state) => {
   state.submitStatus =
@@ -22,6 +23,8 @@ export const signUpSlice = createSlice({
     retypePasswordStatus: false,
     submitStatus: false,
     orgnization: '',
+    role: '',
+    userCompanyId: '',
   },
   reducers: {
     checkFirstName: (state, action) => {
@@ -70,6 +73,14 @@ export const signUpSlice = createSlice({
       const org = action.payload;
       state.orgnization = org;
     },
+    updateUserRole(state, action) {
+      const role = action.payload;
+      state.role = role;
+    },
+    updateCompanyId(state, action) {
+      const userCompanyId = COMPANY_ID[action.payload.toUpperCase()];
+      state.userCompanyId = userCompanyId;
+    },
   },
 });
 
@@ -80,6 +91,8 @@ export const {
   checkPassword,
   checkRetypePassword,
   updateOrgnization,
+  updateUserRole,
+  updateCompanyId,
 } = signUpSlice.actions;
 
 export default signUpSlice.reducer;

@@ -1,5 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { deleteAuthUserThunk, findAllUsersThunk, updateUserThunk } from "services/user-thunk.js";
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  deleteAuthUserThunk,
+  findAllUsersThunk,
+  updateUserThunk,
+} from 'services/user-thunk.js';
 
 const initialState = {
   users: [],
@@ -8,18 +12,23 @@ const initialState = {
 };
 
 const usersSlice = createSlice({
-  name: "users",
+  name: 'users',
   initialState,
   extraReducers: {
     [updateUserThunk.fulfilled]: (state, action) => {
-      state.users = state.users.map((user) => user.uid === action.payload.uid ? action.payload : user)
+      state.users = state.users.map((user) =>
+        user.uid === action.payload.uid ? action.payload : user
+      );
     },
     [deleteAuthUserThunk.fulfilled]: (state, action) => {
       state.users = state.users.filter((user) => {
         user.uid !== action.payload.uid;
-        console.log("found delete user uid", user.uid !== action.payload.uid ? user : null)
-      })
-      console.log("delete user uid", action.payload.uid)
+        console.log(
+          'found delete user uid',
+          user.uid !== action.payload.uid ? user : null
+        );
+      });
+      console.log('delete user uid', action.payload.uid);
     },
     [findAllUsersThunk.pending]: (state, action) => {
       state.loading = true;
@@ -33,19 +42,14 @@ const usersSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     },
-    
   },
   reducers: {
-    
     deleteUser(state, action) {
-      state.users = state.users.filter(u => u.uid !== action.payload);
+      state.users = state.users.filter((u) => u.uid !== action.payload);
     },
-      
-  }
+  },
 });
 
 export default usersSlice.reducer;
 
-export const { deleteUser } =
-usersSlice.actions;
-
+export const { deleteUser } = usersSlice.actions;
