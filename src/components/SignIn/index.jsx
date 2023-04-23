@@ -48,20 +48,7 @@ function SignIn() {
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
     }
-    // await signInWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     const { uid } = userCredential.user;
-    //     const userData = await findUser(uid);
-    //     // navigate('/');
-    //     // console.log(user);
-
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(errorCode, errorMessage);
-    //   });
+   
   };
 
   const emailOnChange = (event) => {
@@ -76,43 +63,45 @@ function SignIn() {
 
   return (
     <div className="Auth-form-container">
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In!</h3>
-          <div className="form-group mt-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control mt-1"
-              placeholder="Enter email"
-              onChange={emailOnChange}
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control mt-1"
-              placeholder="Enter password"
-              onChange={passwordOnChange}
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={onLogin}
-              disabled={!submitStatus}
-            >
-              Submit
-            </button>
-          </div>
-          <p className="forgot-password text-right mt-2">
-            <a href="/signup">Sign up?</a>
-          </p>
-        </div>
-      </form>
+  <form className="Auth-form">
+    <div className="Auth-form-content">
+      <h3 className="Auth-form-title">Sign In!</h3>
+      <div className="form-group mt-3">
+        <label>Email address</label>
+        <input
+          type="email"
+          className="form-control mt-1"
+          placeholder="Enter email"
+          onChange={emailOnChange}
+        />
+      </div>
+      <div className="form-group mt-3">
+        <label>Password</label>
+        <input
+          type="password"
+          className="form-control mt-1"
+          placeholder="Enter password"
+          onChange={passwordOnChange}
+        />
+      </div>
+
+
+      <div className="d-grid gap-2 mt-3">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={onLogin}
+          disabled={!submitStatus}
+        >
+          Submit
+        </button>
+      </div>
+      <p className="forgot-password text-right mt-2">
+        <a href="/signup">Sign up?</a>
+      </p>
     </div>
+  </form>
+</div>
   );
 }
 

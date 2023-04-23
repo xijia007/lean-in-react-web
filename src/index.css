@@ -124,3 +124,19 @@ label {
   margin-left: 0.5em;
   margin-bottom: 0.5em;
 }
+.signup-role-button .btn {
+  margin-right: 8px;
+  background-color: #8d9f8e;
+  border-color: #8e9f8f;
+  color: white;
+}
+
+.signup-role-button .btn:hover {
+  background-color: #45a049;
+  border-color: #45a049;
+}
+
+.signup-role-button .btn.selected {
+  background-color: #45a049;
+  border-color: #45a049;
+}
