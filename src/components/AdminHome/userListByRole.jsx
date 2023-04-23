@@ -4,6 +4,8 @@ import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteAuthUserThunk } from "services/user-thunk.js";
+import { deleteAuthUser } from "services/user-service.js";
+import { deleteUser } from "components/Features/admin/users-reducer.jsx";
 
 function UserItemByRole({ user = { firstName: '', lastName: '', role: '', userCompanyId: 0, uid: ''} }) {
   const navigate = useNavigate();
@@ -32,7 +34,8 @@ function UserItemByRole({ user = { firstName: '', lastName: '', role: '', userCo
           <button
             className="btn btn-primary rounded-pill mt-2 float-end"
             onClick={() => {
-              dispatch(deleteAuthUserThunk(user.uid));
+              deleteAuthUser(user.uid);
+              dispatch(deleteUser(user.uid));
               console.log("delete uid", user.uid)
             }}
           >

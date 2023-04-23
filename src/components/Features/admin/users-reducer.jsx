@@ -16,7 +16,11 @@ const usersSlice = createSlice({
       state.users = state.users.map((user) => user.uid === action.payload.uid ? action.payload : user)
     },
     [deleteAuthUserThunk.fulfilled]: (state, action) => {
-      state.users = state.users.filter((user) => user.uid !== action.payload.uid)
+      state.users = state.users.filter((user) => {
+        user.uid !== action.payload.uid;
+        console.log("found delete user uid", user.uid !== action.payload.uid ? user : null)
+      })
+      console.log("delete user uid", action.payload.uid)
     },
     [findAllUsersThunk.pending]: (state, action) => {
       state.loading = true;
@@ -36,11 +40,14 @@ const usersSlice = createSlice({
     updateUserRole(state,action){
       const role = action.payload;
       state.role = role;
-    }
+    },
+    deleteUser(state, action) {
+      state.users = state.users.filter(u => u.uid !== action.payload);
+    },
       
   }
 });
 
 export default usersSlice.reducer;
-export const {updateUserRole } =
+export const {updateUserRole, deleteUser } =
 usersSlice.actions;
