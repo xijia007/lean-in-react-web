@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Fuse from 'fuse.js';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import useFetchJobs from 'customhooks/fetchJob';
 import SearchBar from './search-bar';
 import JobSummaryList from '../JobSummaryList/index';
-import {useDispatch} from 'react-redux';
-import {updateSearchTerm} from '../../../reducers/search-reducer';
+import { updateSearchTerm } from '../../../reducers/search-reducer';
 
 function Search() {
   useFetchJobs();
@@ -21,7 +20,7 @@ function Search() {
   // }
 
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
-  
+
   const dispatch = useDispatch();
 
   const handleSearch = (keyword) => {
@@ -29,7 +28,7 @@ function Search() {
     dispatch(updateSearchTerm(keyword));
   };
 
-  console.log('searchTerm:', searchTerm)
+  console.log('searchTerm:', searchTerm);
 
   const options = {
     keys: ['title', 'company_name'],
