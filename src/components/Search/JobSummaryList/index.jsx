@@ -1,16 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import JobSummaryItem from './job-summary-item';
-// import jobs from '../reducer/jobs';
 
 function JobSummaryList({ jobs }) {
   return (
     <div className="list-group">
-      {Array.isArray(jobs) &&
-        jobs.map(
-          (job) => <JobSummaryItem key={job.id} {...job} />
-          // JobSummaryItem(job)
-        )}
+      {Array.isArray(jobs) && jobs.length > 0 ? (
+        jobs.map((job) => <JobSummaryItem key={job.id} {...job} />)
+      ) : (
+        <div>No jobs to display</div>
+      )}
     </div>
   );
 }
