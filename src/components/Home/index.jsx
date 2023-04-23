@@ -42,8 +42,9 @@ function Home() {
     <div className="container-fluid">
       {isUser && isLogined && (
         <nav>
-          <h2>
-            Welcome to LeanIn, <span className="text-primary">{email}</span>
+          <h2 className='wd-greeting'>
+            Welcome to LeanIn, <span className="text-primary">{email}</span> 
+            <br/>You're logged in as a Job Seeker.
           </h2>
           <UserHome />
           <div>
@@ -55,8 +56,9 @@ function Home() {
       )}
       {isCompany && isLogined && (
         <nav>
-          <h2>
+          <h2 className='wd-greeting'>
             Welcome to LeanIn, <span className="text-primary">{email}</span>
+            <br/>You're logged in as a Company.
           </h2>
 
           <CompanyHome />
@@ -69,8 +71,9 @@ function Home() {
       )}
       {isAdmin && isLogined && (
         <nav>
-          <h2>
+          <h2 className='wd-greeting'>
             Welcome to LeanIn, <span className="text-primary">{email}</span>
+            <br/>You're logged in as an Admin.
           </h2>
           <AdminHome />
           <div>

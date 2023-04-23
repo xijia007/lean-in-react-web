@@ -15,7 +15,7 @@ function CompanyHome() {
      );
   return (
     <div className="container">
-      <h2>Hi, LeanIn Company</h2>
+      {/* <h2>Hi, LeanIn Company</h2> */}
       <h1>Company Home Page</h1>
         <div className="row">
             <div className="col-9">
