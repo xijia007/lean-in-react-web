@@ -26,7 +26,7 @@ function HomeNav() {
   return (
     <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary">
       <Container fluid>
-        <Navbar.Brand href="#"><img className="logo_size" src="./images/logo-transparent-png.png"/></Navbar.Brand>
+        <Navbar.Brand><img className="logo_size" src="./images/logo-transparent-png.png"/></Navbar.Brand>
         <Nav className="ml-auto">
           {isLogined ? (
             <LinkContainer to={greetingRoute()}>
