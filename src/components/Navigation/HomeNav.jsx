@@ -33,11 +33,11 @@ function HomeNav() {
             </LinkContainer>
           )}
 
-           {!isCompany && (
+           {
             <LinkContainer to={ROUTES.HOME}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-           )}
+           }
 
           
           {/* {isUser && (
