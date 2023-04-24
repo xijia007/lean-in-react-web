@@ -51,9 +51,12 @@ const appliedJobsSlice = createSlice({
         jobs: [...state.jobs, newState],
       };
     },
+    clearAppliedJobs: (state, action) => {
+      state.jobs = [];
+    },
   },
 });
 
 export default appliedJobsSlice.reducer;
 
-export const { addAppliedJob } = appliedJobsSlice.actions;
+export const { addAppliedJob, clearAppliedJobs } = appliedJobsSlice.actions;

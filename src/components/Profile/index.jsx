@@ -29,12 +29,6 @@ function ProfileScreen() {
         const user = await findUser(userId);
         setUserInfo(user);
       }
-      // const response = await dispatch(findUserThunk(uid));
-      // setUserInfo(response.payload);
-      // console.log("View my profile", response.payload)
-
-      // setUserInfo(response.payload);
-      // console.log("View my profile", response.payload)
     }
     fetchUserProfile();
   }, [uid]);
@@ -64,7 +58,7 @@ function ProfileScreen() {
               <p className="mb-2">
                 {userInfo.skills
                   ? `Skills: ${userInfo.skills}`
-                  : 'Add your skills...'}
+                  : (isMyProfile ? 'Add your skills...' : "")}
               </p>
 
               {userInfo.jobsApplied && userInfo.jobsSaved && (
