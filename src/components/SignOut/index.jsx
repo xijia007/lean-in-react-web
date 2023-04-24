@@ -29,6 +29,7 @@ function SignOut() {
   return (
     <div>
       <h1>You just successfully log out.</h1>
+      <img src="/images/haha.png" alt="sign out" className="sign_out" />
     </div>
   );
 }
