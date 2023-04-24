@@ -27,7 +27,7 @@ function JobSummaryItem({ job }) {
         <div className="col-2 d-flex align-items-center">
           <button
             type="button"
-            className="btn btn-outline-secondary"
+            className="btn btn-sm btn-outline-secondary"
             onClick={() => {
               NavigateJobDetails();
             }}

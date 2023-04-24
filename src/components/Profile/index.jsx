@@ -42,7 +42,7 @@ function ProfileScreen() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-9">
+        <div className="col-12 col-md-9 mb-4">
           <div className="list-group">
             <div className="list-group-item p-3">
               <div>
@@ -86,11 +86,12 @@ function ProfileScreen() {
           <br />
           <EducationComponent isMyProfile={isMyProfile} />
         </div>
+        <div className="col-12 col-md-3">
         {isMyProfile && (
-          <div className="col-3">
             <JobsSideBar />
-          </div>
         )}
+        </div>
+
       </div>
     </div>
   );

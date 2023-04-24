@@ -17,7 +17,7 @@ function AdminHome() {
     <div className="container">
       {/* <h2>Hi, LeanIn Admin</h2> */}
       <div className="row">
-        <div className="col-4">
+        <div className="col col-md-4 mb-4">
           {' '}
           <h3>Job Seeker List</h3>
           {users
@@ -26,7 +26,7 @@ function AdminHome() {
               <UserItemByRole key={user.id} user={user} />
             ))}
         </div>
-        <div className="col-4">
+        <div className="col col-md-4 mb-4">
           {' '}
           <h3>Company List</h3>
           {users
@@ -35,7 +35,7 @@ function AdminHome() {
               <UserItemByRole key={user.id} user={user} />
             ))}
         </div>
-        <div className="col-4">
+        <div className="col col-md-4 mb-4">
           {' '}
           <h3>Admin List</h3>
           {users
