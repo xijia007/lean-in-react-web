@@ -2,22 +2,24 @@ import React, { useState } from 'react';
 import Fuse from 'fuse.js';
 import { useSelector, useDispatch } from 'react-redux';
 import useFetchJobs from 'customhooks/fetchJob';
+import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import SearchBar from './search-bar';
 import JobSummaryList from '../JobSummaryList/index';
 import { updateSearchTerm } from '../../../reducers/search-reducer';
-import { useNavigate } from 'react-router';
 
 function Search() {
   useFetchJobs();
   const { jobs } = useSelector((state) => state.jobs);
-  // console.log('jobs:', jobs);
-  const initialSearchTerm = useSelector((state) => state.searchTerm.searchTerm);
-  // console.log('initialSearchTerm:', initialSearchTerm);
-
-  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
-
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const criteria = searchParams.get('criteria');
+
+  const initialSearchTerm = useSelector((state) => state.searchTerm.searchTerm);
+
+  const [searchTerm, setSearchTerm] = useState(criteria ?? initialSearchTerm);
 
   const handleSearch = (keyword) => {
     setSearchTerm(keyword);
@@ -28,8 +30,6 @@ function Search() {
       navigate(`/search`);
     }
   };
-
-  // console.log('searchTerm:', searchTerm);
 
   const options = {
     keys: ['title', 'company_name'],
@@ -43,13 +43,12 @@ function Search() {
     ? fuse.search(searchTerm).map((result) => result.item)
     : jobs;
 
-  // console.log('searchResults:', searchedList);
   const searchResultsCount = searchedList.length;
 
   return (
     <div className="container">
       <h1>Search</h1>
-      <SearchBar setKeyword={handleSearch} />
+      <SearchBar setKeyword={handleSearch} currentKeyword={criteria} />
 
       {/* <h4>Results: {searchResultsCount}</h4> */}
 

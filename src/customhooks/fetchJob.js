@@ -1,15 +1,18 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserAppliedJobs, getUserAppliedJobs, getUserSavedJobs } from "../services/user-service"; // import your API functions here
+import { addAppliedJob } from 'components/Features/AppliedSavedJobs/applied-jobs-reducer';
+import {
+  addUserAppliedJobs,
+  getUserAppliedJobs,
+  getUserSavedJobs,
+} from '../services/user-service'; // import your API functions here
 import { getAllJobsSearch } from '../services/job-service';
 
 import { addJob } from '../reducers/jobs-reducer';
 import { addDBJob } from '../reducers/DBjobs-reducer';
 import { addSavedJob } from '../components/Features/AppliedSavedJobs/saved-jobs-reducer';
-import { addAppliedJob } from "components/Features/AppliedSavedJobs/applied-jobs-reducer.jsx";
 
 function useFetchJobs() {
-  console.log('fetching jobs');
   const dispatch = useDispatch();
   const { uid } = useSelector((state) => state.userInfo.user);
   const { jobs: savedJobs } = useSelector((state) => state.savedJobs);
@@ -56,9 +59,7 @@ function useFetchJobs() {
     } else if (appliedJobs.length === 0) {
       fetchAppliedJobs();
     }
-  }, [allJobs.length, dispatch, savedJobs.length, uid, appliedJobs.length, uid]);
-  console.log("fetched applied job", appliedJobs)
-
+  }, [allJobs.length, dispatch, savedJobs.length, uid, appliedJobs.length]);
 }
 
 export default useFetchJobs;
