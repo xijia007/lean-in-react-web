@@ -56,8 +56,38 @@ const jobsSlice = createSlice({
         jobs: [...state.jobs, newState],
       };
     },
+    updateJob: (state, action) => {
+      const { apply_uid, save_uid, job_id } = action.payload;
+
+      const newState = {
+        apply_uid,
+        save_uid,
+        job_id,
+      };
+
+      const existingJob = state.jobs.find((job) => job.job_id === job_id);
+
+      if (existingJob) {
+        // If the education object already exists, replace it with the new data
+        return {
+          ...state,
+          jobs: state.jobs.map((job) => {
+            if (job.job_id === job_id) {
+              return { ...job, ...newState };
+            }
+            return job;
+          }),
+        };
+      }
+
+      // // If the education object does not exist, add it to the array
+      // return {
+      //   ...state,
+      //   jobs: [...state.jobs, newState],
+      // };
+    },
   },
 });
 
 export default jobsSlice.reducer;
-export const { addJob } = jobsSlice.actions;
+export const { addJob, updateJob } = jobsSlice.actions;

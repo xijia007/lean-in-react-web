@@ -9,11 +9,8 @@ function EditCompanyProfileScreen() {
   const [companyInfo, setCompanyInfo] = useState(company);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  console.log(companyInfo);
   const handleSaveButton = async () => {
     await dispatch(updateCompanyThunk(companyInfo));
-    console.log('save companyinfo', companyInfo);
     navigate(-1);
   };
   return (
@@ -110,7 +107,7 @@ function EditCompanyProfileScreen() {
             </div>
           </form>
           <br />
-          </div>
+        </div>
       </div>
     </div>
   );

@@ -23,7 +23,6 @@ export const signUpSlice = createSlice({
     retypePasswordStatus: false,
     submitStatus: false,
     orgnization: '',
-    role: '',
     userCompanyId: '',
   },
   reducers: {
