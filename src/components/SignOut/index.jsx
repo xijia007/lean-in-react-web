@@ -35,9 +35,15 @@ function SignOut() {
   }, []);
 
   return (
-    <div>
-      <h1>You just successfully log out.</h1>
-      <img src="/images/haha.png" alt="sign out" className="sign_out" />
+    <div className='m-0 p-0 d-flex wd-logout-position bg-primary' >
+      <div class="position-relative">
+        <img src="/images/logout-bg.jpeg" alt="sign out" className="bg-image"/>
+        <div class="container pt-4 position-absolute top-0 start-0 text-white">
+          <h2>Thank you for using LeanIn!</h2>
+          <h2>We hope to see you again soon.</h2>
+          <p></p>
+        </div>
+      </div>
     </div>
   );
 }

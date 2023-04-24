@@ -144,3 +144,17 @@ label {
   background-color: #45a049;
   border-color: #45a049;
 }
+
+.wd-logout-position {
+  position: relative;
+  top: -24px;
+  /* top: 0;
+  right: 0;
+  margin: 1em; */
+}
+
+.bg-image {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+}
