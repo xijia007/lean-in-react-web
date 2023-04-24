@@ -32,9 +32,9 @@ function Search() {
   };
 
   const options = {
-    keys: ['title', 'company_name'],
+    keys: ['title', 'company_name', 'add_state'],
     includeScore: true,
-    threshold: 0.3,
+    threshold: 0.1,
   };
 
   const fuse = new Fuse(jobs, options);

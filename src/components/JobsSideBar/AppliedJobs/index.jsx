@@ -15,7 +15,7 @@ function AppliedJobsComponent() {
       {Array.isArray(appliedJobs) &&
         appliedJobs.map((job) => (
           <div
-            key={job._id}
+            key={job.job_id}
             className="list-group-item d-flex justify-content-between"
           >
             <div>
