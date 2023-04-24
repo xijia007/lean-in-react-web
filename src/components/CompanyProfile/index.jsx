@@ -3,7 +3,9 @@ import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import useFetchJobs from 'customhooks/fetchJob';
+import { updateJob } from 'reducers/jobs-reducer';
 import { findCompany } from '../../services/company-service';
+import { getAllJobs } from '../../services/job-service';
 import { findCompanyThunk } from '../../services/company-thunk';
 // import RecentJobList from '../Home/recentJobLists/index';
 import CompanyJobLists from './compnayJobLists.jsx';
@@ -28,8 +30,21 @@ function CompanyProfile() {
       const response = await dispatch(findCompanyThunk(userCompanyId));
       setCompanyInfo(response.payload);
     }
+
+    async function fetchDBjobs() {
+      const jobs = await getAllJobs();
+
+      const filteredJobs = jobs.filter(
+        (job) => job.company_name === companyInfo.name
+      );
+
+      filteredJobs.forEach((job) => {
+        dispatch(updateJob(job));
+      });
+    }
+    fetchDBjobs();
     fetchCompany();
-  }, [companyId, dispatch, userCompanyId]);
+  }, [companyId, companyInfo.name, dispatch, userCompanyId]);
 
   return (
     <div className="container">
