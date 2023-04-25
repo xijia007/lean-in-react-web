@@ -34,7 +34,7 @@ function Search() {
   const options = {
     keys: ['title', 'company_name', 'add_state'],
     includeScore: true,
-    threshold: 0.1,
+    threshold: 0.5,
   };
 
   const fuse = new Fuse(jobs, options);
@@ -49,11 +49,13 @@ function Search() {
     <div className="container">
       <h1>Search</h1>
       <SearchBar setKeyword={handleSearch} currentKeyword={criteria} />
-
-      <h4>Results: {searchResultsCount}</h4>
+       
+      {searchTerm && 
+        <h4>Results: {searchResultsCount}</h4>
+      }
 
       {searchResultsCount === 0 && (
-        <h2>Sorry, There is no results matching your search keyword.</h2>
+        <h2>Sorry, there are no results matching your search keyword.</h2>
       )}
 
       <div className="row" id="wd-search-results">
