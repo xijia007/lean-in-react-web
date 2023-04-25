@@ -4,6 +4,10 @@ import JobKeyFacts from '../JobSummaryList/job-key-facts';
 import CompanyImage from '../JobSummaryList/company-image';
 import { addSavedJob } from '../../Features/AppliedSavedJobs/saved-jobs-reducer.jsx';
 // import { applyJob } from '../../Features/AppliedSavedJobs/applied-jobs-reducer.jsx';
+// import * as ROUTES from 'constants/routes';
+// import COMPANY_ID from 'constants/company';
+// import Nav from 'react-bootstrap/Nav';
+// import { LinkContainer } from 'react-router-bootstrap';
 
 function JobDetailItem(job) {
   const { jobs: savedJobs } = useSelector((state) => state.savedJobs);
@@ -17,19 +21,21 @@ function JobDetailItem(job) {
     dispatch(applyJob(job));
     console.log('appliedJob: ', job);
   };
+
+  // const { job_id, image, company_name } = job;
+  // const companyProfileLink = `${ROUTES.COMPANY_PROFILE}/${
+  //   COMPANY_ID[company_name.toUpperCase()]
+  // }`;
+
   return (
     <div className="list-group-item">
       <div className="row">
-        <div className="col-2 text-center">
-          <CompanyImage {...job} />
-          {/* <img  src={`https://logo.clearbit.com/${job.company}.com`}
-                          onError={(e) => { e.target.src = '/images/default_logo.jpg'; }}// set default image URL
-                          alt="Company Logo" className="img-fluid"/> */}
-          {/* <img  src={`https://logo.clearbit.com/${job.company}.com`}
-                          onError={(e) => { e.target.src = '/images/default_logo.jpg'; }}// set default image URL
-                          alt="Company Logo" className="img-fluid"/> */}
-          {/* <img src={"https://via.placeholder.com/200"} alt="Company Logo" className="img-fluid w-200 h-200"/> */}
-          {/* <img src={`/images/${job.image}`} alt="Company Logo" className="img-fluid w-200 h-200"/> */}
+        {/* <div className="col-2 text-center">
+          <LinkContainer to={companyProfileLink}>
+              <Nav.Link> */}
+                <CompanyImage {...job} />
+              {/* </Nav.Link>
+          </LinkContainer> */}
         </div>
         <div className="col-10">
           <JobKeyFacts {...job} />

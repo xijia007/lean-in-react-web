@@ -12,6 +12,10 @@ import {
 import { addAppliedJob } from "../../Features/AppliedSavedJobs/applied-jobs-reducer";
 import { addUserAppliedJobs, addUserSavedJobs, removeUserSavedJobs } from "services/user-service.js";
 
+import * as ROUTES from 'constants/routes';
+import COMPANY_ID from 'constants/company';
+import Nav from 'react-bootstrap/Nav';
+import { LinkContainer } from 'react-router-bootstrap';
 
 function JobDetails() {
   useFetchJobs();
@@ -62,21 +66,22 @@ function JobDetails() {
 
   };
 
+  const { job_id, image, company_name } = job;
+  const companyProfileLink = `${ROUTES.COMPANY_PROFILE}/${
+    COMPANY_ID[company_name.toUpperCase()]
+  }`;
+
   return (
     <div className="list-group">
       <div className="list-group-item">
         <div className="row">
           {/* <h4>Job Details for selected id: {jobId}</h4> */}
           <div className="col-2 text-center">
-            <CompanyImage {...job} />
-            {/* <img  src={`https://logo.clearbit.com/${job.company}.com`}
-                        onError={(e) => { e.target.src = '/images/default_logo.jpg'; }}// set default image URL
-                        alt="Company Logo" className="img-fluid"/> */}
-            {/* <img  src={`https://logo.clearbit.com/${job.company}.com`}
-                        onError={(e) => { e.target.src = '/images/default_logo.jpg'; }}// set default image URL
-                        alt="Company Logo" className="img-fluid"/> */}
-            {/* <img src={"https://via.placeholder.com/200"} alt="Company Logo" className="img-fluid w-200 h-200"/> */}
-            {/* <img src={`/images/${job.image}`} alt="Company Logo" className="img-fluid w-200 h-200"/> */}
+            <LinkContainer to={companyProfileLink}>
+                <Nav.Link>
+                  <CompanyImage {...job} />
+                </Nav.Link>
+            </LinkContainer>
           </div>
           <div className="col-10">
             <JobKeyFacts {...job} />

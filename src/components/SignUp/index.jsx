@@ -22,7 +22,7 @@ function Signup() {
   const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState('user');
   const [companyList, setCompanyList] = useState([]);
-  const [selectedOption, setSelectedOption] = useState('Plesae select');
+  const [selectedOption, setSelectedOption] = useState('Please select');
   const handleFirstNameChange = (event) => {
     dispatch(checkFirstName(event.target.value));
   };
